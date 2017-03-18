@@ -1,0 +1,9 @@
+[{
+  "file": "/home/daniel/Documents/UOC/PAC1/main.c",
+  "directory": "/home/daniel/Documents/UOC/PAC1",
+  "command": "gcc -c /home/daniel/Documents/UOC/PAC1/main.c -o /home/daniel/Documents/UOC/PAC1/main.c.o  -g  -O0  -Wall -I. -I."
+ }, {
+  "file": "/home/daniel/Documents/UOC/helloworld/main.c",
+  "directory": "/home/daniel/Documents/UOC/helloworld",
+  "command": "gcc -c /home/daniel/Documents/UOC/helloworld/main.c -o /home/daniel/Documents/UOC/helloworld/main.c.o  -g  -O0  -Wall -I. -I."
+ }]

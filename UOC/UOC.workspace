@@ -1,7 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<CodeLite_Workspace Name="UOC" Database="./UOC.tags">
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="UOC" Database="">
+  <Project Name="Template" Path="helloworld/helloworld.project" Active="Yes"/>
+  <Project Name="PAC1" Path="PAC1/PAC1.project"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="Debug" Selected="yes"/>
-    <WorkspaceConfiguration Name="Release" Selected="no"/>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="Template" ConfigName="Debug"/>
+      <Project Name="PAC1" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="Template" ConfigName="Release"/>
+      <Project Name="PAC1" ConfigName="Release"/>
+    </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
