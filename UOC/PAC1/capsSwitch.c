@@ -5,17 +5,17 @@
 ** Date:        18-03-2017
 ** Description:
 *   """
-*    Read 5 int and 1 float and check
-*    whether or not the float is the
-*    average of the integers given
-*    by outputting y/n.
-*   
+*    Pass a character as argument check whether
+*    is capital or lowercase letter and convert
+*    it to the other type.   
 *   """
+*
 *****************************************************************/
 
 /* System header files */
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
 /*Application headers file*/
 
@@ -27,12 +27,10 @@
 
 /*Pre-declaration of actions and functions*/
 
-void handleErrors(){
-    
-
-}
-
 char capsSwitch(char character){
+    /*
+    Convert to capital Character
+    */
     char newCharacter;
     newCharacter = toupper(character);
     return newCharacter;
@@ -40,6 +38,9 @@ char capsSwitch(char character){
 }
 
 char lowercaseSwitch(char character){
+    /*
+    Convert to lowercase Character
+    */
     char newCharacter;
     newCharacter = tolower(character);
     return newCharacter;
@@ -52,10 +53,8 @@ int main(int argc, char **argv)
 char character;
 char newCharacter;
 
-printf("Ingrese una character: ");
+printf("Insert one character: \n");
 scanf("%c", &character);
-
-handleErrors();
 
 if (character >= 65 && character <= 90){
     newCharacter = lowercaseSwitch(character);
