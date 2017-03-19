@@ -62,7 +62,8 @@ else{
     newCharacter = capsSwitch(character); 
 }
 //Output results
-printf("The new character is: %c\n", newCharacter);
+printf("The character %c is transfromed into: %c\n",
+         character, newCharacter);
 return 0;
 
 }
