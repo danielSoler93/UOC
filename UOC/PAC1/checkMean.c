@@ -11,12 +11,13 @@
 *    by outputting y/n.
 *   
 *   """
+*
 *****************************************************************/
 
 /* System header files */
 #include <stdio.h>
 #include <stdlib.h>
-#include <getopt.h>
+#include <ctype.h>
 
 /*Application headers file*/
 
@@ -24,14 +25,17 @@
 /*Symboli constants*/
 
 /*User defined types*/
-
+typedef enum { false, true } bool;
 
 /*Pre-declaration of actions and functions*/
 
 void handelingErrors(char **parameters, int numArguments){
     /*
     Handles the excess or lack of arguments
+    Handles the wrong type of arg
     */
+    int i;
+
     if ((numArguments-1)!=6){
         printf("\n\n6 arguments need it for this excercise\n"
                "Example: ./main 5 6 7 4 9 5.32\n\n");

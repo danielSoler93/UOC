@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="UOC" Database="">
-  <Project Name="Template" Path="helloworld/helloworld.project" Active="Yes"/>
-  <Project Name="PAC1" Path="PAC1/PAC1.project"/>
+  <Project Name="PAC1" Path="PAC1/PAC1.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
