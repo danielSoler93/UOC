@@ -15,7 +15,6 @@
 /* System header files */
 #include <stdio.h>
 #include <ctype.h>
-#include <string.h>
 
 /*Application headers file*/
 
@@ -49,20 +48,20 @@ char lowercaseSwitch(char character){
 /*Main Function*/
 int main(int argc, char **argv)
 {
-
+//Intialize variable
 char character;
 char newCharacter;
 
 printf("Insert one character: \n");
 scanf("%c", &character);
-
+//Recognising whether we have a capital or a lowercase letter
 if (character >= 65 && character <= 90){
     newCharacter = lowercaseSwitch(character);
 }
 else{
     newCharacter = capsSwitch(character); 
 }
-
+//Output results
 printf("The new character is: %c\n", newCharacter);
 return 0;
 
