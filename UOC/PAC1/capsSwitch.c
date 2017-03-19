@@ -28,11 +28,13 @@
 
 /*Pre-declaration of actions and functions*/
 char * stringBackwards(char *string){
-    int stringCharacters = strlen(string);
-    char *stringBackwards = malloc(stringCharacters); // allocate memory from the heap
+    int endString = strlen(string) - 1;  
+    char *stringBackwards = malloc(endString +1); // allocate memory from the heap
     int i;
-    for(i=stringCharacters-1; i<0; i--){
-        stringBackwards[i] = string[stringCharacters-(i+1)];
+    int j=0;
+    for(i=endString; i>=0; i--){
+        stringBackwards[j] = string[i];
+        j++;
     }
     return stringBackwards;
 }
@@ -43,7 +45,7 @@ int main(int argc, char **argv)
 //initialize varibles
 char *targetString = argv[1];
 char *stringBack = stringBackwards(targetString);
-printf("\n%s\n", stringBack);
+printf("%s\n", stringBack);
 
 
 }
