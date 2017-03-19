@@ -15,8 +15,7 @@
 
 /* System header files */
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <ctype.h>
 
 /*Application headers file*/
 
@@ -27,26 +26,46 @@
 
 
 /*Pre-declaration of actions and functions*/
-char * stringBackwards(char *string){
-    int endString = strlen(string) - 1;  
-    char *stringBackwards = malloc(endString +1); // allocate memory from the heap
-    int i;
-    int j=0;
-    for(i=endString; i>=0; i--){
-        stringBackwards[j] = string[i];
-        j++;
-    }
-    return stringBackwards;
+
+void handleErrors(){
+    
+
+}
+
+char capsSwitch(char character){
+    char newCharacter;
+    newCharacter = toupper(character);
+    return newCharacter;
+    
+}
+
+char lowercaseSwitch(char character){
+    char newCharacter;
+    newCharacter = tolower(character);
+    return newCharacter;
 }
 
 /*Main Function*/
 int main(int argc, char **argv)
 {
-//initialize varibles
-char *targetString = argv[1];
-char *stringBack = stringBackwards(targetString);
-printf("%s\n", stringBack);
 
+char character;
+char newCharacter;
+
+printf("Ingrese una character: ");
+scanf("%c", &character);
+
+handleErrors();
+
+if (character >= 65 && character <= 90){
+    newCharacter = lowercaseSwitch(character);
+}
+else{
+    newCharacter = capsSwitch(character); 
+}
+
+printf("The new character is: %c\n", newCharacter);
+return 0;
 
 }
 
