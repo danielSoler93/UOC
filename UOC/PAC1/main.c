@@ -7,7 +7,8 @@
 *   """
 *    Read 5 int and 1 float and check
 *    whether or not the float is the
-*    average of the integers given.
+*    average of the integers given
+*    by outputting y/n.
 *   
 *   """
 *****************************************************************/
@@ -27,68 +28,61 @@
 
 /*Pre-declaration of actions and functions*/
 
-
-void errorHandeling(int choosenflag, int otherflag, int anotherflag)
-{
-    
-    if (choosenflag){
-        printf("Only one option allowed");
-        exit(1);
-            }
-    else{
-        
-        choosenflag++;
-        otherflag++;
-        anotherflag++;
+void handelingErrors(char **parameters, int numArguments){
+    /*
+    Handles the excess or lack of arguments
+    */
+    if ((numArguments-1)!=6){
+        printf("\n\n6 arguments need it for this excercise\n"
+               "Example: ./main 5 6 7 4 9 5.32\n\n");
     }
-    
 }
 
-void checkMean(int *data, float average){
+    float calculateMean(char **Arguments, int numArguments){
+    /*
+    Calculate the first five numbers mean
+    by addind them all and dividing by 5.
+    */
     int sum = 0;
     int i;
-
-    for(i=0; sizeof(data); i++){
-        sum += sum;
+    for(i=1; i<(numArguments-1); i++){
+        sum += atoi(Arguments[i]);
     }
-    float calculatedAverage = sum/sizeof(data);
-    if (calculatedAverage==average){
-        printf("y");
+    float calculatedAverage = sum / (float)(numArguments-2);
+    return calculatedAverage;
+}
+
+
+void checkMean(char **Arguments, float givenAverage, int numArguments){
+    /*
+    Check whether or not the given mean
+    and the calculated one are the same,
+    and output y/n depending on the result.
+    */
+    float calculatedAverage = calculateMean(Arguments, numArguments);
+    if (calculatedAverage==givenAverage){
+        printf("y\n");
     }
     else{
-        printf("n");
+        printf("n\n");
     }
 }
+
+
 
 /*Main Function*/
 int main(int argc, char **argv)
 {
-    int option;
-    int aflag = 0;
-    int bflag = 0;
-    int cflag = 0;
-    
-	 while ((option = getopt(argc, argv, "a:b:c:")) != -1)
-     {
-     switch (option)
-      {
-      case 'a':
-            //errorHandeling(aflag, bflag, cflag);
-            printf("%s", optarg);
-            printf("Calculating and comparing 5 first numbers average");
-            break;
-      case 'b':
-            //errorHandeling(bflag, aflag, cflag);
-            printf("Reading and printing string backwards");
-            break;
-      case 'c':
-            //errorHandeling(cflag, aflag, bflag);
-            printf("Palindrom detection");
-            break;
-     case '?':
-            printf("Invalid option");
-      }
-    } 
+//initialize varibles
+char **arguments = argv;
+int numArguments = argc;
+float givenAverage = atof(arguments[6]);
+
+//Calculate Mean and output y/n
+//by comparison with the given float
+handelingErrors(arguments, numArguments);
+checkMean(arguments, givenAverage, numArguments);
+
 }
 
 /* Implementation of actions and functions*/
