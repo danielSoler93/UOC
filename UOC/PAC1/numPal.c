@@ -13,7 +13,7 @@
 
 /* System header files */
 #include <stdio.h>
-#include <ctype.h>
+#include <math.h>
 
 /*Application headers file*/
 
@@ -24,22 +24,36 @@
 
 
 /*Pre-declaration of actions and functions*/
-int isPalindrome(int number){
-    int i;
-    int *numberArray = &number;
-    int numberLenght = sizeof(numberArray);
-    int forLoops = div(numberLenght, number) + (numberLenght % number);
 
-    for (i=0; i<forLoops; i++){
-        if (numberArray[i] != numberArray[-i]){
-            printf("The number is not palindrome\n");
-            printf("%d",numberArray[i]);
-            return(0);
-        }
-    }
-    printf("The number is palindrome\n");
-    return(0);
-    
+int reverseNumber(int originalNumber){
+    /*
+    Create the reversed number from the one given.
+
+    Example: 212
+    1- 212%10-->212/10=21,2-->we keep the decimal-->2
+    2- reversenumber = 2
+    3- new number--> 212/10=21,2-->keep the non decimal part --> 21
+
+    1- 21%10 = 1
+    2- reverse number = 21
+    3- new number = 2
+
+    1- 2%10 = 2
+    2- reverse number = 212
+    3- new number 0---> exit while!
+    */
+
+int Remainder;
+int reversedNum;
+
+
+    while(originalNumber!=0 )
+{
+    Remainder = originalNumber%10;
+    reversedNum = reversedNum*10 + Remainder;
+    originalNumber /= 10; 
+}
+return reversedNum;
 }
 
 
@@ -47,12 +61,23 @@ int isPalindrome(int number){
 int main(int argc, char **argv)
 {
 //Intialize variable
-int targetNum;
+int reversedNum = 0;
+int originalNum = 0;
+int Remainder = 0;
+
 //Get number from command line
 printf("Insert a number: \n");
-scanf("%d", &targetNum);
-//Check whether or not is palindrome
-isPalindrome(targetNum);
+scanf("%d", &originalNum);
+
+//Create reversedNumber
+reversedNum = reverseNumber(originalNum);
+
+//Output whether or not the given num is palidrome
+if (originalNum == reversedNum)
+        printf("%d is a palindrome. \n", originalNum);
+    else
+        printf("%d is not a palindrome. \n", originalNum);
+
 return 0;
 
 }
