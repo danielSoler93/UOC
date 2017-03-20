@@ -21,7 +21,7 @@
 /*Symboli constants*/
 
 /*User defined types*/
-
+typedef enum { false, true } bool;
 
 /*Pre-declaration of actions and functions*/
 
@@ -56,6 +56,22 @@ int reversedNum;
 return reversedNum;
 }
 
+bool handleError(int number){
+    int count = 0;
+    while(number != 0)
+    {
+        number /= 10;
+        ++count;
+    }
+    if (count != 5){
+        printf("\nInput must be a 5 digit number \n");
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
 
 /*Main Function*/
 int main(int argc, char **argv)
@@ -64,10 +80,16 @@ int main(int argc, char **argv)
 int reversedNum = 0;
 int originalNum = 0;
 int Remainder = 0;
+bool validation = false;
 
+while (!validation){
 //Get number from command line
-printf("Insert a number: \n");
+printf("\nInsert a number: \n");
 scanf("%d", &originalNum);
+
+//check the passed argument has  5 digits
+validation = handleError(originalNum);
+}
 
 //Create reversedNumber
 reversedNum = reverseNumber(originalNum);

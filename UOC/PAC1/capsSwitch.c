@@ -64,6 +64,7 @@ else{
 //Output results
 printf("The character %c is transfromed into: %c\n",
          character, newCharacter);
+    
 return 0;
 
 }
