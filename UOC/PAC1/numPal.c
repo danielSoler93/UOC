@@ -56,7 +56,26 @@ int reversedNum;
 return reversedNum;
 }
 
+
 bool handleError(int number){
+
+    /*
+    Handle the lack or exces of enter numbers
+    on the given input.
+
+    Paramaters:
+    -----------
+
+    input:
+    -  number:  int
+       number to check
+
+    output: 
+    -  validation: bool
+        true if the number is correct
+        false if it's not
+    */
+        
     int count = 0;
     while(number != 0)
     {
