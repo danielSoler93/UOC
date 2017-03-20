@@ -12,6 +12,10 @@
 *   
 *   """
 *
+**Launch:
+* gcc checkMean.c -o checkMean
+*./checkMean 1 2 3 4 5 3
+*
 *****************************************************************/
 
 /* System header files */

@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 char character;
 char newCharacter;
 
-printf("Insert one character: \n");
+printf("\nInsert one character: \n");
 scanf("%c", &character);
 //Recognising whether we have a capital or a lowercase letter
 if (character >= 65 && character <= 90){
@@ -62,9 +62,9 @@ else{
     newCharacter = capsSwitch(character); 
 }
 //Output results
-printf("The character %c is transfromed into: %c\n",
+printf("\nThe character %c is transfromed into: %c\n",
          character, newCharacter);
-    
+
 return 0;
 
 }
