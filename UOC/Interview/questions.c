@@ -26,10 +26,10 @@
 
 
 /*Pre-declaration of actions and functions*/
-def forToWhile(){
+void forToWhile(){
     int a = 1;
     while (a<100){
-        printf (&quot;%d\n&quot;, a * a);
+        printf ("&quot;%d\n&quot;", a * a);
         a++;
     }
 
@@ -39,7 +39,7 @@ def forToWhile(){
 int main(int argc, char **argv)
 {
 
-
+forToWhile();
 return 0;
 
 }
