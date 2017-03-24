@@ -61,6 +61,24 @@ void retrieveSequence(){
 }
 
 int nonRepit(char string[], int lenght){
+    /*
+    Prints out to terminal the first
+    non repite character from a string
+
+    Parameters:
+    -----------
+    Input)   
+        string char []
+            initial string
+
+        lenght int
+            lenght of the string
+
+    Output)
+        First non repit character
+        in case there is not prints
+        an alert message.
+    */
     int i = 0;
     int storage[200] = {0};
     int number;
