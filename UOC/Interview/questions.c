@@ -13,6 +13,7 @@
 
 /* System header files */
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 
 /*Application headers file*/
@@ -59,15 +60,35 @@ void retrieveSequence(){
     }
 }
 
+int nonRepit(char string[], int lenght){
+    int i = 0;
+    int storage[200] = {0};
+    int number;
+    char character;
+    //printf("%d", lenght );
+    for (i=0; i<lenght; i++){
+        character = string[i];
+        number = (int)(character);
+        storage[number] += 1;
+        //printf("%c", character);
 
-
+    }
+    for (i=0; i<lenght; i++){
+        character = string[i];
+        if (storage[(int)(character)] == 1){
+            printf("The first non repited character is --> %c\n", string[i]);
+            return(0);
+        }
+    }
+}
 
 int main(int argc, char **argv)
 {
-//Question to run:
-retrieveSequence();
-}
-}
+char string[] = "teeter";
+int lenght = sizeof(string)-1;
+
+nonRepit(string, lenght);
+
 
 return 0;
 
