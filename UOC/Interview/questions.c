@@ -102,11 +102,32 @@ int nonRepit(char string[], int lenght){
 }
 
 char removeChars(char string[], char charsToRemove[], int stringLenght, int removeLenght){
-    int storage[200] = {0};
-    int i;
-    printf("%d\n", stringLenght);
-    printf("%d\n", removeLenght);
+    
+    /*
+    Given a string and some chars,
+    remove these chars from inside
+    the string and print out to terminal.
+
+    Paramaters:
+    ------------
+    input)
+
+        string[]: original string
+
+        charsToRemove[]: characters to remove form string
+
+        stringLenght(int): lenght of string
+
+        removeLenght(int): lenght of charstoremove
+
+    output)
+
+        Printed string with removed characters
+    */
+
     //Saving items to remove
+    int storage[200] = {0}; //It's a dinamic array how can I do it to not specify memory
+    int i;    
     for(i=0; i<removeLenght; i++){
         char character = charsToRemove[i];
         int number = (int)(character);
@@ -118,8 +139,8 @@ char removeChars(char string[], char charsToRemove[], int stringLenght, int remo
     for(i=stringLenght; i>=0; i--){      
         if (storage[(int) string[i]] == 0){
             char characterToCopy = string[i];
-            copy[j] = characterToCopy; //not working??
-            j++;
+            copy[j] = characterToCopy; //NOT WORKING WHYYY??
+            j++
         }
     }
     //Print string without charsToRemove
