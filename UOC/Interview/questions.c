@@ -101,12 +101,50 @@ int nonRepit(char string[], int lenght){
     printf("Non repited value\n");
 }
 
+char removeChars(char string[], char charsToRemove[], int stringLenght, int removeLenght){
+    int storage[200] = {0};
+    int i;
+    printf("%d\n", stringLenght);
+    printf("%d\n", removeLenght);
+    //Saving items to remove
+    for(i=0; i<removeLenght; i++){
+        char character = charsToRemove[i];
+        int number = (int)(character);
+        storage[number] = 1;
+    }
+    //Copyng not removed items
+    char copy[80]={0}; //It's a dinamic array how can I do it to not specify memory
+    int j = 0;
+    for(i=stringLenght; i>=0; i--){      
+        if (storage[(int) string[i]] == 0){
+            char characterToCopy = string[i];
+            copy[j] = characterToCopy; //not working??
+            j++;
+        }
+    }
+    //Print string without charsToRemove
+    printf("\n");
+    i=0;
+    while(copy[i]){
+        printf("a");
+        printf("%c", copy[i]);
+        i++;
+    }
+  
+
+
+
+}
+
 int main(int argc, char **argv)
 {
-char string[] = "teeter";
-int lenght = sizeof(string)-1;
+    char string[] = "Battle of the Vowels: Hawaii vs. Grozny";
+    char charsToRemove[] = "aeiou";
+    int stringLenght = sizeof(string)-1;
+    int removeLenght = sizeof(charsToRemove)-1;
 
-nonRepit(string, lenght);
+    removeChars(string, charsToRemove, stringLenght, removeLenght);
+
 
 
 return 0;
