@@ -80,6 +80,7 @@ int nonRepit(char string[], int lenght){
             return(0);
         }
     }
+    printf("Non repited value\n");
 }
 
 int main(int argc, char **argv)
