@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 
 /*Application headers file*/
 
@@ -134,35 +135,34 @@ char removeChars(char string[], char charsToRemove[], int stringLenght, int remo
         storage[number] = 1;
     }
     //Copyng not removed items
-    char copy[80]={0}; //It's a dinamic array how can I do it to not specify memory
+    char *copy; //It's a dinamic array how can I do it to not specify memory
+    copy = (char *) malloc(sizeof(int));
     int j = 0;
-    for(i=stringLenght; i>=0; i--){      
+    for(i=0; i<stringLenght; i++){      
         if (storage[(int) string[i]] == 0){
             char characterToCopy = string[i];
-            copy[j] = characterToCopy; //NOT WORKING WHYYY??
-            j++
+            copy[j] = characterToCopy;
+            j++;
+            copy = realloc(copy, (j+1) * sizeof(int));
         }
     }
     //Print string without charsToRemove
-    printf("\n");
+    printf("The string with the removed character is:\n");
     i=0;
     while(copy[i]){
-        printf("a");
         printf("%c", copy[i]);
         i++;
     }
-  
-
-
-
+    printf("\n");
+    free(copy);
 }
 
 int main(int argc, char **argv)
 {
     char string[] = "Battle of the Vowels: Hawaii vs. Grozny";
     char charsToRemove[] = "aeiou";
-    int stringLenght = sizeof(string)-1;
-    int removeLenght = sizeof(charsToRemove)-1;
+    int stringLenght = strlen(string);
+    int removeLenght = strlen(charsToRemove);
 
     removeChars(string, charsToRemove, stringLenght, removeLenght);
 
