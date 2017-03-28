@@ -157,14 +157,71 @@ char removeChars(char string[], char charsToRemove[], int stringLenght, int remo
     free(copy);
 }
 
+void reverse(char string[]){
+    
+    /*
+    Given a string, reverse the sentence without
+    changing the letters order inside each word.
+
+    Parameters
+    ------------
+
+    Input)
+
+        string[] : Initial sentence
+
+    Output)
+
+        Printf with the reversed sentence if no failure
+    */
+
+    char *buffer;
+    int wordStart;
+    int wordEnd;
+    int writePos = 0;
+    int stringLenght = strlen(string);
+    int readPosition = stringLenght-1;
+    buffer = (char *) malloc(stringLenght + 1);
+    
+    if(!buffer){
+        printf("Failed");
+    }
+    while(readPosition>=0){
+        if (string[readPosition] == ' '){
+            /*Write non word characters */
+            buffer[writePos++] = string[readPosition--];
+            }
+        else{
+            /*Write word characters*/
+            //Store end of the word position
+            wordEnd = readPosition;
+            //Look start position
+            while(readPosition>=0 && string[readPosition] != ' '){
+                readPosition--;
+            }
+            wordStart = readPosition + 1;
+
+            //write to buffer
+            while(wordStart<=wordEnd){
+                buffer[writePos++] = string[wordStart++];
+            }
+        }
+    }
+    buffer[writePos] = '\0';
+    strncpy(string, buffer, stringLenght + 1);
+    free(buffer);
+   //Printing string
+   int i;
+   for(i=0; i<stringLenght; i++){
+        printf("%c", string[i]);
+    }
+}
+
+
 int main(int argc, char **argv)
 {
-    char string[] = "Battle of the Vowels: Hawaii vs. Grozny";
-    char charsToRemove[] = "aeiou";
-    int stringLenght = strlen(string);
-    int removeLenght = strlen(charsToRemove);
-
-    removeChars(string, charsToRemove, stringLenght, removeLenght);
+    char string[] = "Do or do not, there is no try.";
+    reverse(string);
 
 
 
