@@ -1,4 +1,4 @@
-     /**************************************************************
+/**************************************************************
 *
 ** File:        StudentsTeacher.c
 ** Author:      Daniel Soler (www.github.com/miniaoshi)
@@ -117,4 +117,9 @@ void updateTeacherStudent(tTeacherVector *teacher, tStudent *student){
     if (!found){
         *student.idTeacher = -1;
     }
+}
+
+void writeStudent(tStudent* Student){
+    printf("The Student dni is: %c\n", *Student.dni);
+    printf("The TeacherID assigned to the Student is: %c\n", *Student.idTeacher);
 }
