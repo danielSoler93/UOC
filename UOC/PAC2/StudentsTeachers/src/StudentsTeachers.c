@@ -45,7 +45,7 @@ void fillTeachersVector(tTeacher * tTeacherVector){
 
     Input)
 
-        tTeacherVector tTeacher: Original Teacher vector
+        tTeacherVector tTeacher: Original Teachers Info
     */
 
     int teachersId[] = {1,2,3,4};
@@ -70,9 +70,16 @@ void readStudent(tStudent * tStudentVector){
 
     Input)
 
-    tStudentVector tStudent: Original Student Information
+    tStudentVector tStudent: Original Students Information
     */
+    printf('Enter Student ID\n')
+    scnaf("%d", &tStudentVector.dni);
 
-    
+    printf('Is the student native (n=0/y=0)\n')
+    scnaf("%d", &tStudentVector.bEnglish);    
+
+    printf('Which level the student has (P/S)\n')
+    tStudentVector.cLevel = getchar();
+
 
 }
