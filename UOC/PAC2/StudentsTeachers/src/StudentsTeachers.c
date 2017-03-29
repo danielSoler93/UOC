@@ -35,7 +35,7 @@ typedef enum { false, true } bool;
 
 /* Implementation of actions and functions*/
 
-void fillTeachersVector(tTeacher * tTeacherVector){
+void fillTeachersVector(tTeacherVector * tTeacherVector){
     
     /*
     Initialize Teacher's information
@@ -62,7 +62,7 @@ void fillTeachersVector(tTeacher * tTeacherVector){
 }
 
 
-void readStudent(tStudent * tStudentVector){
+void readStudent(tStudentVector * tStudentVector){
     
     /*
     ReadStudent infromation from terminal
@@ -82,4 +82,39 @@ void readStudent(tStudent * tStudentVector){
     tStudentVector.cLevel = getchar();
 
 
+}
+
+void updateTeacherStudent(tTeacherVector *teacher, tStudent *student){
+    
+    /*
+    Look for Student English and subject Level
+    iterate over professors to find out which
+    one of them is suitable for him.
+    Otherwise, wirte -1 to Student.idteacher.
+
+    Input)
+
+    teacher *tTeacherVector: Teachers information
+
+    student *tStudent: Student information
+
+    Output) 
+
+    student *tstudent: Student id teacher updated
+    */
+    
+    bool bEnglish = *student.bEnglish;
+    bool found = false;
+    char cLevel = *student.cLevel;
+    int vectorLenght = strlen(*teacher);
+    int vectorPos;
+    for (vectorPos=0; vectorPos<vectorLenght; vectorPos++){
+        if (*teacher[i].bEnglish == *student.bEnglish && *teacher[i].cLevel == *student.cLevel){
+            *student.idTeacher == *teacher[i].idTeacher;
+            found = true;
+        }
+    }
+    if (!found){
+        *student.idTeacher = -1;
+    }
 }

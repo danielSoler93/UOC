@@ -38,16 +38,25 @@ typedef struct
    int idTeacher;
 } tStudent;
 
-tTeacher tTeacherVector[4];
+typedef struct
+{
+   tTeacher teacher[4];
+} tTeacherVector;
 
-tStudent tStudentVector[6];
+typedef struct
+{
+   tStudent student[6];
+} tStudentVector;
+
 
 
 /*Pre-declaration of actions and functions*/
 
-void fillTeachersVecotor(tTeacher * tTeacherVector);
+void fillTeachersVecotor(tTeacherVector * tTeacherVector);
 
-void readStudent(tStudent * tStudentVector);
+void readStudent(tStudentVector * tStudentVector);
+
+void updateTeacherStudent(tTeacherVector *tTeacherVector, tStudent *Student);
 
 
 /* Implementation of actions and functions*/
