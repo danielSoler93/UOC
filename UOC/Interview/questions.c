@@ -237,8 +237,7 @@ void StringToInt(char string[]){
     convertedString[]: converted string 
     */
 
-    int readPosition = 0
-    ;
+    int readPosition = 0;
     int convertedNum;
     int stringLenght = strlen(string);
     int intArray[stringLenght];
@@ -257,14 +256,54 @@ int i;
 for(i=0; i<stringLenght; i++){
     printf("%d", intArray[i]);
 }
-printf("\n");
+printf("\n");   
+}
+
+void intToString(int array[]){
+    
+    /*
+    Convert array of ints to array of strings
+
+    Parameters:
+    ------------
+
+    Input)
+
+    array [] = Original array of ints
+
+    Output)
+
+    convertedArray[] = Converted array of chars
+    */
+
+    int readPosition = 0;
+    int convertedNum;
+    int stringLenght = strlen(string);
+    int convertedArray[stringLenght];
+    for (readPosition; readPosition<stringLenght; readPosition++){
+        //Numbers
+        if(string[readPosition] >= 0  && string[readPosition] <= 9 ){
+            convertedNum = (string[readPosition] + 8) % 10;
+            convertedArray[readPosition] = (char) 
+            convertedNum;
+        }
+
+        else{
+            printf("Just Integers");
+        }
+    }
+int i;
+for(i=0; i<stringLenght; i++){
+    printf("%d", intArray[i]);
+}
+printf("\n");   
 }
 
 
 int main(int argc, char **argv)
 {
     char string[] = "12342";
-    StringToInt(string);
+    intToString(string);
 
 
 
