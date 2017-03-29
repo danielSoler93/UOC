@@ -219,7 +219,7 @@ void reverse(char string[]){
     }
 }
 
-int * StringToInt(char string[]){
+void StringToInt(char string[]){
 
     /*
     Convert string to int
@@ -237,29 +237,34 @@ int * StringToInt(char string[]){
     convertedString[]: converted string 
     */
 
-    int readPosition;
+    int readPosition = 0
+    ;
     int convertedNum;
-    stringLenght = strlen(string);
+    int stringLenght = strlen(string);
     int intArray[stringLenght];
-    for (readPosition; readPosition<stringLenght; i++){
+    for (readPosition; readPosition<stringLenght; readPosition++){
         //Numbers
-        if(string[readPosition] >= 48  && string[readPosition] <= '57' ){
+        if(string[readPosition] >= 48  && string[readPosition] <= 57 ){
             convertedNum = ((int) string[readPosition] + 2) % 10;
             intArray[readPosition] = convertedNum;
         }
 
         else{
-            printf("Just Integers")
+            printf("Just Integers");
         }
     }
-    return(intArray);
+int i;
+for(i=0; i<stringLenght; i++){
+    printf("%d", intArray[i]);
+}
+printf("\n");
 }
 
 
 int main(int argc, char **argv)
 {
     char string[] = "12342";
-    intString =StringToInt(string);
+    StringToInt(string);
 
 
 
