@@ -219,11 +219,47 @@ void reverse(char string[]){
     }
 }
 
+int * StringToInt(char string[]){
+
+    /*
+    Convert string to int
+    with O(n)
+
+    Parameters:
+    ...........
+
+    Input)
+
+    string [] : string to convert
+
+    Output)
+
+    convertedString[]: converted string 
+    */
+
+    int readPosition;
+    int convertedNum;
+    stringLenght = strlen(string);
+    int intArray[stringLenght];
+    for (readPosition; readPosition<stringLenght; i++){
+        //Numbers
+        if(string[readPosition] >= 48  && string[readPosition] <= '57' ){
+            convertedNum = ((int) string[readPosition] + 2) % 10;
+            intArray[readPosition] = convertedNum;
+        }
+
+        else{
+            printf("Just Integers")
+        }
+    }
+    return(intArray);
+}
+
 
 int main(int argc, char **argv)
 {
-    char string[] = "Do or do not, there is no try.";
-    reverse(string);
+    char string[] = "12342";
+    intString =StringToInt(string);
 
 
 
