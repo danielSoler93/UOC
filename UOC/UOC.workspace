@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="UOC" Database="">
   <Project Name="PAC1" Path="PAC1/PAC1.project" Active="Yes"/>
+  <Project Name="StudentsTeachers" Path="StudentsTeachers/StudentsTeachers.project"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
       <Project Name="Template" ConfigName="Debug"/>
       <Project Name="PAC1" ConfigName="Debug"/>
+      <Project Name="StudentsTeachers" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
       <Project Name="Template" ConfigName="Release"/>
       <Project Name="PAC1" ConfigName="Release"/>
+      <Project Name="StudentsTeachers" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
