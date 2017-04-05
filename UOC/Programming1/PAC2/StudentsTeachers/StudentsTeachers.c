@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include "StudentsTeachers.h"
 
 
 /*Application headers file*/
@@ -25,7 +26,6 @@
 /*Symboli constants*/
 
 /*User defined types*/
-typedef enum { false, true } bool;
 
 
 
@@ -35,51 +35,44 @@ typedef enum { false, true } bool;
 
 /* Implementation of actions and functions*/
 
-void fillTeachersVector(tTeacherVector * tTeacherVector){
+void fillTeachersVector(tTeacherVector* teachers){
     
     /*
     Initialize Teacher's information
     
     Parameters:
     ------------
-
     Input)
-
-        tTeacherVector tTeacher: Original Teachers Info
+        tTeacherVector teacher: Original Teachers Info
     */
 
     int teachersId[] = {1,2,3,4};
     bool teachersEnglish[] = {true, false, true, false};
     char teachersCLevel[] = {'P', 'P', 'S', 'S'};
-    int vectorsLenght = strlen(studentsCLevel);
+    int vectorsLenght = strlen(teachersCLevel);
     int readPos;
 
     for (readPos=0; readPos<vectorsLenght; readPos++){
-        *tTeacherVector[i].idTeacher = studentsId[i];
-        *tTeacherVector[i].bEnglish = studentsEnglish[i];
-        *tTeacherVector[i].cLevel = studentsCLevel[i];
+        (*teachers).teacher[readPos].idTeacher = teachersId[readPos];
+        (*teachers).teacher[readPos].bEnglish = teachersEnglish[readPos];
+        (*teachers).teacher[readPos].cLevel = teachersCLevel[readPos];
+		//NOT WORKING??? 
     }
 }
 
 
-void readStudent(tStudentVector * tStudentVector){
+void readStudent(int dni, bool bEnglish, char cLevel, tStudent * student){
     
     /*
-    ReadStudent infromation from terminal
+    ReadStudent infromation from standard entry
     and update data to Student tuple vector.
-
     Input)
-
     tStudentVector tStudent: Original Students Information
     */
-    printf('Enter Student ID\n')
-    scnaf("%d", &tStudentVector.dni);
-
-    printf('Is the student native (n=0/y=0)\n')
-    scnaf("%d", &tStudentVector.bEnglish);    
-
-    printf('Which level the student has (P/S)\n')
-    tStudentVector.cLevel = getchar();
+    (*student).dni = dni;
+	(*student).bEnglish = bEnglish;
+	(*student).cLevel = cLevel;
+	
 
 
 }
@@ -91,35 +84,28 @@ void updateTeacherStudent(tTeacherVector *teacher, tStudent *student){
     iterate over professors to find out which
     one of them is suitable for him.
     Otherwise, wirte -1 to Student.idteacher.
-
     Input)
-
     teacher *tTeacherVector: Teachers information
-
     student *tStudent: Student information
-
     Output) 
-
     student *tstudent: Student id teacher updated
     */
     
-    bool bEnglish = *student.bEnglish;
     bool found = false;
-    char cLevel = *student.cLevel;
-    int vectorLenght = strlen(*teacher);
+    int vectorLenght = 4;
     int vectorPos;
     for (vectorPos=0; vectorPos<vectorLenght; vectorPos++){
-        if (*teacher[i].bEnglish == *student.bEnglish && *teacher[i].cLevel == *student.cLevel){
-            *student.idTeacher == *teacher[i].idTeacher;
+        if ((*teacher).teacher[vectorPos].bEnglish == (*student).bEnglish && (*teacher).teacher[vectorPos].cLevel == (*student).cLevel){
+            (*student).idTeacher = (*teacher).teacher[vectorPos].idTeacher;
             found = true;
         }
     }
     if (!found){
-        *student.idTeacher = -1;
+        (*student).idTeacher = -1;
     }
 }
 
-void writeStudent(tStudent* Student){
-    printf("The Student dni is: %c\n", *Student.dni);
-    printf("The TeacherID assigned to the Student is: %c\n", *Student.idTeacher);
+void writeStudent(tStudent* student){
+    printf("The Student dni is: %d\n", (*student).dni);
+    printf("The TeacherID assigned to the Student is: %d\n", (*student).idTeacher);
 }

@@ -38,13 +38,13 @@ int main(int argc, char **argv)
     //Initialize Teachers Vector
     fillTeachersVector(&teachers);
    //Create Student
-   tStudentVector student;
+    tStudent student;
    //Initialize Student
-   readStudent(&student);
+   readStudent(345, false, 'S', &student);
    //Find teacher for student
    updateTeacherStudent(&teachers, &student);
    //write ID from student an associate teacher
-   writeStudent(&student);    
+   writeStudent(&student);
 
 
 return 0;

@@ -1,4 +1,4 @@
-     /**************************************************************
+    /**************************************************************
 *
 ** File:        StudentTeachers.h
 ** Author:      Daniel Soler (www.github.com/miniaoshi)
@@ -40,23 +40,24 @@ typedef struct
 
 typedef struct
 {
-   tTeacher teacher[4];
+	tTeacher teacher[3];
 } tTeacherVector;
 
 typedef struct
 {
-   tStudent student[6];
+	tStudent student[5];
 } tStudentVector;
-
 
 
 /*Pre-declaration of actions and functions*/
 
-void fillTeachersVecotor(tTeacherVector * tTeacherVector);
+void fillTeachersVector(tTeacherVector* teachers);
 
-void readStudent(tStudentVector * tStudentVector);
+void readStudent(int dni, bool bEnglish, char cLevel, tStudent * student);
 
-void updateTeacherStudent(tTeacherVector *tTeacherVector, tStudent *Student);
+void updateTeacherStudent(tTeacherVector *teacher, tStudent *student);
+
+void writeStudent(tStudent * student);
 
 
 /* Implementation of actions and functions*/
