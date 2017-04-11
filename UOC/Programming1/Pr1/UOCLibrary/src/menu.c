@@ -173,6 +173,8 @@ void mainMenu(tAppData *appData)
 			else{
 				printf("No data for stats menu");
 			}
+		case MAIN_MENU_EXIT:
+			break;
 		}
 			
 		
