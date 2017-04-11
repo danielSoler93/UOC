@@ -23,6 +23,7 @@ int getOption(int numOptions) {
 }
 
 tError readBook(tBook *book) {	
+	 
 
 	tError retVal = OK;
 
@@ -31,29 +32,32 @@ tError readBook(tBook *book) {
  /******************** PR1 - EX 2B ********************/
 
 	printf("ISBN (13 digits) :\n>> ");
+	scanf("%u", &(*book).isbn);
  
 	printf("Publication year:\n>> ");
+	scanf("%u", &(*book).publicationYear);
 
 	getchar();
 	
 	printf("Is it available?:\n(1 yes, 0 no) >> ");
+	unsigned int availability;
+	scanf("%u", &availability);
 
-	getchar();
- 
 	printf("Section (1 digit):\n>> ");
-
+	scanf("%c", &(*book).identificator.mainSection);
 	getchar();
 	
 	printf("Subsection (1 digit):\n>> ");
-
+	scanf("%c", &(*book).identificator.subSection);
 	getchar();
     
     printf("Author Code (3 char):\n>> ");
-
+	fgets((*book).authorCode, sizeof (*book).authorCode, stdin);
      
     printf("Title: (no whitespaces)\n>> ");
-
- 	return retVal;
+	fgets((*book).bookTitle, sizeof (*book).bookTitle, stdin);
+ 	
+	return retVal;
 }
 
 tError readSection(tSection *section) {	

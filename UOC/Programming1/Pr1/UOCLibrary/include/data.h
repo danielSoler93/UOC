@@ -10,6 +10,8 @@
 #define MAX_BOOKS 300
 #define MAX_SUB 10
 #define MAX_BOOK_AUTHOR_CODE 4
+#define AUTHORCODELENGHT 3
+#define TITLELENGHT 100
 
 /* Definition of a boolean type */
 typedef enum {FALSE, TRUE} tBoolean;
@@ -40,7 +42,18 @@ typedef struct {
 /******************** PR1 - EX 2A ********************/
 /* Definition of the book */
 typedef struct {
-} tBook;
+	char mainSection;
+	char subSection;
+} tIdentificator;
+
+typedef struct {
+	unsigned int isbn;
+	int publicationYear;
+	tBoolean available;
+	tIdentificator identificator;
+	char authorCode[AUTHORCODELENGHT];
+	char bookTitle[TITLELENGHT];
+	} tBook;
 
 /* Table of books */
 typedef struct {
