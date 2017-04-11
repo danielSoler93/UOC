@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "books.h"
+
+
+/******************** PR1 - EX 2C ********************/
+void getBookStr(tBook book, int maxSize, char *str) {
+
+}
+
+
+/******************** PR1 - EX 2D ********************/
+tError getBookObject(const char *str, tBook *book) {
+
+	tError retVal = OK;
+	
+	return retVal;
+}
+
+
+void bookTable_init(tBookTable *bookTable) {
+	
+	bookTable->size=0;
+
+}
+
+/******************** PR1 - EX 3A ********************/
+int book_cmp(tBook b1, tBook b2) {
+	
+	int retVal=0;
+	
+	return retVal;
+}
+
+/******************** PR1 - EX 3B ********************/
+void book_cpy(tBook *dst, tBook src) {
+
+}
+
+/******************** PR1 - EX 4A ********************/
+tError bookTable_add(tBookTable *tabBook, tBook book) {
+
+	tError retVal = OK;
+	
+	return retVal;
+}
+
+/******************** PR1 - EX 4B ********************/
+int bookTable_find(tBookTable tabBook, char *ISBN) {
+
+	int idx = -1;
+
+	return idx;
+}
+
+/******************** PR1 - EX 4C ********************/
+void bookTable_del(tBookTable *tabBook, tBook book) {
+
+}
+
+/******************** PR1 - EX 5A ********************/
+tError bookTable_save(tBookTable tabBook, const char* filename) {
+
+	tError retVal = OK;
+	
+	return retVal;
+}
+
+/******************** PR1 - EX 5B ********************/
+tError bookTable_load(tBookTable *tabBook, const char* filename) {
+	
+	tError retVal = OK;
+	
+	return retVal;
+}
+
+/******************** PR1 - EX 6 ********************/
+void bookTable_filterBySection(tBookTable tabBook, char sectionId, tBookTable *result) {
+
+}
+
+/******************** PR1 - EX 7A ********************/
+unsigned int bookTable_getOnLoanNumber(tBookTable tabBook){
+
+	int numBooks = 0;
+
+	return numBooks;
+}
+
+/******************** PR1 - EX 7B ********************/
+unsigned int bookTable_getAuthorNumber(tBookTable tabBook, char *author){
+
+	int numBooks = 0;
+
+	return numBooks;
+}
+
