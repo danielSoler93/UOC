@@ -1,7 +1,9 @@
+BITS 64
+
 section .data               
 section .data               
 ;Canviar Nom i Cognom per les vostres dades.
-developer db "_Nom_ _Cognom1_",0
+developer db "_Daniel_ _Soler_",0
 
 ;Constants que també estan definides en C.
 DimMatrix    equ 10
@@ -21,7 +23,9 @@ extern charac, mines, marks, numMines, state
 
 ;Funcions de C que es criden des de assemblador
 extern clearScreen_C, gotoxyP1_C, getchP1_C, printchP1_C
-extern printBoardP1_C, printMessageP1_C,  	
+extern printBoardP1_C, printMessageP1_C, posCurScreenP1_C
+extern showMinesP1_C, updateBoardP1_C, moveCursorP1_C
+extern mineMarkerP1_C
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ATENCIÓ: Recordeu que les variables i els paràmetres de tipus 'char',
@@ -33,7 +37,7 @@ extern printBoardP1_C, printMessageP1_C,
 ;;
 ;; Les subrutines en assemblador que heu d'implementar són:
 ;;   posCurScreenP1, showMinesP1, updateBoardP1
-;;   moveCursorP1, calcIndexMatP1, mineMarkerP1
+;;   moveCursorP1, calcIndexP1, mineMarkerP1
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -68,7 +72,7 @@ gotoxyP1:
    push r15
 
    call gotoxyP1_C
- 
+
    pop r15
    pop r14
    pop r13
@@ -205,15 +209,45 @@ getchP1:
 ; rowcol   : vector amb la fila i la columna del cursor dins del tauler.
 ;;;;;  ;;;;;  
 posCurScreenP1:
-		push rbp
-		mov  rbp, rsp
-		  
-		
-				
-		mov rsp, rbp
-		pop rbp
-		ret
+   push rbp
+   mov  rbp, rsp
+   ;guardem l'estat dels registres del processador perquè
+   ;les funcions de C no mantenen l'estat dels registres.
+   push rax
+   push rbx
+   push rcx
+   push rdx
+   push rsi
+   push rdi
+   push r8
+   push r9
+   push r10
+   push r11
+   push r12
+   push r13
+   push r14
+   push r15
 
+   call posCurScreenP1_C
+ 
+   pop r15
+   pop r14
+   pop r13
+   pop r12
+   pop r11
+   pop r10
+   pop r9
+   pop r8
+   pop rdi
+   pop rsi
+   pop rdx
+   pop rcx
+   pop rbx
+   pop rax
+   
+   mov rsp, rbp
+   pop rbp
+   ret 
 
 ;;;;;
 ; Converteix el valor del Número de mines que queden per marcar (numMines)
@@ -234,15 +268,45 @@ posCurScreenP1:
 ; charac   : Caràcter a escriure a pantalla.
 ;;;;;
 showMinesP1:
-	push rbp
-	mov  rbp, rsp
-		
-	
-	
-	mov rsp, rbp
-	pop rbp
-	ret
+   push rbp
+   mov  rbp, rsp
+   ;guardem l'estat dels registres del processador perquè
+   ;les funcions de C no mantenen l'estat dels registres.
+   push rax
+   push rbx
+   push rcx
+   push rdx
+   push rsi
+   push rdi
+   push r8
+   push r9
+   push r10
+   push r11
+   push r12
+   push r13
+   push r14
+   push r15
 
+   call showMinesP1_C
+ 
+   pop r15
+   pop r14
+   pop r13
+   pop r12
+   pop r11
+   pop r10
+   pop r9
+   pop r8
+   pop rdi
+   pop rsi
+   pop rdx
+   pop rcx
+   pop rbx
+   pop rax
+   
+   mov rsp, rbp
+   pop rbp
+   ret
 
 ;;;;;
 ; Actualitzar el contingut del Tauler de Joc amb les dades de la matriu 
@@ -261,14 +325,45 @@ showMinesP1:
 ; marks    : Matriu amb les mines marcades i les mines de les obertes.   
 ;;;;;  
 updateBoardP1:
-	push rbp
-	mov  rbp, rsp
+   push rbp
+   mov  rbp, rsp
+   ;guardem l'estat dels registres del processador perquè
+   ;les funcions de C no mantenen l'estat dels registres.
+   push rax
+   push rbx
+   push rcx
+   push rdx
+   push rsi
+   push rdi
+   push r8
+   push r9
+   push r10
+   push r11
+   push r12
+   push r13
+   push r14
+   push r15
 
-	
-
-	mov rsp, rbp
-	pop rbp
-	ret
+   call updateBoardP1_C
+ 
+   pop r15
+   pop r14
+   pop r13
+   pop r12
+   pop r11
+   pop r10
+   pop r9
+   pop r8
+   pop rdi
+   pop rsi
+   pop rdx
+   pop rcx
+   pop rbx
+   pop rax
+   
+   mov rsp, rbp
+   pop rbp
+   ret
 
 
 ;;;;;		
@@ -285,13 +380,46 @@ updateBoardP1:
 ; charac   : Caràcter llegit de teclat.
 ;;;;;  
 moveCursorP1:
-	push rbp
-	mov  rbp, rsp
+   push rbp
+   mov  rbp, rsp
+   ;guardem l'estat dels registres del processador perquè
+   ;les funcions de C no mantenen l'estat dels registres.
+   push rax
+   push rbx
+   push rcx
+   push rdx
+   push rsi
+   push rdi
+   push r8
+   push r9
+   push r10
+   push r11
+   push r12
+   push r13
+   push r14
+   push r15
 
+   call moveCursorP1_C
+ 
+   pop r15
+   pop r14
+   pop r13
+   pop r12
+   pop r11
+   pop r10
+   pop r9
+   pop r8
+   pop rdi
+   pop rsi
+   pop rdx
+   pop rcx
+   pop rbx
+   pop rax
+   
+   mov rsp, rbp
+   pop rbp
+   ret
 	
-	mov rsp, rbp
-	pop rbp
-	ret
 
 
 ;;;;;  
@@ -343,15 +471,45 @@ calcIndexP1:
 ; numMines : nombre de mines que queden per marcar.
 ;;;;;  
 mineMarkerP1:
-	push rbp
-	mov  rbp, rsp
+   push rbp
+   mov  rbp, rsp
+   ;guardem l'estat dels registres del processador perquè
+   ;les funcions de C no mantenen l'estat dels registres.
+   push rax
+   push rbx
+   push rcx
+   push rdx
+   push rsi
+   push rdi
+   push r8
+   push r9
+   push r10
+   push r11
+   push r12
+   push r13
+   push r14
+   push r15
 
-	          
-	
-	mov rsp, rbp
-	pop rbp
-	ret
-	
+   call mineMarkerP1_C
+ 
+   pop r15
+   pop r14
+   pop r13
+   pop r12
+   pop r11
+   pop r10
+   pop r9
+   pop r8
+   pop rdi
+   pop rsi
+   pop rdx
+   pop rcx
+   pop rbx
+   pop rax
+   
+   mov rsp, rbp
+   pop rbp
+   ret
 
 ;;;;;  
 ; Aquesta subrutina es dóna feta. NO LA PODEU MODIFICAR.
