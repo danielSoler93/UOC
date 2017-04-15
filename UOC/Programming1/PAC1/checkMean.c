@@ -75,8 +75,24 @@ void checkMean(char **Arguments, float givenAverage, int numArguments){
         printf("n\n");
     }
 }
+//Easy Solution to deploy! --> Simpler, Shorter and more time-efficient
+//What is best argv or scanf??
+int Solution(void) {
+   int a, b, c, d, e;
+   float mean;
+   
+   printf("Enter 5 integers:\n");
+   scanf("%i %i %i %i %i", &a, &b, &c, &d, &e); 
+   
+   printf("Enter the mean:\n");
+   scanf("%f", &mean);
 
-
+   if ( (float)((a + b + c + d + e) / 5) == mean)
+      printf("y");
+   else
+      printf("n");
+   return 0;
+}
 
 /*Main Function*/
 int main(int argc, char **argv)
@@ -94,3 +110,4 @@ checkMean(arguments, givenAverage, numArguments);
 }
 
 /* Implementation of actions and functions*/
+
