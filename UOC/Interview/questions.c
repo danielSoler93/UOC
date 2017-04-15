@@ -5,8 +5,10 @@
 ** Date:        18-03-2017
 ** Description:
 *   """
-*
-
+*   Programming
+*   Interviews
+*   Experience
+*   Problems
 *   """
 *
 *****************************************************************/
@@ -157,14 +159,151 @@ char removeChars(char string[], char charsToRemove[], int stringLenght, int remo
     free(copy);
 }
 
+void reverse(char string[]){
+    
+    /*
+    Given a string, reverse the sentence without
+    changing the letters order inside each word.
+
+    Parameters
+    ------------
+
+    Input)
+
+        string[] : Initial sentence
+
+    Output)
+
+        Printf with the reversed sentence if no failure
+    */
+
+    char *buffer;
+    int wordStart;
+    int wordEnd;
+    int writePos = 0;
+    int stringLenght = strlen(string);
+    int readPosition = stringLenght-1;
+    buffer = (char *) malloc(stringLenght + 1);
+    
+    if(!buffer){
+        printf("Failed");
+    }
+    while(readPosition>=0){
+        if (string[readPosition] == ' '){
+            /*Write non word characters */
+            buffer[writePos++] = string[readPosition--];
+            }
+        else{
+            /*Write word characters*/
+            //Store end of the word position
+            wordEnd = readPosition;
+            //Look start position
+            while(readPosition>=0 && string[readPosition] != ' '){
+                readPosition--;
+            }
+            wordStart = readPosition + 1;
+
+            //write to buffer
+            while(wordStart<=wordEnd){
+                buffer[writePos++] = string[wordStart++];
+            }
+        }
+    }
+    buffer[writePos] = '\0';
+    strncpy(string, buffer, stringLenght + 1);
+    free(buffer);
+   //Printing string
+   int i;
+   for(i=0; i<stringLenght; i++){
+        printf("%c", string[i]);
+    }
+}
+
+void StringToInt(char string[]){
+
+    /*
+    Convert string to int
+    with O(n)
+
+    Parameters:
+    ...........
+
+    Input)
+
+    string [] : string to convert
+
+    Output)
+
+    convertedString[]: converted string 
+    */
+
+    int readPosition = 0;
+    int convertedNum;
+    int stringLenght = strlen(string);
+    int intArray[stringLenght];
+    for (readPosition; readPosition<stringLenght; readPosition++){
+        //Numbers
+        if(string[readPosition] >= 48  && string[readPosition] <= 57 ){
+            convertedNum = ((int) string[readPosition] + 2) % 10;
+            intArray[readPosition] = convertedNum;
+        }
+
+        else{
+            printf("Just Integers");
+        }
+    }
+int i;
+for(i=0; i<stringLenght; i++){
+    printf("%d", intArray[i]);
+}
+printf("\n");   
+}
+
+void intToString(int array[]){
+    
+    /*
+    Convert array of ints to array of strings
+
+    Parameters:
+    ------------
+
+    Input)
+
+    array [] = Original array of ints
+
+    Output)
+
+    convertedArray[] = Converted array of chars
+    */
+
+    int readPosition = 0;
+    int convertedNum;
+    int stringLenght = strlen(string);
+    int convertedArray[stringLenght];
+    for (readPosition; readPosition<stringLenght; readPosition++){
+        //Numbers
+        if(string[readPosition] >= 0  && string[readPosition] <= 9 ){
+            convertedNum = (string[readPosition] + 8) % 10;
+            convertedArray[readPosition] = (char) 
+            convertedNum;
+        }
+
+        else{
+            printf("Just Integers");
+        }
+    }
+int i;
+for(i=0; i<stringLenght; i++){
+    printf("%d", intArray[i]);
+}
+printf("\n");   
+}
+
+
 int main(int argc, char **argv)
 {
-    char string[] = "Battle of the Vowels: Hawaii vs. Grozny";
-    char charsToRemove[] = "aeiou";
-    int stringLenght = strlen(string);
-    int removeLenght = strlen(charsToRemove);
-
-    removeChars(string, charsToRemove, stringLenght, removeLenght);
+    char string[] = "12342";
+    intToString(string);
 
 
 
