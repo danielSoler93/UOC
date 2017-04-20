@@ -1,11 +1,15 @@
+BITS 64
+
 section .data               
 section .data               
 ;Canviar Nom i Cognom per les vostres dades.
-developer db "_Nom_ _Cognom1_",0
+developer db "Daniel Soler",0
 
 ;Constants que també estan definides en C.
 DimMatrix    equ 10
 SizeMatrix   equ 100
+;reservant espai
+buffer resb 10 
 
 section .text            
 ;Variables definides en Assemblador.
@@ -205,14 +209,50 @@ getchP1:
 ; rowcol   : vector amb la fila i la columna del cursor dins del tauler.
 ;;;;;  ;;;;;  
 posCurScreenP1:
-		push rbp
-		mov  rbp, rsp
-		  
+	push rbp
+	mov  rbp, rsp
+	mov  rax, 3
+	mov  rbx, 0
+	mov  rcx, buffer
+	mov  rdx,1
+	int 80h
+	mov  eax, DWORD[rowcol+0] 
+	mov  ebx, DWORD[rowcol+4]
+	mov  ecx, qword [DimMatrix]
+	sub  ecx, 1
+	mov  edx,  bit [buffer]
+	cmp  edx, 'i'
+	je   i
+	cmp  edx,  'j'
+	je   j
+	cmp  edx,  'k'
+	je   k
+	cmp  edx,  'k'
+	je   k
+	i:
+		cmp  eax, 0
+		jl  up
+	j:
+		cmp  ebx, 0
+		jl  left
+	k:
+		cmp  eax, ecx
+		jg  down
+	l:
+		cmp  ebx, ecx
+		jg  right
 		
-				
-		mov rsp, rbp
-		pop rbp
-		ret
+	up:
+		sub eax, 1
+	left:
+		sub ebx, 1
+	down:
+		add eax, 1
+	rigth:
+		add ebx, 
+	mov rsp, rbp
+	pop rbp
+	ret
 
 
 ;;;;;
@@ -287,6 +327,13 @@ updateBoardP1:
 moveCursorP1:
 	push rbp
 	mov  rbp, rsp
+
+	
+	
+	
+	cmp  rax, rbx
+	
+	
 
 	
 	mov rsp, rbp
