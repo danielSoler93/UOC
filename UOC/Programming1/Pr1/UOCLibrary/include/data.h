@@ -42,12 +42,12 @@ typedef struct {
 /******************** PR1 - EX 2A ********************/
 /* Definition of the book */
 typedef struct {
-	char mainSection;
-	char subSection;
+	int mainSection;
+	int subSection;
 } tIdentificator;
 
 typedef struct {
-	unsigned int isbn;
+	long long int isbn;
 	int publicationYear;
 	tBoolean available;
 	tIdentificator identificator;

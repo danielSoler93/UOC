@@ -30,32 +30,30 @@ tError readBook(tBook *book) {
 	/* Request information from user */
 
  /******************** PR1 - EX 2B ********************/
-
 	printf("ISBN (13 digits) :\n>> ");
-	scanf("%u", &(*book).isbn);
+	scanf("%lld", &(*book).isbn);
  
 	printf("Publication year:\n>> ");
-	scanf("%u", &(*book).publicationYear);
+	scanf("%d", &(*book).publicationYear);
 
-	getchar();
 	
 	printf("Is it available?:\n(1 yes, 0 no) >> ");
 	unsigned int availability;
 	scanf("%u", &availability);
+	(*book).available = !!availability;
 
 	printf("Section (1 digit):\n>> ");
-	scanf("%c", &(*book).identificator.mainSection);
-	getchar();
+	scanf("%d", &(*book).identificator.mainSection);
 	
 	printf("Subsection (1 digit):\n>> ");
-	scanf("%c", &(*book).identificator.subSection);
-	getchar();
+	scanf("%d", &(*book).identificator.subSection);
     
     printf("Author Code (3 char):\n>> ");
-	fgets((*book).authorCode, sizeof (*book).authorCode, stdin);
-     
+	scanf("%s", (*book).authorCode);
+	getchar();
     printf("Title: (no whitespaces)\n>> ");
-	fgets((*book).bookTitle, sizeof (*book).bookTitle, stdin);
+	scanf("%s", (*book).bookTitle);
+	getchar();
  	
 	return retVal;
 }
