@@ -246,6 +246,7 @@ void bookMenu(tAppData *appData) {
 		case BOOK_MENU_SORT:
 			break;
 		case BOOK_MENU_EXIT:
+			mainMenu(appData);
 			break;
 		}	
 	} while(option!=BOOK_MENU_EXIT);
@@ -299,6 +300,7 @@ void secMenu(tAppData *appData) {
 		case SEC_MENU_INFO:
 			break;
 		case SEC_MENU_EXIT:
+			mainMenu(appData);
 			break;
 		}	
 	} while(option!=SEC_MENU_EXIT);	
@@ -357,6 +359,7 @@ void statsMenu(tAppData appData) {
 			printf("Number of books in %c: %d\n", sectionId, bookTableFilt.size);
 			break;
 		case STAT_MENU_EXIT:
+		    mainMenu(appData);
 			break;	
 		}	
 	} while(option!=STAT_MENU_EXIT);	

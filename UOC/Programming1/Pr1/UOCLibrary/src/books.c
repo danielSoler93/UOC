@@ -18,7 +18,9 @@ tError getBookObject(const char *str, tBook *book) {
 
 	tError retVal = OK;
 	
-	sscanf(str, "%c %s", &section->id, section->name);
+	sscanf(str, "%lld %d %d %d %d %s %s", &book->isbn, &book->publicationYear, &book->available,
+										  &book->identificator.mainSection, &book->identificator.subSection,
+										  book->authorCode, book->bookTitle);
 	
 	return retVal;
 	
