@@ -174,7 +174,7 @@ void bookTable_del(tBookTable *tabBook, tBook book) {
 			book_cpy(&tabBook->table[i],tabBook->table[i+1]);
 		}
 		tabBook->size=tabBook->size-1;		
-	}
+	} 
 }
 
 /******************** PR1 - EX 5A ********************/
