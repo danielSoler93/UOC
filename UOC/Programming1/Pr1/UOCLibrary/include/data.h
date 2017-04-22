@@ -13,6 +13,7 @@
 #define AUTHORCODELENGHT 3
 #define TITLELENGHT 100
 
+
 /* Definition of a boolean type */
 typedef enum {FALSE, TRUE} tBoolean;
 

@@ -49,12 +49,14 @@ tError readBook(tBook *book) {
 	scanf("%d", &(*book).identificator.subSection);
     
     printf("Author Code (3 char):\n>> ");
-	scanf("%s", (*book).authorCode);
-	getchar();
-    printf("Title: (no whitespaces)\n>> ");
-	scanf("%s", (*book).bookTitle);
-	getchar();
- 	
+	int i;
+	for(i=0;i<=AUTHORCODELENGHT;i++){
+		(*book).authorCode[i] = getchar();
+	}
+	
+	printf("Title: (no whitespaces)\n>> ");
+	scanf("%s", &(*book).bookTitle);
+
 	return retVal;
 }
 
@@ -132,7 +134,7 @@ void mainMenu(tAppData *appData)
 		
 	/* Start the menu */
 /******************** PR1 - EX 1 ********************/
-
+	do{
 		/* Show list of options and ask the user for an option */
 		printMainMenuOptions();
 		option=getMainMenuOption();
@@ -168,6 +170,7 @@ void mainMenu(tAppData *appData)
 			else{
 				printf("No data for section menu\n");
 			}
+			break;
 		case MAIN_MENU_STATS:
 			if(appData){
 				statsMenu(*appData);
@@ -175,13 +178,11 @@ void mainMenu(tAppData *appData)
 			else{
 				printf("No data for stats menu");
 			}
+			break;
 		case MAIN_MENU_EXIT:
 			break;
 		}
-			
-		
-			
-
+	}while(option!=MAIN_MENU_EXIT && option!=MAIN_MENU_STATS && option!=MAIN_MENU_SECTIONS && option!=MAIN_MENU_BOOKS);
 }
 
 /*********************************
@@ -246,7 +247,7 @@ void bookMenu(tAppData *appData) {
 		case BOOK_MENU_SORT:
 			break;
 		case BOOK_MENU_EXIT:
-			mainMenu(appData);
+			mainMenu(&appData);
 			break;
 		}	
 	} while(option!=BOOK_MENU_EXIT);
@@ -300,10 +301,10 @@ void secMenu(tAppData *appData) {
 		case SEC_MENU_INFO:
 			break;
 		case SEC_MENU_EXIT:
-			mainMenu(appData);
+			mainMenu(&appData);
 			break;
 		}	
-	} while(option!=SEC_MENU_EXIT);	
+	} while(option!=SEC_MENU_EXIT);
 }
 
 
@@ -359,8 +360,8 @@ void statsMenu(tAppData appData) {
 			printf("Number of books in %c: %d\n", sectionId, bookTableFilt.size);
 			break;
 		case STAT_MENU_EXIT:
-		    mainMenu(appData);
+			mainMenu(&appData);
 			break;	
-		}	
-	} while(option!=STAT_MENU_EXIT);	
+		}
+	} while(option!=STAT_MENU_EXIT);
 }
