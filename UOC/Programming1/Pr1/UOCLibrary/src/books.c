@@ -172,6 +172,25 @@ tError bookTable_save(tBookTable tabBook, const char* filename) {
 
 	tError retVal = OK;
 	
+	FILE *fout=0;
+	unsigned int i;
+	char str[MAX_LINE];
+	
+	/* Open the output file */
+	if((fout=fopen(filename, "w"))==0) {
+		retVal = ERR_CANNOT_WRITE;
+	} else {
+	
+        /* Save all sections to the file */
+        for(i=0;i<tabBook.size;i++) {
+            getBookStr(tabBook.table[i], MAX_LINE, str);
+            fprintf(fout, "%s\n", str);
+        }
+            
+        /* Close the file */
+        fclose(fout);
+	}
+	
 	return retVal;
 }
 
@@ -180,12 +199,45 @@ tError bookTable_load(tBookTable *tabBook, const char* filename) {
 	
 	tError retVal = OK;
 	
+	FILE *fin=0;
+	char line[MAX_LINE];
+	tBook newBook;
+	
+	/* Initialize the output table */
+	bookTable_init(tabBook);
+	
+	/* Open the input file */
+	if((fin=fopen(filename, "r"))!=NULL) {
+
+		/* Read all the sections */
+		while(!feof(fin) && tabBook->size<MAX_BOOKS) {
+			/* Remove any content from the line */
+			line[0] = '\0';
+			/* Read one line (maximum 511 chars) and store it in "line" variable */
+			fgets(line, MAX_LINE-1, fin);
+			/* Ensure that the string is ended by 0*/
+			line[MAX_LINE-1]='\0';
+			if(strlen(line)>0) {
+				/* Obtain the object */
+				getBookObject(line, &newBook);
+				/* Add the new section to the output table */
+				bookTable_add(tabBook, newBook);		
+			}
+		}
+		/* Close the file */
+		fclose(fin);
+		
+	}else {
+		retVal = ERR_CANNOT_READ;
+	}
+	
+	
 	return retVal;
 }
 
 /******************** PR1 - EX 6 ********************/
 void bookTable_filterBySection(tBookTable tabBook, char sectionId, tBookTable *result) {
-
+	
 }
 
 /******************** PR1 - EX 7A ********************/
