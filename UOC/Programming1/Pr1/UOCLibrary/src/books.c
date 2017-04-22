@@ -8,7 +8,7 @@
 void getBookStr(tBook book, int maxSize, char *str) {
 	int length;
 	
-	length = snprintf(str,maxSize-1,"%s %d %d %d %d %s %s", book.isbn, book.publicationYear, book.available, book.identificator.mainSection, book.identificator.subSection, book.authorCode, book.bookTitle);			
+	length = snprintf(str,maxSize-1,"%s %d %d %c %c %s %s", book.isbn, book.publicationYear, book.available, book.identificator.mainSection, book.identificator.subSection, book.authorCode, book.bookTitle);			
 	str[length]='\0';
 }
 
@@ -18,7 +18,7 @@ tError getBookObject(const char *str, tBook *book) {
 
 	tError retVal = OK;
 	
-	sscanf(str, "%s %d %d %d %d %s %s", &book->isbn, &book->publicationYear, &book->available,
+	sscanf(str, "%s %d %d %c %c %s %s", &book->isbn, &book->publicationYear, &book->available,
 										  &book->identificator.mainSection, &book->identificator.subSection,
 										  book->authorCode, book->bookTitle);
 	
@@ -150,7 +150,6 @@ int bookTable_find(tBookTable tabBook, char *ISBN) {
 	int idx = -1;
 	
 	i=0;
-	printf("%d", tabBook.size);
 	while(i< tabBook.size && idx==-1) {
 		/* Check if the id is the same */
 		if(strcmp(tabBook.table[i].isbn,ISBN) ==0){
@@ -248,6 +247,14 @@ tError bookTable_load(tBookTable *tabBook, const char* filename) {
 /******************** PR1 - EX 6 ********************/
 void bookTable_filterBySection(tBookTable tabBook, char sectionId, tBookTable *result) {
 	
+	unsigned int i=0;
+	while(i<tabBook.size) {
+		/* Check if the idsection is the same */
+		if(tabBook.table[i].identificator.mainSection == sectionId){
+			bookTable_add(result, tabBook.table[i]);
+		}
+		i++;
+	}
 }
 
 /******************** PR1 - EX 7A ********************/
@@ -260,9 +267,15 @@ unsigned int bookTable_getOnLoanNumber(tBookTable tabBook){
 
 /******************** PR1 - EX 7B ********************/
 unsigned int bookTable_getAuthorNumber(tBookTable tabBook, char *author){
-
-	int numBooks = 0;
-
+	int i =0;
+	unsigned int numBooks = 0;
+		while(i<tabBook.size) {
+		/* Check if the author is the same */
+		if(strcmp(tabBook.table[i].authorCode, author)==0){
+			numBooks ++;
+		}
+		i++;
+	}
 	return numBooks;
 }
 

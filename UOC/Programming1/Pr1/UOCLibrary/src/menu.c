@@ -43,19 +43,18 @@ tError readBook(tBook *book) {
 	(*book).available = !!availability;
 
 	printf("Section (1 digit):\n>> ");
-	scanf("%d", &(*book).identificator.mainSection);
+	scanf(" %c", &(*book).identificator.mainSection);
 	
 	printf("Subsection (1 digit):\n>> ");
-	scanf("%d", &(*book).identificator.subSection);
+	scanf(" %c", &(*book).identificator.subSection);
+
     
     printf("Author Code (3 char):\n>> ");
-	int i;
-	for(i=0;i<=AUTHORCODELENGHT;i++){
-		(*book).authorCode[i] = getchar();
-	}
+	scanf(" %c %c %c", &(*book).authorCode[0], &(*book).authorCode[1], &(*book).authorCode[2]);
 	
 	printf("Title: (no whitespaces)\n>> ");
-	scanf("%s", &(*book).bookTitle);
+	scanf ("%s", (*book).bookTitle);
+
 
 	return retVal;
 }

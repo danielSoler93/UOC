@@ -44,8 +44,8 @@ typedef struct {
 /******************** PR1 - EX 2A ********************/
 /* Definition of the book */
 typedef struct {
-	int mainSection;
-	int subSection;
+	char mainSection;
+	char subSection;
 } tIdentificator;
 
 typedef struct {
@@ -55,7 +55,7 @@ typedef struct {
 	tIdentificator identificator;
 	char authorCode[AUTHORCODELENGHT];
 	char bookTitle[TITLELENGHT];
-	} tBook;
+} tBook;
 
 /* Table of books */
 typedef struct {
