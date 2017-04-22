@@ -31,7 +31,7 @@ tError readBook(tBook *book) {
 
  /******************** PR1 - EX 2B ********************/
 	printf("ISBN (13 digits) :\n>> ");
-	scanf("%lld", &(*book).isbn);
+	scanf("%s", &(*book).isbn);
  
 	printf("Publication year:\n>> ");
 	scanf("%d", &(*book).publicationYear);

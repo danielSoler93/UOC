@@ -12,6 +12,7 @@
 #define MAX_BOOK_AUTHOR_CODE 4
 #define AUTHORCODELENGHT 3
 #define TITLELENGHT 100
+#define ISBNLENGHT 13
 
 
 /* Definition of a boolean type */
@@ -48,7 +49,7 @@ typedef struct {
 } tIdentificator;
 
 typedef struct {
-	long long int isbn;
+	char isbn[ISBNLENGHT];
 	int publicationYear;
 	tBoolean available;
 	tIdentificator identificator;

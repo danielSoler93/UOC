@@ -8,7 +8,7 @@
 void getBookStr(tBook book, int maxSize, char *str) {
 	int length;
 	
-	length = snprintf(str,maxSize-1,"%lld %d %d %d %d %s %s", book.isbn, book.publicationYear, book.available, book.identificator.mainSection, book.identificator.subSection, book.authorCode, book.bookTitle);			
+	length = snprintf(str,maxSize-1,"%s %d %d %d %d %s %s", book.isbn, book.publicationYear, book.available, book.identificator.mainSection, book.identificator.subSection, book.authorCode, book.bookTitle);			
 	str[length]='\0';
 }
 
@@ -18,7 +18,7 @@ tError getBookObject(const char *str, tBook *book) {
 
 	tError retVal = OK;
 	
-	sscanf(str, "%lld %d %d %d %d %s %s", &book->isbn, &book->publicationYear, &book->available,
+	sscanf(str, "%s %d %d %d %d %s %s", &book->isbn, &book->publicationYear, &book->available,
 										  &book->identificator.mainSection, &book->identificator.subSection,
 										  book->authorCode, book->bookTitle);
 	
@@ -81,12 +81,14 @@ int book_cmp(tBook b1, tBook b2) {
 					return retVal;
 					
 				}   else if (ret==0) {
+					
+						int ret = strcmp(b1.isbn, b2.isbn);
 						
-						if (b1.isbn > b2.isbn) {
+						if (ret > 0) {
 							retVal = 1;
 							return retVal;
 							
-						} else if (b1.isbn < b2.isbn) {
+						} else if (ret < 0) {
 							retVal = -1;
 							return retVal;
 							
@@ -103,7 +105,23 @@ int book_cmp(tBook b1, tBook b2) {
 
 /******************** PR1 - EX 3B ********************/
 void book_cpy(tBook *dst, tBook src) {
-
+	/*
+	int destination[] = {dst->isbn, dst->available, dst->identificator.mainSection,
+	dst->identificator.subSection, dst->authorCode, dst->bookTitle};
+	int source[] = {src.isbn, src.available, src.identificator.mainSection,
+	src.identificator.subSection, src.authorCode, src.bookTitle};
+	int i;
+	int Size = sizeof(source)/sizeof(source[0]);
+	for (i=0; i<Size; i++){
+	strcpy(destination[i], source[i]);
+	} 
+	*/
+	strcpy(dst->isbn, src.isbn);
+	dst->available = src.available;
+	dst->identificator.mainSection = src.identificator.mainSection;
+	dst->identificator.subSection = src.identificator.subSection;
+	strcpy(dst->authorCode, src.authorCode); 
+	strcpy(dst->bookTitle, src.bookTitle); 
 }
 
 /******************** PR1 - EX 4A ********************/
@@ -111,13 +129,35 @@ tError bookTable_add(tBookTable *tabBook, tBook book) {
 
 	tError retVal = OK;
 	
+	/* Check if there enough space for the new section */
+	if(tabBook->size>=MAX_BOOKS) {
+		retVal = ERR_MEMORY;
+	}
+
+	if (retVal == OK) {
+		/* Add the new section to the end of the table */
+		book_cpy(&tabBook->table[tabBook->size],book);
+		tabBook->size++;
+	}
+	
+	
 	return retVal;
 }
 
 /******************** PR1 - EX 4B ********************/
 int bookTable_find(tBookTable tabBook, char *ISBN) {
-
+	unsigned int i;
 	int idx = -1;
+	
+	i=0;
+	printf("%d", tabBook.size);
+	while(i< tabBook.size && idx==-1) {
+		/* Check if the id is the same */
+		if(strcmp(tabBook.table[i].isbn,ISBN) ==0){
+			idx = i;
+		}
+		i++;
+	}
 
 	return idx;
 }
