@@ -38,8 +38,68 @@ int book_cmp(tBook b1, tBook b2) {
 	
 	int retVal=0;
 	
-	return retVal;
+	if (b1.identificator.mainSection > b2.identificator.mainSection) {
+        retVal = 1;
+		return retVal;
+		
+	} else if (b1.identificator.subSection < b2.identificator.subSection) {
+        retVal = -1;
+		return retVal;
+    }
+		else if (b1.identificator.subSection == b2.identificator.subSection){
+			
+			if (b1.identificator.subSection > b2.identificator.subSection) {
+			retVal = 1;
+			return retVal;
+			
+		} 	else if (b1.identificator.subSection < b2.identificator.subSection) {
+			retVal = -1;
+			return retVal;
+		} 
+			else if (b1.identificator.subSection == b2.identificator.subSection){
+				
+				int ret = strcmp(b1.authorCode, b2.authorCode);
+				
+				if (ret>0) {
+				retVal = 1;
+				return retVal;
+				
+			} 	else if (ret<0) {
+				retVal = -1;
+				return retVal;
+				
+			}   else if (ret == 0){
+					
+					int ret = strcmp(b1.bookTitle, b2.bookTitle);
+					
+					if (ret>0) {
+					retVal = 1;
+					return retVal;
+					
+				} 	else if (ret<0) {
+					retVal = -1;
+					return retVal;
+					
+				}   else if (ret==0) {
+						
+						if (b1.isbn > b2.isbn) {
+							retVal = 1;
+							return retVal;
+							
+						} else if (b1.isbn < b2.isbn) {
+							retVal = -1;
+							return retVal;
+							
+						} else {
+							retVal = 0;
+							return retVal;
+						}
+					}
+				}
+			}
+		}
 }
+
 
 /******************** PR1 - EX 3B ********************/
 void book_cpy(tBook *dst, tBook src) {
