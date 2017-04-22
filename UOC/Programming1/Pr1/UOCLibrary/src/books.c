@@ -164,7 +164,17 @@ int bookTable_find(tBookTable tabBook, char *ISBN) {
 
 /******************** PR1 - EX 4C ********************/
 void bookTable_del(tBookTable *tabBook, tBook book) {
+	unsigned int i;
+    unsigned int pos;
 
+	pos = bookTable_find(*tabBook, book.isbn);
+	if (pos!=-1){
+	/* If the section is found, all the rest of the elements are displaced one position */
+		for(i=pos; i<tabBook->size-1; i++) {		
+			book_cpy(&tabBook->table[i],tabBook->table[i+1]);
+		}
+		tabBook->size=tabBook->size-1;		
+	}
 }
 
 /******************** PR1 - EX 5A ********************/
