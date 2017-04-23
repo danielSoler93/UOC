@@ -211,53 +211,18 @@ getchP1:
 posCurScreenP1:
 	push rbp
 	mov  rbp, rsp
-	mov  rax, 3
-	mov  rbx, 0
-	mov  rcx, buffer
-	mov  rdx,1
-	int 80h
 	mov  eax, DWORD[rowcol+0] 
 	mov  ebx, DWORD[rowcol+4]
-	mov  ecx, DWORD[DimMatrix]
-	sub  ecx, 1
-	mov  edx,  BYTE[buffer]
-	cmp  edx, 'i'
-	je   i
-	cmp  edx,  'j'
-	je   j
-	cmp  edx,  'k'
-	je   k
-	cmp  edx,  'l'
-	je   l
-	i:
-	  cmp  eax, 0
-	  jl  up
-	j:
-	  cmp  ebx, 0
-	  jl  left
-	k:
-	  cmp  eax, ecx
-	  jg  down
-	l:
-	  cmp  ebx, ecx
-	  jg  right
-	up:
-	  sub eax, 1
-	  jmp end
-	left:
-	  sub ebx, 1
-	  jmp end
-	down:
-	  add eax, 1
-	  jmp end
-	rigth:
-	  add ebx, 1
-	  jmp end
-	  
-	end:
-		mov rsp, rbp
-		pop rbp
-		ret
+	imul eax, 2
+	add  eax, 7
+	imul ebx, 4
+	add  ebx, 7
+	mov  [rowScreen], eax
+	mov  [colScreen], ebx
+	call gotoxyP1
+	mov rsp, rbp
+	pop rbp
+	ret
 
 
 ;;;;;
