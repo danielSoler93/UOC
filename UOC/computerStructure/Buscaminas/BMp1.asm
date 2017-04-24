@@ -246,11 +246,26 @@ posCurScreenP1:
 showMinesP1:
 	push rbp
 	mov  rbp, rsp
-		
-	
-	
-	mov rsp, rbp
-	pop rbp
+	mov  eax, DWORD[numMines]
+	mov  edx, 0
+	mov  ecx, 10
+	div  ecx
+	add  al, 48
+	mov  [charac], al
+	mov  ebx, 27
+	mov  [rowScreen], ebx
+	mov  ebx, 23
+	mov  [colScreen], ebx
+	call gotoxyP1
+	call printchP1
+	add  dl, 48
+	mov  [charac], al
+	mov  ebx, 24
+	mov  [colScreen], ebx
+	call gotoxyP1
+	call printchP1
+	mov  rsp, rbp
+	pop  rbp
 	ret
 
 
@@ -273,9 +288,39 @@ showMinesP1:
 updateBoardP1:
 	push rbp
 	mov  rbp, rsp
+	mov  eax, 7
+	mov  [rowScreen], eax
+	mov  ebx, 0
+	mov  ecx, 0
+for:
+	cmp ebx, DimMatrix
+	jl  cert
+	jmp fin
 
-	
+cert:
+	mov eax, 7
+	mov [colScreen], eax
+	cmp ecx, DimMatrix
+	jl  cert2
+	mov eax,2
+	add [rowScreen], eax
+	add ebx, 1
+	jmp for
 
+cert2:
+	call gotoxyP1
+	mov  al, BYTE[marks + 11]
+	mov  [charac], al
+	call printchP1
+	mov eax, 4
+	add  [colScreen], eax
+	mov eax, 2
+	add  [rowScreen], eax
+	add ecx, 1
+	jmp  for
+
+fin:
+	call showMinesP1
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -297,15 +342,63 @@ updateBoardP1:
 moveCursorP1:
 	push rbp
 	mov  rbp, rsp
-
+	mov  eax, 3
+	mov  ebx, 0
+	mov  ecx, charac
+	mov  edx,1
+	int 80h
+	mov  eax, DWORD[rowcol+0] 
+	mov  ebx, DWORD[rowcol+4]
+	mov  ecx, DimMatrix
+	sub  ecx, 1
+	mov  al, BYTE[charac]
+	cmp  al, 'i'
+	je   i
+	cmp  al,  'j'
+	je   j
+	cmp  al,  'k'
+	je   k
+	cmp  al, 'l'
+	je   l
+	jmp moveFin
+i:
+	cmp  eax, 0
+	jl  up
+	jmp moveFin
+j:
+	cmp  ebx, 0
+	jl  left
+	jmp moveFin
+k:
+	cmp  eax, ecx
+	jg  down
+	jmp moveFin
+l:
+	cmp  ebx, ecx
+	jg   right
+	jmp  moveFin
 	
+up:
+	sub eax, 1
+	mov [rowcol], eax
+	jmp moveFin
 	
+left:
+	sub ebx, 1
+	mov [rowcol], ebx
+	jmp moveFin
 	
-	cmp  rax, rbx
+down:
+	add eax, 1
+	mov [rowcol], eax
+	jmp moveFin
 	
+right:
+	add ebx, 1
+	mov [rowcol], ebx
+	jmp moveFin
 	
-
-	
+moveFin:
 	mov rsp, rbp
 	pop rbp
 	ret
