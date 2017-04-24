@@ -248,6 +248,7 @@ tError bookTable_load(tBookTable *tabBook, const char* filename) {
 void bookTable_filterBySection(tBookTable tabBook, char sectionId, tBookTable *result) {
 	
 	unsigned int i=0;
+	bookTable_init(result);
 	while(i<tabBook.size) {
 		/* Check if the idsection is the same */
 		if(tabBook.table[i].identificator.mainSection == sectionId){
@@ -261,7 +262,14 @@ void bookTable_filterBySection(tBookTable tabBook, char sectionId, tBookTable *r
 unsigned int bookTable_getOnLoanNumber(tBookTable tabBook){
 
 	int numBooks = 0;
-
+	unsigned int i=0;
+	while(i<tabBook.size) {
+		/* Check if the idsection is the same */
+		if(tabBook.table[i].available==0){
+			numBooks++;
+		}
+		i++;
+	}
 	return numBooks;
 }
 

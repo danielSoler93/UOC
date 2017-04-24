@@ -50,7 +50,7 @@ tError readBook(tBook *book) {
 
     
     printf("Author Code (3 char):\n>> ");
-	scanf(" %c %c %c", &(*book).authorCode[0], &(*book).authorCode[1], &(*book).authorCode[2]);
+	scanf(" %c%c%c/0", &(*book).authorCode[0], &(*book).authorCode[1], &(*book).authorCode[2]);
 	
 	printf("Title: (no whitespaces)\n>> ");
 	scanf ("%s", (*book).bookTitle);
