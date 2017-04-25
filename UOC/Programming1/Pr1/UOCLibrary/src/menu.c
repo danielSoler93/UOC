@@ -30,33 +30,32 @@ tError readBook(tBook *book) {
 	/* Request information from user */
 
  /******************** PR1 - EX 2B ********************/
-
 	printf("ISBN (13 digits) :\n>> ");
-	scanf("%u", &(*book).isbn);
+	scanf("%s", &(*book).isbn);
  
 	printf("Publication year:\n>> ");
-	scanf("%u", &(*book).publicationYear);
+	scanf("%d", &(*book).publicationYear);
 
-	getchar();
 	
 	printf("Is it available?:\n(1 yes, 0 no) >> ");
 	unsigned int availability;
 	scanf("%u", &availability);
+	(*book).available = !!availability;
 
 	printf("Section (1 digit):\n>> ");
-	scanf("%c", &(*book).identificator.mainSection);
-	getchar();
+	scanf(" %c", &(*book).identificator.mainSection);
 	
 	printf("Subsection (1 digit):\n>> ");
-	scanf("%c", &(*book).identificator.subSection);
-	getchar();
+	scanf(" %c", &(*book).identificator.subSection);
+
     
     printf("Author Code (3 char):\n>> ");
-	fgets((*book).authorCode, sizeof (*book).authorCode, stdin);
-     
-    printf("Title: (no whitespaces)\n>> ");
-	fgets((*book).bookTitle, sizeof (*book).bookTitle, stdin);
- 	
+	scanf(" %c%c%c/0", &(*book).authorCode[0], &(*book).authorCode[1], &(*book).authorCode[2], &(*book).authorCode[3]);
+	
+	printf("Title: (no whitespaces)\n>> ");
+	scanf ("%s", (*book).bookTitle);
+
+
 	return retVal;
 }
 
@@ -134,7 +133,7 @@ void mainMenu(tAppData *appData)
 		
 	/* Start the menu */
 /******************** PR1 - EX 1 ********************/
-
+	do{
 		/* Show list of options and ask the user for an option */
 		printMainMenuOptions();
 		option=getMainMenuOption();
@@ -170,6 +169,7 @@ void mainMenu(tAppData *appData)
 			else{
 				printf("No data for section menu\n");
 			}
+			break;
 		case MAIN_MENU_STATS:
 			if(appData){
 				statsMenu(*appData);
@@ -177,13 +177,11 @@ void mainMenu(tAppData *appData)
 			else{
 				printf("No data for stats menu");
 			}
+			break;
 		case MAIN_MENU_EXIT:
 			break;
 		}
-			
-		
-			
-
+	}while(option!=MAIN_MENU_EXIT && option!=MAIN_MENU_STATS && option!=MAIN_MENU_SECTIONS && option!=MAIN_MENU_BOOKS);
 }
 
 /*********************************
@@ -248,6 +246,7 @@ void bookMenu(tAppData *appData) {
 		case BOOK_MENU_SORT:
 			break;
 		case BOOK_MENU_EXIT:
+			mainMenu(&appData);
 			break;
 		}	
 	} while(option!=BOOK_MENU_EXIT);
@@ -301,9 +300,10 @@ void secMenu(tAppData *appData) {
 		case SEC_MENU_INFO:
 			break;
 		case SEC_MENU_EXIT:
+			mainMenu(&appData);
 			break;
 		}	
-	} while(option!=SEC_MENU_EXIT);	
+	} while(option!=SEC_MENU_EXIT);
 }
 
 
@@ -359,7 +359,8 @@ void statsMenu(tAppData appData) {
 			printf("Number of books in %c: %d\n", sectionId, bookTableFilt.size);
 			break;
 		case STAT_MENU_EXIT:
+			mainMenu(&appData);
 			break;	
-		}	
-	} while(option!=STAT_MENU_EXIT);	
+		}
+	} while(option!=STAT_MENU_EXIT);
 }
