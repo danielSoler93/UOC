@@ -5,15 +5,15 @@
 ## Release
 ProjectName            :=ex1
 ConfigurationName      :=Release
-WorkspacePath          :=C:/Users/Daniel/Documents/PAC3_Tables
-ProjectPath            :=C:/Users/Daniel/Documents/PAC3_Tables/ex1
+WorkspacePath          :=C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3_Tables
+ProjectPath            :=C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3_Tables/ex1
 IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Daniel
-Date                   :=26/04/2017
+Date                   :=27/04/2017
 CodeLitePath           :=C:/CodeLite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
