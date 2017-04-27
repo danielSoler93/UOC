@@ -1,5 +1,5 @@
 /* Run all the test set */
-#include "ex1.h"
+#include "discount.h"
 
 
 void runTests();

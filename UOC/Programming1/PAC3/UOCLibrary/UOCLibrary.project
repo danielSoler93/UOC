@@ -18,12 +18,12 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="src/main.c"/>
-    <File Name="src/ex1.c"/>
     <File Name="src/test.c"/>
+    <File Name="src/discount.c"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
-    <File Name="include/ex1.h"/>
     <File Name="include/test.h"/>
+    <File Name="include/discount.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

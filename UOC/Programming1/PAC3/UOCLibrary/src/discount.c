@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ex1.h"
+#include "discount.h"
 /*
 void bookTable_add(tDiscountsShop *tabDisc, tDiscount discount) {
 

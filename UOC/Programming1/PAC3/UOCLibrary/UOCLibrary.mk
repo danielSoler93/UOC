@@ -2,12 +2,12 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Release
+## Debug
 ProjectName            :=UOCLibrary
-ConfigurationName      :=Release
+ConfigurationName      :=Debug
 WorkspacePath          :=C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3/UOCLibrary
 ProjectPath            :=C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3/UOCLibrary
-IntermediateDirectory  :=./Release
+IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
@@ -28,7 +28,7 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
-Preprocessors          :=$(PreprocessorSwitch)NDEBUG 
+Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
@@ -52,8 +52,8 @@ LibPath                := $(LibraryPathSwitch).
 AR       := ar rcus
 CXX      := gcc
 CC       := gcc
-CXXFLAGS :=  -O2 -Wall $(Preprocessors)
-CFLAGS   :=  -O2 -Wall $(Preprocessors)
+CXXFLAGS :=  -g -O0 -Wall $(Preprocessors)
+CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -62,7 +62,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IntermediateDirectory)/src_ex1.c$(ObjectSuffix) $(IntermediateDirectory)/src_test.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IntermediateDirectory)/src_discount.c$(ObjectSuffix) 
 
 
 
@@ -81,11 +81,11 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 MakeIntermediateDirs:
-	@$(MakeDirCommand) "./Release"
+	@$(MakeDirCommand) "./Debug"
 
 
 $(IntermediateDirectory)/.d:
-	@$(MakeDirCommand) "./Release"
+	@$(MakeDirCommand) "./Debug"
 
 PreBuild:
 
@@ -101,14 +101,6 @@ $(IntermediateDirectory)/src_main.c$(DependSuffix): src/main.c
 $(IntermediateDirectory)/src_main.c$(PreprocessSuffix): src/main.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_main.c$(PreprocessSuffix) src/main.c
 
-$(IntermediateDirectory)/src_ex1.c$(ObjectSuffix): src/ex1.c $(IntermediateDirectory)/src_ex1.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3/UOCLibrary/src/ex1.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_ex1.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_ex1.c$(DependSuffix): src/ex1.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_ex1.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_ex1.c$(DependSuffix) -MM src/ex1.c
-
-$(IntermediateDirectory)/src_ex1.c$(PreprocessSuffix): src/ex1.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_ex1.c$(PreprocessSuffix) src/ex1.c
-
 $(IntermediateDirectory)/src_test.c$(ObjectSuffix): src/test.c $(IntermediateDirectory)/src_test.c$(DependSuffix)
 	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3/UOCLibrary/src/test.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_test.c$(DependSuffix): src/test.c
@@ -117,12 +109,20 @@ $(IntermediateDirectory)/src_test.c$(DependSuffix): src/test.c
 $(IntermediateDirectory)/src_test.c$(PreprocessSuffix): src/test.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_test.c$(PreprocessSuffix) src/test.c
 
+$(IntermediateDirectory)/src_discount.c$(ObjectSuffix): src/discount.c $(IntermediateDirectory)/src_discount.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3/UOCLibrary/src/discount.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_discount.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_discount.c$(DependSuffix): src/discount.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_discount.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_discount.c$(DependSuffix) -MM src/discount.c
+
+$(IntermediateDirectory)/src_discount.c$(PreprocessSuffix): src/discount.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_discount.c$(PreprocessSuffix) src/discount.c
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
 ## Clean
 ##
 clean:
-	$(RM) -r ./Release/
+	$(RM) -r ./Debug/
 
 
