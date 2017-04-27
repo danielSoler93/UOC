@@ -1,22 +1,17 @@
 #include <stdio.h>
-#include <string.h>
-#include "menu.h"
-#include "test.h"
-#include <stdio.h>
-#include "ex.h"
+#include "ex1.h"
 
 int main(int argc, char **argv)
 {	
-	tDiscount discounts[];
+	tDiscount discounts[MAXDISCOUNTS];
 	tDiscount discount1;
 	tDiscount discount2;
 	tDiscount discount3;
 	tDiscount discount4;
 	
-	printf("%d", 1);
-	discount1.dni = 1234;
-	discount2.dni = 1222;
-	discount3.dni = 1121;
+	discount1.dni = 1434;
+	discount2.dni = 1122;
+	discount3.dni = 1221;
 	discount4.dni = 1110;
 	
 	discounts[0] = discount1;
@@ -24,7 +19,7 @@ int main(int argc, char **argv)
 	discounts[2] = discount3;
 	discounts[3] = discount4;
 	
-	sortDiscountsShop(discounts);
+	sortDiscountsShop(&discounts);
 	
 	return 0;
 }
