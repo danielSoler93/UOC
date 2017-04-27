@@ -16,6 +16,9 @@ typedef struct {
 } tDiscountsShop;
 
 //Function headers
-void sortDiscountsShop(tDiscount *table);
+void initDiscounts(tDiscountsShop *tabDisc);
 
-void discountChanged(tDiscount *table, int id);
+void sortDiscountsShop(tDiscountsShop *tabDisc);
+
+void discountChanged(tDiscountsShop *tabDisc, int id);
+
