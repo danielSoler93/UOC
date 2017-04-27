@@ -63,10 +63,14 @@ void discountChanged(tDiscount *table, int id){
 	 
 	 n = sizeof(table);
 	 for(i=0; i<n; i++){
-		 if(table[i].dni == id){
+		 if(table[i].dni == id && table[i].changed == FALSE){
 			 table[i].changed = TRUE;
 			 found = TRUE;
 			 printf("Cupon with id %d changed\n", id);
+		 }
+		 else if(table[i].dni == id && table[i].changed == TRUE){
+			 found = TRUE;
+			printf("Cupon with id %d already changed\n", id);
 		 }
 	 }
 	 if(!found){
