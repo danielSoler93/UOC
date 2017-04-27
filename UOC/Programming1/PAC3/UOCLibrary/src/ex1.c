@@ -41,3 +41,38 @@ void sortDiscountsShop(tDiscount *table){
 	//printf("%d\n", smallest.dni);
 	}
 }
+
+void discountChanged(tDiscount *table, int id){
+		/*
+	 * 
+	 * Search for discount and change it.
+	 * Switch the change bool from false to true.
+	 * 
+	 *Input:
+	 * 		table: Storage of discounts
+	 * 		id: Discount id
+	 * Output:
+	 * 		table: Discounts with the discount
+	 * 			   with the selected id changed
+	 * 
+	 */
+	 
+	 int i;
+	 int n;
+	 bool found = FALSE;
+	 
+	 n = sizeof(table);
+	 for(i=0; i<n; i++){
+		 if(table[i].dni == id){
+			 table[i].changed = TRUE;
+			 found = TRUE;
+			 printf("Cupon with id %d changed\n", id);
+		 }
+	 }
+	 if(!found){
+		 printf("No cupon with that id %d. Check again \n", id);
+	 }
+	
+	
+}
+
