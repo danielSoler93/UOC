@@ -96,6 +96,8 @@ void discountChanged(tDiscountsShop *tabDisc, int id, bool *found, bool *changed
 	* Output:
 	* 		table: Discounts with the discount
 	* 			   with the selected id changed
+	* 		found: bool to know if the dni was found.
+	* 		changed: bool toknow if the discount was exchnged.
 	*
 	*/
 
@@ -103,19 +105,19 @@ void discountChanged(tDiscountsShop *tabDisc, int id, bool *found, bool *changed
     (*found) = FALSE;
 	(*changed) = FALSE;
     for(i = 0; i < tabDisc->numDiscounts; i++) {
-	//Change discount from false true
+	//ExChange discount
 	if(tabDisc->discounts[i].dni == id && tabDisc->discounts[i].changed == FALSE) {
 	    tabDisc->discounts[i].changed = TRUE;
 	    (*found) = TRUE;
 		(*changed) = TRUE;
 	    printf("Cupon with id %d changed\n", id);
-	//already changed descount
+	//Already exchanged descount
 	} else if(tabDisc->discounts[i].dni == id && tabDisc->discounts[i].changed == TRUE) {
 	    (*found) = TRUE;
 	    printf("Cupon with id %d already changed\n", id);
 	}
     }
-	//unknown id
+	//Unknown discount
     if(!(*found)) {
 	printf("No cupon with that id %d. Check again \n", id);
     }

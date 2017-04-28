@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 			testMode=TRUE;			
 		}
 	}
-	/* If test mode is active, run the tests. Otherwise, start the menu */
+	/* If test mode is active, run the tests. Otherwise, trigger the sort and search algotihms */
 	if(testMode) {
 		runTests();
 	} else {

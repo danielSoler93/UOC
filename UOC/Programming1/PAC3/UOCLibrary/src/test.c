@@ -29,14 +29,14 @@ void runTestsPAC3(int *totalTest, int *passedTest) {
 	initDiscounts(&tabDisc);
 
 	
-	test_sortedId(totalTest, passedTest, &tabDisc);
+	test_sortIds(totalTest, passedTest, &tabDisc);
 	test_searchFalseId(totalTest, passedTest,&tabDisc, 1434);	
 	test_searchTrueId(totalTest, passedTest, &tabDisc, 1234);
 	test_searchMissingId(totalTest, passedTest,&tabDisc, 2222);
 	
 }
 
-void test_sortedId(int *totalTest, int *passedTest, tDiscountsShop *tabDisc){
+void test_sortIds(int *totalTest, int *passedTest, tDiscountsShop *tabDisc){
 	printf("\n=================================================\n");
 	printf(" SORT DISCOUNTS\n");
 	printf("=================================================\n");
