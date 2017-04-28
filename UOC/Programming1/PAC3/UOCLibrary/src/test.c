@@ -57,12 +57,14 @@ void test_searchFalseId(int *totalTest, int *passedTest, tDiscountsShop *tabDisc
 	printf(" CHANGE UNGIVEN DISCOUNT\n");
 	printf("=================================================\n");
 	(*totalTest)++;
-	discountChanged(tabDisc, dni);
+	bool found;
+	bool changed;
+	discountChanged(tabDisc, dni, &found, &changed);
 	//Verify
 	int i;
 	for(i = 0; i < tabDisc->numDiscounts; i++) {
 		if(tabDisc->discounts[i].dni == dni){
-			if(tabDisc->discounts[i].changed == TRUE){
+			if(tabDisc->discounts[i].changed == TRUE && changed == TRUE){
 				printf("\n\t-> OK\n");
 				(*passedTest)++;
 			} else{
@@ -78,12 +80,14 @@ void test_searchTrueId(int *totalTest, int *passedTest, tDiscountsShop *tabDisc,
 	printf(" CHANGE ALREADY GIVEN DISCOUNT\n");
 	printf("=================================================\n");
 	(*totalTest)++;
-	discountChanged(tabDisc, dni);
+	bool found;
+	bool changed;
+	discountChanged(tabDisc, dni, &found, &changed);
 	//Verify
 	int i;
 	for(i = 0; i < tabDisc->numDiscounts; i++) {
 		if(tabDisc->discounts[i].dni == dni){
-			if(tabDisc->discounts[i].changed == TRUE){
+			if(tabDisc->discounts[i].changed == TRUE && changed == FALSE){
 				printf("\n\t-> OK\n");
 				(*passedTest)++;
 			} else{
@@ -100,6 +104,14 @@ void test_searchMissingId(int *totalTest, int *passedTest, tDiscountsShop *tabDi
 	printf(" CHANGE NON EXISTENT DISCOUNT\n");
 	printf("=================================================\n");
 	(*totalTest)++;
-	(*passedTest)++;
-	discountChanged(tabDisc, dni);
+	bool found;
+	bool changed;
+	discountChanged(tabDisc, dni, &found, &changed);
+	if(changed == FALSE && found == FALSE){
+		printf("\n\t-> OK\n");
+		(*passedTest)++;
+	} else{
+		printf("\n\t-> FAIL\n");
+	}
+	
 	}

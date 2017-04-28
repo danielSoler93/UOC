@@ -20,5 +20,5 @@ void initDiscounts(tDiscountsShop *tabDisc);
 
 void sortDiscountsShop(tDiscountsShop *tabDisc);
 
-void discountChanged(tDiscountsShop *tabDisc, int id);
+void discountChanged(tDiscountsShop *tabDisc, int id, bool *found, bool *changed);
 

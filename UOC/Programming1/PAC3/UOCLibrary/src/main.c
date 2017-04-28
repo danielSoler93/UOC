@@ -15,11 +15,12 @@ int main(int argc, char **argv) {
 	if(testMode) {
 		runTests();
 	} else {
-
 	tDiscountsShop tabDisc;
 	initDiscounts(&tabDisc);
 	sortDiscountsShop(&tabDisc);
-	discountChanged(&tabDisc, 1110);
+	bool found;
+	bool changed;
+	discountChanged(&tabDisc, 1110, &found, &changed);
 	}
 	
 	return 0;

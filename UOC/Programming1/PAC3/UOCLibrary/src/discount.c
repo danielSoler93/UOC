@@ -2,52 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 #include "discount.h"
-/*
-void bookTable_add(tDiscountsShop *tabDisc, tDiscount discount) {
 
-	
-	/* Check if there enough space for the new section */ /*
-	if(tabDisc->numDiscounts >= MAXDISCOUNTS) {
-		printf("No Discounts Left");
-	}
-
-	else {
-		/* Add the new section to the end of the table */ /*
-discount_cpy(&tabDisc->table[tabDisc->size], discount);
-tabDisc->numDiscounts++;
-printf("Discount added to table");
-}
-}
-/*
-void getBookObject(const char str, tBook *book) {
-
-
-sscanf(str, "%s %d %d %c %c %s %s", &book->isbn, &book->publicationYear, &book->available,
-                         &book->identificator.mainSection, &book->identificator.subSection,
-                         book->authorCode, book->bookTitle);
-
-}
-
-void discount_cpy(tDiscount *dst, tDiscount src) {
-/*
-int destination[] = {dst->isbn, dst->available, dst->identificator.mainSection,
-dst->identificator.subSection, dst->authorCode, dst->bookTitle};
-int source[] = {src.isbn, src.available, src.identificator.mainSection,
-src.identificator.subSection, src.authorCode, src.bookTitle};
-int i;
-int Size = sizeof(source)/sizeof(source[0]);
-for (i=0; i<Size; i++){
-strcpy(destination[i], source[i]);
-}
-*/
-/*
-dst->dni = src.dni;
-dst->discount = src.discount;
-dst->changed = src.changed;
-}*/
 
 void initDiscounts(tDiscountsShop *tabDisc)
 {
+	/*
+     *
+     * Initialize Discounts table with 5
+     * random discounts and ids.
+	 * 
+     *Input:
+     * 		table: Storage of discounts
+     * Output:
+     * 		table: Discounts storage in increasing id number
+     *
+     */
    	tDiscount discount1;
     tDiscount discount2;
     tDiscount discount3;
@@ -114,7 +83,7 @@ void sortDiscountsShop(tDiscountsShop *tabDisc)
 	printf("Discounts sorted by id\n");
 }
 
-void discountChanged(tDiscountsShop *tabDisc, int id)
+void discountChanged(tDiscountsShop *tabDisc, int id, bool *found, bool *changed)
 {
 	/*
 	*
@@ -131,21 +100,23 @@ void discountChanged(tDiscountsShop *tabDisc, int id)
 	*/
 
     int i;
-    bool found = FALSE;
+    (*found) = FALSE;
+	(*changed) = FALSE;
     for(i = 0; i < tabDisc->numDiscounts; i++) {
 	//Change discount from false true
 	if(tabDisc->discounts[i].dni == id && tabDisc->discounts[i].changed == FALSE) {
 	    tabDisc->discounts[i].changed = TRUE;
-	    found = TRUE;
+	    (*found) = TRUE;
+		(*changed) = TRUE;
 	    printf("Cupon with id %d changed\n", id);
 	//already changed descount
 	} else if(tabDisc->discounts[i].dni == id && tabDisc->discounts[i].changed == TRUE) {
-	    found = TRUE;
+	    (*found) = TRUE;
 	    printf("Cupon with id %d already changed\n", id);
 	}
     }
 	//unknown id
-    if(!found) {
+    if(!(*found)) {
 	printf("No cupon with that id %d. Check again \n", id);
     }
 }
