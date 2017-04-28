@@ -17,19 +17,13 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="src/api.c"/>
-    <File Name="src/books.c"/>
     <File Name="src/main.c"/>
-    <File Name="src/menu.c"/>
-    <File Name="src/sections.c"/>
     <File Name="src/test.c"/>
+    <File Name="src/discount.c"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
-    <File Name="include/data.h"/>
-    <File Name="include/menu.h"/>
     <File Name="include/test.h"/>
-    <File Name="include/books.h"/>
-    <File Name="include/sections.h"/>
+    <File Name="include/discount.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
