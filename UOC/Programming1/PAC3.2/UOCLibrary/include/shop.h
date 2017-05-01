@@ -2,6 +2,7 @@
 #define MAXPURCHASES 50
 #define MAXCLIENTS 50
 #define MAXSTRINGLEN 100
+#define MINACCUMULATED 100
 
 typedef enum {FALSE, TRUE} bool;
 
@@ -31,4 +32,6 @@ void clientAdd(tShop *shop, tClient client);
 
 void insertClient(tShop *shop, tClient client);
 
-void addAmountClinet(tShop *shop, int dni, int import);
+void addAmountClient(tShop *shop, int dni, int import);
+
+void generateDiscount(tShop *shop);

@@ -72,12 +72,26 @@ void insertClient(tShop *shop, tClient client){
 	
 }
 
-void addAmountClinet(tShop *shop, int dni, int import){
+void addAmountClient(tShop *shop, int dni, int import){
 	int position =posClient(*shop, dni);
 	if(position != -1){
 		shop->clients[position].accumulated += import;
-		printf("Import of %d added. Total accumulated %f", import, shop->clients[position].accumulated);
+		printf("Import of %d added. Total accumulated %f\n", import, shop->clients[position].accumulated);
 	} else if(position == -1){
-		printf("Client with dni %d not found. Check the number", dni);
+		printf("Client with dni %d not found. Check the number\n", dni);
+	}
+}
+
+void generateDiscount(tShop *shop){
+	int i;
+	for(i=0; i < shop->numClients; i++){
+		float cuponAmount = 0;
+		if(shop->clients[i].accumulated >= MINACCUMULATED){
+			tClient client = shop->clients[i];
+			cuponAmount = (client.accumulated * 0.03);
+			printf("Client %d: New Cupon of %f Euros\n", client.dni, cuponAmount);
+			client.accumulated = 0;
+			client.thereIsCupon = TRUE;
+		} 
 	}
 }

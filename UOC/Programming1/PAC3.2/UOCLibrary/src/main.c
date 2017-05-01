@@ -25,7 +25,8 @@ int main(int argc, char **argv) {
 		clientAdd(&shop, client2);
 		posClient(shop, 123456);
 		insertClient(&shop, client3);
-		addAmountClinet(&shop, 123476, 12);
+		addAmountClient(&shop, 123476, 120);
+		generateDiscount(&shop);
 	}
 	return 0;
 }
