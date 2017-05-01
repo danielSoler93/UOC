@@ -36,9 +36,9 @@ int posClient(tShop shop, int dni){
 	int position = 0;
 	int i;
 	for(i=0; i < shop.numClients; i++){
-		position ++;
 		if (shop.clients[i].dni == dni){
 			return position;
+		position ++;
 		}
 	}
 	return -1;
@@ -70,4 +70,14 @@ void insertClient(tShop *shop, tClient client){
 		printf("That client already exists in the shop storage\n");
 	}
 	
+}
+
+void addAmountClinet(tShop *shop, int dni, int import){
+	int position =posClient(*shop, dni);
+	if(position != -1){
+		shop->clients[position].accumulated += import;
+		printf("Import of %d added. Total accumulated %f", import, shop->clients[position].accumulated);
+	} else if(position == -1){
+		printf("Client with dni %d not found. Check the number", dni);
+	}
 }

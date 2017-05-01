@@ -30,3 +30,5 @@ int posClient(tShop shop, int dni);
 void clientAdd(tShop *shop, tClient client);
 
 void insertClient(tShop *shop, tClient client);
+
+void addAmountClinet(tShop *shop, int dni, int import);
