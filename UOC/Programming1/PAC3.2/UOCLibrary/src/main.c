@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
 	}
 	/* If test mode is active, run the tests. Otherwise, trigger the sort and search algotihms */
 	if(testMode) {
-		//runTests();
+		runTests();
 	} else {
 		tShop shop;
 		tClient client1, client2, client3;

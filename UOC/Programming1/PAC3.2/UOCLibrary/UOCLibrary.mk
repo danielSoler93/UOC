@@ -2,18 +2,18 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Release
+## Debug
 ProjectName            :=UOCLibrary
-ConfigurationName      :=Release
+ConfigurationName      :=Debug
 WorkspacePath          :=C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3.2/UOCLibrary
 ProjectPath            :=C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3.2/UOCLibrary
-IntermediateDirectory  :=./Release
+IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Daniel
-Date                   :=01/05/2017
+Date                   :=02/05/2017
 CodeLitePath           :=C:/CodeLite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -28,7 +28,7 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
-Preprocessors          :=$(PreprocessorSwitch)NDEBUG 
+Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
@@ -52,8 +52,8 @@ LibPath                := $(LibraryPathSwitch).
 AR       := ar rcus
 CXX      := gcc
 CC       := gcc
-CXXFLAGS :=  -O2 -Wall $(Preprocessors)
-CFLAGS   :=  -O2 -Wall $(Preprocessors)
+CXXFLAGS :=  -g -O0 -Wall $(Preprocessors)
+CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -81,11 +81,11 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 MakeIntermediateDirs:
-	@$(MakeDirCommand) "./Release"
+	@$(MakeDirCommand) "./Debug"
 
 
 $(IntermediateDirectory)/.d:
-	@$(MakeDirCommand) "./Release"
+	@$(MakeDirCommand) "./Debug"
 
 PreBuild:
 
@@ -123,6 +123,6 @@ $(IntermediateDirectory)/src_shop.c$(PreprocessSuffix): src/shop.c
 ## Clean
 ##
 clean:
-	$(RM) -r ./Release/
+	$(RM) -r ./Debug/
 
 

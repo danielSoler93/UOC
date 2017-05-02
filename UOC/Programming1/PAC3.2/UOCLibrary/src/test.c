@@ -23,4 +23,59 @@ void runTests() {
 void runTestsPAC3(int *totalTest, int *passedTest) {
 	*totalTest=0;
 	*passedTest=0;
+	
+	tShop shop;
+	tClient client1, client2, client3, client4;
+	shopInit(&shop);
+	clientInit(&client1, 123476,  "Dani", "Dani@gmail.com", 2.123, FALSE);
+	clientInit(&client2, 123486,  "Pepe", "Pepe@gmail.com", 1.123, FALSE);
+	clientInit(&client3, 123477,  "Anna", "Anna@gmail.com", 3.123, FALSE);
+	clientInit(&client4, 123457,   "Ron",  "Ron@gmail.com", 5.123, FALSE);
+	addToEmptyList(&shop, client1, totalTest, passedTest);
+	addToNonemptyList(&shop, client2, client3, client4, totalTest, passedTest);
 }
+
+void addToEmptyList(tShop *shop, tClient client, int *totalTest, int *passedTest){
+	clientAdd(shop, client);
+	(*totalTest)++;
+	if(shop->clients[0].dni== client.dni){
+		(*passedTest)++;
+		printf("->OK\n");
+	} else{
+		printf("->ERROR\n");
+	}
+}
+
+void addToNonemptyList(tShop *shop, tClient client1, tClient client2, tClient client3, int *totalTest, int *passedTest){
+	//insert at the begging of the list
+	printf("%d\n", shop->clients[0].dni);
+	insertClient(shop, client1);
+	printf("%d\n", shop->clients[0].dni);
+	(*totalTest)++;
+	if(shop->clients[0].dni== client1.dni){
+		(*passedTest)++;
+		printf("->OK\n");
+	} else{
+		printf("->ERROR\n");
+	}
+	//Insert at the middle of the list
+	insertClient(shop, client2);
+	(*totalTest)++;
+	if(shop->clients[1].dni== client2.dni){
+		(*passedTest)++;
+		printf("->OK\n");
+	} else{
+		printf("->ERROR\n");
+	}
+	//insert at the end of the list
+	insertClient(shop, client3);
+	(*totalTest)++;
+	if(shop->clients[3].dni== client3.dni){
+		(*passedTest)++;
+		printf("->OK\n");
+	} else{
+		printf("->ERROR\n");
+	}
+}
+	
+	
