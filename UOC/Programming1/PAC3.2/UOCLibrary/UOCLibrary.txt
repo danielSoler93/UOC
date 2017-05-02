@@ -1,1 +1,1 @@
-./Debug/src_main.c.o ./Debug/src_test.c.o ./Debug/src_shop.c.o   
+./Release/src_main.c.o ./Release/src_test.c.o ./Release/src_shop.c.o   

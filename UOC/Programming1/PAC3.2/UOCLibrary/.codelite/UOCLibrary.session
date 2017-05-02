@@ -19,8 +19,8 @@
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Daniel\Documents\uoc\UOC\UOC\Programming1\PAC3.2\UOCLibrary\src\shop.c" Name="FileName"/>
-      <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="45" Name="CurrentLine"/>
+      <int Value="153" Name="FirstVisibleLine"/>
+      <int Value="98" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
@@ -33,8 +33,8 @@
     </TabInfo>
     <TabInfo>
       <wxString Value="C:\Users\Daniel\Documents\uoc\UOC\UOC\Programming1\PAC3.2\UOCLibrary\src\test.c" Name="FileName"/>
-      <int Value="23" Name="FirstVisibleLine"/>
-      <int Value="35" Name="CurrentLine"/>
+      <int Value="52" Name="FirstVisibleLine"/>
+      <int Value="50" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>

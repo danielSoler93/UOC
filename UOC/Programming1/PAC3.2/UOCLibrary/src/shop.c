@@ -68,21 +68,6 @@ void clientInit(tClient *client, int dni, char *name, char *email, float accumul
 	client->thereIsCupon = thereIsCupon;
 }
 
-void clientAdd(tShop *shop, tClient client){
-	/*
-	 * Include client inside the shop database
-	 * 
-	 * input:
-	 * 	shop: shop table with all the clients
-	 * 	
-	 * 	client: client to store in shop
-	 * 
-	 * output:
-	 * 		shop: table with client included in first place
-	 */
-	shop->clients[shop->numClients] = client;
-	shop->numClients ++;
-}
 
 int posClient(tShop shop, int dni){
 	/*
@@ -195,9 +180,9 @@ void generateDiscount(tShop *shop){
 		if(shop->clients[i].accumulated >= MINACCUMULATED){
 			tClient client = shop->clients[i];
 			cuponAmount = (client.accumulated * 0.03);
-			printf("Client %d: New Cupon of %f Euros\n", client.dni, cuponAmount);
-			client.accumulated = 0;
-			client.thereIsCupon = TRUE;
+			printf("\nClient %d: New Cupon of %f Euros\n", client.dni, cuponAmount);
+			shop->clients[i].accumulated = 0;
+			shop->clients[i].thereIsCupon = TRUE;
 		} 
 	}
 }

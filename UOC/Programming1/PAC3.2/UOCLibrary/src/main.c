@@ -21,8 +21,8 @@ int main(int argc, char **argv) {
 		clientInit(&client1, 123476,  "Dani", "Dani@gmail.com", 2.123, TRUE);
 		clientInit(&client2, 123466,  "Pepe", "Pepe@gmail.com", 1.123, TRUE);
 		clientInit(&client3, 123477,  "Anna", "Anna@gmail.com", 3.123, TRUE);
-		clientAdd(&shop, client1);
-		clientAdd(&shop, client2);
+		insertClient(&shop, client1);
+		insertClient(&shop, client2);
 		posClient(shop, 123456);
 		insertClient(&shop, client3);
 		addAmountClient(&shop, 123476, 120);
