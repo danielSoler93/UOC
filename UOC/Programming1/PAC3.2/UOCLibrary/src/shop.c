@@ -147,7 +147,6 @@ void insertClient(tShop *shop, tClient client){
 			clientCopy(clientReplace, &(shop->clients[i]));
 			clientReplace = nextClientReplace;
 		}
-
 		shop->numClients ++;
 		printf("\nClient introduced in position %d. Current Number of Clients %d\n", position + 1, shop->numClients);
 	} else{
