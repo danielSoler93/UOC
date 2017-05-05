@@ -4,6 +4,11 @@
 #include <stdio.h>
 
 void display(tArray pArray){
+	/*
+	 * 
+	 * Print array to screen
+	 * 
+	*/
 	int i;
 	for(i=0; i<pArray.size; i++){
 		printf("%d\n", pArray.list[i]);
@@ -11,6 +16,25 @@ void display(tArray pArray){
 }
 
 void quicksort(int number[MAXNUMBERS],int first,int last){
+	/*
+	 * best O(n) avrg O(nlogn) worst O(n2)
+	 * 
+	 * Not really efficient
+	 * needs more memory
+	 * it's ok if we dont know whic type of data
+	 * and need a good average
+	 * 
+	 * Sort algorithm order the original array
+	 * split in two more and do the same recursevly
+	 * 
+	 * input)
+	 * 	number: randomly ordered array
+	 * 	first: first index of the array
+	 *  last: second index of the array
+	 * 
+	 * output)
+	 * 	number: array sorted from low numbers to high.
+	 */
    int i, j, pivot, temp;
 
    if(first<last){
@@ -39,6 +63,22 @@ void quicksort(int number[MAXNUMBERS],int first,int last){
    }
 }
 void merge(int *dest, int left[], int right[], int lSize, int rSize){
+	 /*
+	 * 
+	 * 
+	 * Sort algorith joins the left and right
+	 * array to the original one while sorting
+	 * 
+	 * input)
+	 * 	dest: original randomly ordered array
+	 * 	left: array make from the left part of the original
+	 * 	right: array make from the right part of the original
+	 * 	lSize: array left size
+	 *  rSize: array right size
+	 * 
+	 * output)
+	 * 	dest: semi ordered original array.
+	 */
 	int dind = 0;
 	int lind = 0;
 	int rind = 0;
@@ -61,6 +101,19 @@ void merge(int *dest, int left[], int right[], int lSize, int rSize){
 	}
 }
 void mergeSort(int *number, int size){
+	/*
+	 * O(nlogn) "high effixiency"
+	 * 
+	 * Sort algorithm which splits the original in two
+	 * merge while sorting and splits again in two
+	 * 
+	 * input)
+	 * 	array: randomly ordered array
+	 * 	size: array length
+	 * 
+	 * output)
+	 * 	array: array sorted from low numbers to high.
+	 */
 	if(size<2){
 		return;
 	}
@@ -121,7 +174,8 @@ void selectionSort(tArray *pArray){
 	}
 }
 
-void insertionSort(tArray *pArray){
+
+void insertionSort(int *numbers, int n){
 	/*
 	 * O(n^2)[worst case] O(n) [if it's already sorted]
 	 * 
@@ -134,24 +188,4 @@ void insertionSort(tArray *pArray){
 	 * output)
 	 * 	array: array sorted from high numbers to low.
 	 */
-	int i;
-	int sortedArray[MAXNUMBERS];
-	
-	for(i=0; i<pArray->size; i++){
-		
-		int valueToInsert = pArray->list[i];
-		
-		int holePosition = i;
-		
-		while(holePosition>0 && sortedArray[holePosition-1] < valueToInsert){
-			sortedArray[holePosition] = sortedArray[holePosition-1];
-			holePosition--;
-		}
-		
-		if(holePosition!=i){
-			sortedArray[holePosition] = valueToInsert;
-		}
-		
-	}
-	memcpy(pArray->list, sortedArray, pArray->size * sizeof(int));
-}
+	 }

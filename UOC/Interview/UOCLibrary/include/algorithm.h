@@ -15,7 +15,7 @@ void display(tArray pArray);
 
 void selectionSort(tArray *pArray);
 
-void insertionSort(tArray *pArray);
+void insertionSort(int *numbers, int n)
 
 void quicksort(int number[MAXNUMBERS], int first, int last);
 
