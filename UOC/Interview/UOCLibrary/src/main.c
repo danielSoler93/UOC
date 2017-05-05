@@ -12,7 +12,8 @@ int main(int argc, char **argv)
 	
 	//insertionSort(&array);
 	//selectionSort(&array);
-	quicksort(array.list, 0, array.size);
+	//quicksort(array.list, 0, array.size);
+	mergeSort(array.list, array.size);
 	display(array);
 	
 	return 0;

@@ -18,3 +18,7 @@ void selectionSort(tArray *pArray);
 void insertionSort(tArray *pArray);
 
 void quicksort(int number[MAXNUMBERS], int first, int last);
+
+void merge(int *dest, int left[], int right[], int lSize, int rSize);
+
+void mergeSort(int *number, int size);

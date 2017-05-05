@@ -38,6 +38,51 @@ void quicksort(int number[MAXNUMBERS],int first,int last){
 
    }
 }
+void merge(int *dest, int left[], int right[], int lSize, int rSize){
+	int dind = 0;
+	int lind = 0;
+	int rind = 0;
+	
+	int leftSize = lSize;
+	int rightSize = rSize;
+	//Merge array while sorting
+	while(lind<leftSize&&rind<rightSize){
+		if(left[lind]<=right[rind]){
+			dest[dind++] = left[lind++];
+		} else{
+			dest[dind++] = right[rind++];
+		}
+	}
+	while(lind<leftSize){
+		dest[dind++] = left[lind++];
+	}
+	while(rind<rightSize){
+		dest[dind++] = right[rind++];
+	}
+}
+void mergeSort(int *number, int size){
+	if(size<2){
+		return;
+	}
+	int i;
+	int n = size;
+	int mid = n/2;
+	//Divide and conquer
+	int left[mid];
+	int right[n-mid];
+	//Copy original data in two sets
+	for(i=0; i<mid; i++){
+		left[i] = number[i];
+	}
+	for(i=mid; i<n; i++){
+		right[i-(mid)] = number[i];
+	}
+	//merge&sort
+	mergeSort(left, mid);
+	mergeSort(right, n-mid);
+	
+	merge(number, left, right, mid, n-mid);
+}
 	
 	
 	
