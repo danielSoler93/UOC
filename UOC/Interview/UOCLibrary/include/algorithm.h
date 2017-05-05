@@ -11,8 +11,10 @@ typedef struct{
 }tArray;
 
 /*Func headers*/
-void display(tArray *pArray);
+void display(tArray pArray);
 
 void selectionSort(tArray *pArray);
 
 void insertionSort(tArray *pArray);
+
+void quicksort(int number[MAXNUMBERS], int first, int last);
