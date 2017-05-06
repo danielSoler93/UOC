@@ -11,11 +11,11 @@ typedef struct{
 }tArray;
 
 /*Func headers*/
-void display(tArray pArray);
+void display(int array[], int size);
 
 void selectionSort(tArray *pArray);
 
-void insertionSort(int *numbers, int n)
+void insertionSort(int *numbers, int n);
 
 void quicksort(int number[MAXNUMBERS], int first, int last);
 

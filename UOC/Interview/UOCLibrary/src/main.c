@@ -2,33 +2,30 @@
 #include <string.h>
 #include "algorithm.h"
 #include <stdio.h>
+#include <conio.h>
 #include <time.h>
 
 int main(int argc, char **argv)
 {	
 	tArray array;
-	int listOfNumbers[] = {3, 1, 5, 2, 7, 5, 9, 5, 6, 4, 7};
+	int listOfNumbers[] = {3, 1, 5, 2, 7, 5, 9, 5, 6, 4, 7, 1 ,2, 4, 5, 6 ,7 ,8 ,5 ,4 ,3 ,6 ,3 ,1 ,3};
 	memcpy(array.list, listOfNumbers, sizeof(array.list));
-	array.size = 11;
-	
-	clock_t begin = clock();
-	insertionSort(&array);
-	clock_t insertion = clock();
-	
-	//selectionSort(&array);
-
-	//quicksort(array.list, 0, array.size);
-	
-	//mergeSort(array.list, array.size);
-	
-	
+	array.size = 25;
 
 	
-	printf("insertionSort: %f\n", (double)(insertion-begin)/ CLOCKS_PER_SEC);
-	//printf("selectionSort: %f\n", (double)(selection-insertion)/ CLOCKS_PER_SEC);
-	//printf("quickSort: %f\n", (double)(quick-selection)/ CLOCKS_PER_SEC);
-	//printf("mergeSort: %f\n", (double)(merge-quick)/ CLOCKS_PER_SEC);
-	display(array);
+	insertionSort(array.list, array.size);
+
+	
+	selectionSort(&array);
+	
+	
+	quicksort(array.list, 0, array.size);
+
+	
+	mergeSort(array.list, array.size);
+	
+	
+	display(array.list, array.size);
 	
 	return 0;
 }

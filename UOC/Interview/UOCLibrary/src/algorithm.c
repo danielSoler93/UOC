@@ -3,15 +3,15 @@
 #include "algorithm.h"
 #include <stdio.h>
 
-void display(tArray pArray){
+void display(int array[], int size){
 	/*
 	 * 
 	 * Print array to screen
 	 * 
 	*/
 	int i;
-	for(i=0; i<pArray.size; i++){
-		printf("%d\n", pArray.list[i]);
+	for(i=0; i<size; i++){
+		printf("%d\n", array[i]);
 	}
 }
 
@@ -188,4 +188,23 @@ void insertionSort(int *numbers, int n){
 	 * output)
 	 * 	array: array sorted from high numbers to low.
 	 */
+	 int sortedNumbers[n-1];
+	 int position;
+	 //Initialize to 0
+	 int i;
+	 for(i=0; i<n; i++){
+		 sortedNumbers[i] = 0;
 	 }
+	 //Insertion Sort algorithm
+	 for(i=0; i<n; i++){
+		int valueToInsert = numbers[i];
+		position = i;
+		//Search for position tot inserrt value
+		while(valueToInsert > sortedNumbers[position] && position>=0){
+			sortedNumbers[position+1] = sortedNumbers[position];
+			position --;
+		}
+		sortedNumbers[position+1] = valueToInsert;		
+	 }
+	 memcpy(numbers, sortedNumbers, n*sizeof(int));
+}
