@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="UOCLibrary" Database="" Version="10.0.0">
-  <Project Name="sorting" Path="UOCLibrary.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="no">
       <Environment/>
@@ -11,4 +10,7 @@
       <Project Name="sorting" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
+  <VirtualDirectory Name="Sort">
+    <Project Name="sorting" Path="UOCLibrary.project" Active="Yes"/>
+  </VirtualDirectory>
 </CodeLite_Workspace>

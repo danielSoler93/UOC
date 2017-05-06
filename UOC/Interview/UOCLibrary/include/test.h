@@ -1,5 +1,5 @@
 /* Run all the test set */
-#include "algorithm.h"
+#include "sort.h"
 
 void runTests();
 

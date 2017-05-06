@@ -62,7 +62,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IntermediateDirectory)/src_algorithm.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IntermediateDirectory)/src_sort.c$(ObjectSuffix) 
 
 
 
@@ -109,13 +109,13 @@ $(IntermediateDirectory)/src_test.c$(DependSuffix): src/test.c
 $(IntermediateDirectory)/src_test.c$(PreprocessSuffix): src/test.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_test.c$(PreprocessSuffix) src/test.c
 
-$(IntermediateDirectory)/src_algorithm.c$(ObjectSuffix): src/algorithm.c $(IntermediateDirectory)/src_algorithm.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Interview/UOCLibrary/src/algorithm.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_algorithm.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_algorithm.c$(DependSuffix): src/algorithm.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_algorithm.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_algorithm.c$(DependSuffix) -MM src/algorithm.c
+$(IntermediateDirectory)/src_sort.c$(ObjectSuffix): src/sort.c $(IntermediateDirectory)/src_sort.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Interview/UOCLibrary/src/sort.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_sort.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_sort.c$(DependSuffix): src/sort.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_sort.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_sort.c$(DependSuffix) -MM src/sort.c
 
-$(IntermediateDirectory)/src_algorithm.c$(PreprocessSuffix): src/algorithm.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_algorithm.c$(PreprocessSuffix) src/algorithm.c
+$(IntermediateDirectory)/src_sort.c$(PreprocessSuffix): src/sort.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_sort.c$(PreprocessSuffix) src/sort.c
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

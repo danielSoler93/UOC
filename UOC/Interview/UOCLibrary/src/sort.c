@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "algorithm.h"
+#include "sort.h"
 #include <stdio.h>
 
 void display(int array[], int size){

@@ -19,11 +19,11 @@
   <VirtualDirectory Name="src">
     <File Name="src/main.c"/>
     <File Name="src/test.c"/>
-    <File Name="src/algorithm.c"/>
+    <File Name="src/sort.c"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="include/test.h"/>
-    <File Name="include/algorithm.h"/>
+    <File Name="include/sort.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
