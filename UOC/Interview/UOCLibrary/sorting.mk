@@ -3,17 +3,17 @@
 ## any manual changes will be erased      
 ##
 ## Release
-ProjectName            :=UOCLibrary
+ProjectName            :=sorting
 ConfigurationName      :=Release
-WorkspacePath          :=C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3.2/UOCLibrary
-ProjectPath            :=C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3.2/UOCLibrary
+WorkspacePath          :=C:/Users/Daniel/Documents/uoc/UOC/UOC/Interview/UOCLibrary
+ProjectPath            :=C:/Users/Daniel/Documents/uoc/UOC/UOC/Interview/UOCLibrary
 IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Daniel
-Date                   :=02/05/2017
+Date                   :=06/05/2017
 CodeLitePath           :=C:/CodeLite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -32,7 +32,7 @@ Preprocessors          :=$(PreprocessorSwitch)NDEBUG
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
-ObjectsFileList        :="UOCLibrary.txt"
+ObjectsFileList        :="sorting.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
 RcCmpOptions           := 
@@ -62,7 +62,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IntermediateDirectory)/src_shop.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IntermediateDirectory)/src_sort.c$(ObjectSuffix) 
 
 
 
@@ -94,7 +94,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/src_main.c$(ObjectSuffix): src/main.c $(IntermediateDirectory)/src_main.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3.2/UOCLibrary/src/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Interview/UOCLibrary/src/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_main.c$(DependSuffix): src/main.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_main.c$(DependSuffix) -MM src/main.c
 
@@ -102,20 +102,20 @@ $(IntermediateDirectory)/src_main.c$(PreprocessSuffix): src/main.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_main.c$(PreprocessSuffix) src/main.c
 
 $(IntermediateDirectory)/src_test.c$(ObjectSuffix): src/test.c $(IntermediateDirectory)/src_test.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3.2/UOCLibrary/src/test.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Interview/UOCLibrary/src/test.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_test.c$(DependSuffix): src/test.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_test.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_test.c$(DependSuffix) -MM src/test.c
 
 $(IntermediateDirectory)/src_test.c$(PreprocessSuffix): src/test.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_test.c$(PreprocessSuffix) src/test.c
 
-$(IntermediateDirectory)/src_shop.c$(ObjectSuffix): src/shop.c $(IntermediateDirectory)/src_shop.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Programming1/PAC3.2/UOCLibrary/src/shop.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_shop.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_shop.c$(DependSuffix): src/shop.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_shop.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_shop.c$(DependSuffix) -MM src/shop.c
+$(IntermediateDirectory)/src_sort.c$(ObjectSuffix): src/sort.c $(IntermediateDirectory)/src_sort.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Interview/UOCLibrary/src/sort.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_sort.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_sort.c$(DependSuffix): src/sort.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_sort.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_sort.c$(DependSuffix) -MM src/sort.c
 
-$(IntermediateDirectory)/src_shop.c$(PreprocessSuffix): src/shop.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_shop.c$(PreprocessSuffix) src/shop.c
+$(IntermediateDirectory)/src_sort.c$(PreprocessSuffix): src/sort.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_sort.c$(PreprocessSuffix) src/sort.c
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

@@ -1,5 +1,5 @@
-Debug/src_test.c.o: src/test.c include/test.h include/discount.h
+Debug/src_test.c.o: src/test.c include/test.h include/shop.h
 
 include/test.h:
 
-include/discount.h:
+include/shop.h:
