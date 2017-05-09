@@ -88,6 +88,8 @@ typedef struct {
 /* Books of a class */
 typedef struct {
     char id;
+	int subBooks[MAX_BOOKS];
+	unsigned int totSubBooks;
 	/* Table of books of the subsection */
 #ifdef SIMPLE_VERSION	
 #endif	
@@ -98,7 +100,10 @@ typedef struct {
 
 /* Classes of a section */
 typedef struct {
+	tSection section;
+	tSubInfo secSubs[MAX_SUB];
     unsigned int totSecSubs;
+	unsigned int totSecBooks;
 } tSectionInfo;
 
 #endif /*__DATA_H*/

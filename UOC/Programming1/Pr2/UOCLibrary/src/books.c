@@ -279,7 +279,7 @@ if(retVal == OK) {
 /******************** PR2 - EX1B ********************/
 void bookTable_sort(tBookTable tabBook, tBookTable *result){
 	int i;
-	result->size = 0;
+	result->size = 0;	
 	for(i=0; i<tabBook.size; i++){
 		bookTable_sortedAdd(result, tabBook.table[i]);
 	}
