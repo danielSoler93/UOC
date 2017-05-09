@@ -240,10 +240,32 @@ unsigned int bookTable_getAuthorNumber(tBookTable tabBook, char *author){
 
 /******************** PR2 - EX1A ********************/
 tError bookTable_sortedAdd(tBookTable *tabBook, tBook book){
-	tError retVal = OK;
 
 	/* Check if there enough space for the new book */
 #ifdef SIMPLE_VERSION
+int returnValue;
+int i;
+int holePosition;
+
+tError retVal = OK;
+holePosition = tabBook->size;
+
+if(tabBook->size >= MAX_BOOKS){
+	printf("No Space Left\n");
+	retVal = ERR_MEMORY;
+} 
+
+if(retVal == OK) {
+	for(i=tabBook->size; i>0; i--){
+		returnValue = book_cmp(tabBook->table[i-1], book);
+		if (returnValue==1){
+			book_cpy(&(tabBook->table[i]), tabBook->table[i-1]);
+			holePosition--;
+		}
+	}
+	book_cpy(&(tabBook->table[holePosition]), book);	
+	tabBook->size++;
+}
 
 #endif
 #ifdef COMPLETE_VERSION
@@ -256,7 +278,11 @@ tError bookTable_sortedAdd(tBookTable *tabBook, tBook book){
 
 /******************** PR2 - EX1B ********************/
 void bookTable_sort(tBookTable tabBook, tBookTable *result){
-
+	int i;
+	result->size = 0;
+	for(i=0; i<tabBook.size; i++){
+		bookTable_sortedAdd(result, tabBook.table[i]);
+	}
 }
 
 /* Release a books table */
