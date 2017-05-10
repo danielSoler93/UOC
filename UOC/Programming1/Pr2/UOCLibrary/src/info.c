@@ -10,6 +10,31 @@ tError si_getSectionInfo(tBookTable tabB, tSectionTable tabS, char sectionId, tS
 	tError retVal = OK;
 
 	#ifdef SIMPLE_VERSION
+	
+	int i;
+	int index;
+	//Check the excistence of the section
+	index = secTable_find(tSectionTable tabSec, char sectionId)
+	if(index!=-1){
+		section_cpy(tSectionInfo->section, tabS.table[index])
+	} else{
+		retVal = ERR_INVALID_DATA;
+	}
+	
+	//Find books inside this sectionID	
+	if(retVal == OK){
+		for(i=0;i<tabB.size;i++){
+			if(tabB.table[i].clas.secId == sectionId){
+				tSectionInfo->secSubs[tSectionInfo->totSecSubs].id = tabB.table[i].clas.subId;
+				tSectionInfo->secSubs.subBooks[tSectionInfo->secSubs.totSubBooks] = i;
+				tSectionInfo->secSubs.totSubBooks++;
+			}
+			if(tSectionInfo->secSubs.totSubBooks == 0){
+				retVal = ERR_ENTRY_NOT_FOUND;
+			}
+		}
+	}
+}
 	#endif
 	#ifdef COMPLETE_VERSION	
 /******************** PR2 - EX6A ********************/
