@@ -1,6 +1,7 @@
 #include "data.h"
 
 /******************** PR2 - EX4A ********************/
+/*Definition of a stack*/
 typedef struct {
 	tBook bookStack[MAX_BOOKS];
 	int size;	
