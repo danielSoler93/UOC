@@ -34,6 +34,8 @@ void bookTable_init(tBookTable *bookTable) {
 	bookTable->size=0;
 #ifdef COMPLETE_VERSION
 /******************** PR2 - EX6C ********************/
+	bookTable->size = 0;
+	bookTable->table=NULL;
 #endif
 }
 
@@ -78,16 +80,26 @@ tError bookTable_add(tBookTable *tabBook, tBook book) {
 	/* Check if there enough space for the new book */
 	if(tabBook->size>=MAX_BOOKS) {
 		retVal = ERR_MEMORY;
-	}
-#endif
-#ifdef COMPLETE_VERSION
-/******************** PR2 - EX6D ********************/
-#endif
+	}  
 	if (retVal==OK){
 	/* Add the new book to the end of the table */
 		book_cpy(&(tabBook->table[tabBook->size]), book);	
 		tabBook->size++;
 	}
+#endif
+#ifdef COMPLETE_VERSION
+/******************** PR2 - EX6D ********************/
+	/* Add the new book to the end of the table */
+		if(tabBook->size == 0) {
+			tabBook->table=(tBook*)malloc(sizeof(tBook));
+		} else {
+			tabBook->table=(tBook*)realloc(tabBook->table, (tabBook->size+1) * sizeof(tBook));
+		}
+		
+		book_cpy(&(tabBook->table[tabBook->size]), book);	
+		tabBook->size++;
+#endif
+
 
 	return retVal;
 }
@@ -119,11 +131,25 @@ void bookTable_del(tBookTable *tabBook, tBook book) {
 		for(i=pos;i<tabBook->size-1; i++) {		
 			book_cpy(&(tabBook->table[i]), tabBook->table[i+1]);			
 		}
-		tabBook->size=tabBook->size-1;	
+		tabBook->size=tabBook->size-1;
+	}	
 #ifdef COMPLETE_VERSION
 /******************** PR2 - EX6E ********************/
-#endif
+	pos = bookTable_find(*tabBook,book.ISBN);
+	if (pos!=-1){
+	/* If the book is found, all the rest of the elements are displaced one position */
+		for(i=pos;i<tabBook->size-1; i++) {		
+			book_cpy(&(tabBook->table[i]), tabBook->table[i+1]);			
+		}
+		tabBook->size=tabBook->size-1;
+		if(tabBook->size==0){
+			free(tabBook->table);
+			tabBook->table = NULL;
+		} else {
+			tabBook->table = (tBook*)realloc(tabBook->table, tabBook->size*sizeof(tBook));
+		}
 	}
+#endif	
 }
 
 tError bookTable_save(tBookTable tabBook, const char* filename) {
@@ -270,6 +296,30 @@ if(retVal == OK) {
 #endif
 #ifdef COMPLETE_VERSION
 /******************** PR2 - EX6D ********************/
+int returnValue;
+int i;
+int holePosition;
+
+tError retVal = OK;
+holePosition = tabBook->size;
+
+if(tabBook->size==0){
+	tabBook->table=(tBook*)malloc(sizeof(tBook));
+} else{
+	tabBook->table=(tBook*)realloc(tabBook->table, (tabBook->size+1)*sizeof(tBook));
+}
+if(retVal == OK) {
+	for(i=tabBook->size; i>0; i--){
+		returnValue = book_cmp(tabBook->table[i-1], book);
+		if (returnValue==1){
+			book_cpy(&(tabBook->table[i]), tabBook->table[i-1]);
+			holePosition--;
+		}
+	}
+	book_cpy(&(tabBook->table[holePosition]), book);	
+	tabBook->size++;
+}
+
 #endif
 
 	
@@ -289,5 +339,8 @@ void bookTable_sort(tBookTable tabBook, tBookTable *result){
 void bookTable_release(tBookTable *tabBook) {
 #ifdef COMPLETE_VERSION
 /******************** PR2 - EX6F ********************/
+tabBook->size = 0;
+free(tabBook->table);
+tabBook->table = NULL;
 #endif	
 }
