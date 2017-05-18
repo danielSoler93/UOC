@@ -2,6 +2,8 @@
 
 /******************** PR2 - EX4A ********************/
 typedef struct {
+	tBook bookStack[MAX_BOOKS];
+	int size;	
 } tBookStack;
 
 void bookStack_create(tBookStack *stack);

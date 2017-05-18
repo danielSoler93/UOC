@@ -14,33 +14,38 @@ tError si_getSectionInfo(tBookTable tabB, tSectionTable tabS, char sectionId, tS
 	int i;
 	int index;
 	//Check the excistence of the section
-	index = secTable_find(tSectionTable tabSec, char sectionId)
+	index = secTable_find(tabS, sectionId);
 	if(index!=-1){
-		section_cpy(tSectionInfo->section, tabS.table[index])
+		section_cpy(&(si->section), tabS.table[index]);
 	} else{
 		retVal = ERR_INVALID_DATA;
+		return retVal;
 	}
+	
 	
 	//Find books inside this sectionID	
 	if(retVal == OK){
 		for(i=0;i<tabB.size;i++){
 			if(tabB.table[i].clas.secId == sectionId){
-				tSectionInfo->secSubs[tSectionInfo->totSecSubs].id = tabB.table[i].clas.subId;
-				tSectionInfo->secSubs.subBooks[tSectionInfo->secSubs.totSubBooks] = i;
-				tSectionInfo->secSubs.totSubBooks++;
-			}
-			if(tSectionInfo->secSubs.totSubBooks == 0){
-				retVal = ERR_ENTRY_NOT_FOUND;
+				si->secSubs[si->totSecSubs].id = tabB.table[i].clas.subId;
+				//int subBooksPosition = si->secSubs[si->totSecSubs].totSubBooks;
+				//si->secSubs[si->totSecSubs].subBooks[subBooksPosition] = i;
+				si->secSubs[si->totSecSubs].totSubBooks++;
+				si->totSecBooks++;
+				si->totSecSubs++;
 			}
 		}
 	}
-}
+	if(si->totSecBooks == 0){
+		retVal = ERR_ENTRY_NOT_FOUND;
+		return retVal;
+	}
+	
 	#endif
 	#ifdef COMPLETE_VERSION	
 /******************** PR2 - EX6A ********************/
 	#endif 			
-
-	return retVal;
+	
 }
 
 /******************** PR2 - EX3B ********************/
