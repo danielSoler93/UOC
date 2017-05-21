@@ -289,7 +289,7 @@ updateBoardP1:
 	push rbp
 	mov  rbp, rsp
 	mov  eax, 7
-	mov  [rowScreen], eax
+	mov  DWORD[rowScreen], eax
 	mov  ebx, 0
 	mov  ecx, 0
 for:
@@ -299,23 +299,27 @@ for:
 
 cert:
 	mov eax, 7
-	mov [colScreen], eax
+	mov DWORD[colScreen], eax
 	cmp ecx, DimMatrix
 	jl  cert2
 	mov eax,2
-	add [rowScreen], eax
+	add DWORD[rowScreen], eax
 	add ebx, 1
 	jmp for
 
 cert2:
 	call gotoxyP1
-	mov  al, BYTE[marks + 11]
-	mov  [charac], al
+	mov eax, ebx
+	mov edx, 10
+	mul edx
+	add eax, ecx
+	mov  al, BYTE[marks + eax]
+	mov  BYTE[charac], al
 	call printchP1
 	mov eax, 4
-	add  [colScreen], eax
+	add  DWORD[colScreen], eax
 	mov eax, 2
-	add  [rowScreen], eax
+	add  DWORD[rowScreen], eax
 	add ecx, 1
 	jmp  for
 
@@ -420,9 +424,12 @@ moveFin:
 calcIndexP1:
 	push rbp
 	mov  rbp, rsp
-
 	
-		
+	mov eax, DWORD[rowcol + 0]
+	mov ebx, DWORD[rowcol + 4]
+	mov edx, 10
+	mul edx
+	add eax, ebx
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -455,9 +462,25 @@ calcIndexP1:
 mineMarkerP1:
 	push rbp
 	mov  rbp, rsp
-
-	          
 	
+	call calcIndexP1
+	cmp BYTE[marks+eax], ' '
+	jne desmarca
+	cmp DWORD[numMines], 0
+	jl  desmarca
+	mov BYTE[marks+eax], 'M'
+	sub ecx, 1
+	mov DWORD[numMines], ecx
+	jmp final
+	
+desmarca:
+	cmp BYTE[marks+eax], 'M'
+	jne final
+	mov BYTE[marks+eax], ' '
+	add ecx, 1
+	mov DWORD[numMines], ecx
+		
+final:	
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -475,7 +498,8 @@ mineMarkerP1:
 checkMinesP1:
 	push rbp
 	mov  rbp, rsp
-
+	
+	
 	cmp DWORD[numMines], 0  ;if (numMines == 0) {	
 	jne checkMinesP1_End
 
