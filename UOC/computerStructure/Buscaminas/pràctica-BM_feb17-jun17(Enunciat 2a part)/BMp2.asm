@@ -389,9 +389,9 @@ moveCursorP2:
 	push rbp
 	mov  rbp, rsp
 	call getchP2
-	mov  al, BYTE[charac]
-	mov  edx, DWORD[rowcol+0] 
-	mov  ebx, DWORD[rowcol+4]
+	mov  al, sil
+	mov  edx, DWORD[rdi] 
+	mov  ebx, DWORD[rdi+4]
 	mov  ecx, DimMatrix
 	sub  ecx, 1
 	cmp  al, 'i'
@@ -422,22 +422,22 @@ l:
 	
 up:
 	sub edx, 1
-	mov [rowcol+0], edx
+	mov [rdi+0], edx
 	jmp moveFin
 	
 left:
 	sub ebx, 1
-	mov [rowcol+4], ebx
+	mov [rdi+4], ebx
 	jmp moveFin
 	
 down:
 	add edx, 1
-	mov [rowcol+0], edx
+	mov [rdi+0], edx
 	jmp moveFin
 	
 right:
 	add ebx, 1
-	mov [rowcol+4], ebx
+	mov [rdi+4], ebx
 	jmp moveFin
 	
 moveFin:
