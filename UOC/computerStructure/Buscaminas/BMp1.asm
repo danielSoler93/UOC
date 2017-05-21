@@ -363,39 +363,39 @@ moveCursorP1:
 	jmp moveFin
 i:
 	cmp  eax, 0
-	jl  up
+	jg  up
 	jmp moveFin
 j:
 	cmp  ebx, 0
-	jl  left
+	jg  left
 	jmp moveFin
 k:
 	cmp  eax, ecx
-	jg  down
+	jl  down
 	jmp moveFin
 l:
 	cmp  ebx, ecx
-	jg   right
+	jl   right
 	jmp  moveFin
 	
 up:
 	sub eax, 1
-	mov [rowcol], eax
+	mov [rowcol+0], eax
 	jmp moveFin
 	
 left:
 	sub ebx, 1
-	mov [rowcol], ebx
+	mov [rowcol+4], ebx
 	jmp moveFin
 	
 down:
 	add eax, 1
-	mov [rowcol], eax
+	mov [rowcol+0], eax
 	jmp moveFin
 	
 right:
 	add ebx, 1
-	mov [rowcol], ebx
+	mov [rowcol+4], ebx
 	jmp moveFin
 	
 moveFin:
