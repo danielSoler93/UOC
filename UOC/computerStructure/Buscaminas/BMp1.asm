@@ -250,7 +250,7 @@ showMinesP1:
 	mov  edx, 0
 	mov  ecx, 10
 	div  ecx
-	add  al, 48
+	add  al, '0'
 	mov  [charac], al
 	mov  ebx, 27
 	mov  [rowScreen], ebx
@@ -346,16 +346,12 @@ fin:
 moveCursorP1:
 	push rbp
 	mov  rbp, rsp
-	mov  eax, 3
-	mov  ebx, 0
-	mov  ecx, charac
-	mov  edx,1
-	int 80h
-	mov  eax, DWORD[rowcol+0] 
+	call getchP1
+	mov  al, BYTE[charac]
+	mov  edx, DWORD[rowcol+0] 
 	mov  ebx, DWORD[rowcol+4]
 	mov  ecx, DimMatrix
 	sub  ecx, 1
-	mov  al, BYTE[charac]
 	cmp  al, 'i'
 	je   i
 	cmp  al,  'j'
@@ -366,7 +362,7 @@ moveCursorP1:
 	je   l
 	jmp moveFin
 i:
-	cmp  eax, 0
+	cmp  edx, 0
 	jg  up
 	jmp moveFin
 j:
@@ -374,7 +370,7 @@ j:
 	jg  left
 	jmp moveFin
 k:
-	cmp  eax, ecx
+	cmp  edx, ecx
 	jl  down
 	jmp moveFin
 l:
@@ -383,8 +379,8 @@ l:
 	jmp  moveFin
 	
 up:
-	sub eax, 1
-	mov [rowcol+0], eax
+	sub edx, 1
+	mov [rowcol+0], edx
 	jmp moveFin
 	
 left:
@@ -393,8 +389,8 @@ left:
 	jmp moveFin
 	
 down:
-	add eax, 1
-	mov [rowcol+0], eax
+	add edx, 1
+	mov [rowcol+0], edx
 	jmp moveFin
 	
 right:
@@ -424,12 +420,12 @@ moveFin:
 calcIndexP1:
 	push rbp
 	mov  rbp, rsp
-	
 	mov eax, DWORD[rowcol + 0]
 	mov ebx, DWORD[rowcol + 4]
 	mov edx, 10
 	mul edx
 	add eax, ebx
+	mov DWORD[indexMat], eax
 	mov rsp, rbp
 	pop rbp
 	ret
