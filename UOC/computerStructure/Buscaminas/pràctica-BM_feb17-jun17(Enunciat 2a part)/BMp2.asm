@@ -234,9 +234,15 @@ getchP2:
 posCurScreenP2:
 	push rbp
 	mov  rbp, rsp
-	  
-		
-				
+	mov  eax, DWORD[rowcol+0] 
+	mov  ebx, DWORD[rowcol+4]
+	imul eax, 2
+	add  eax, 7
+	imul ebx, 4
+	add  ebx, 7
+	mov  [rowScreen], eax
+	mov  [colScreen], ebx
+	call gotoxyP1
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -266,13 +272,27 @@ posCurScreenP2:
 showMinesP2:
 	push rbp
 	mov  rbp, rsp
-		
-	
-	
-	mov rsp, rbp
-	pop rbp
+	mov  eax, DWORD[numMines]
+	mov  edx, 0
+	mov  ecx, 10
+	div  ecx
+	add  al, '0'
+	mov  [charac], al
+	mov  ebx, 27
+	mov  [rowScreen], ebx
+	mov  ebx, 23
+	mov  [colScreen], ebx
+	call gotoxyP1
+	call printchP1
+	add  dl, 48
+	mov  [charac], al
+	mov  ebx, 24
+	mov  [colScreen], ebx
+	call gotoxyP1
+	call printchP1
+	mov  rsp, rbp
+	pop  rbp
 	ret
-
 
 ;;;;;
 ; Actualitzar el contingut del Tauler de Joc amb les dades de la matriu 
@@ -300,12 +320,47 @@ showMinesP2:
 updateBoardP2:
 	push rbp
 	mov  rbp, rsp
-	
-	
-		
+	mov  eax, 7
+	mov  DWORD[rowScreen], eax
+	mov  ebx, 0
+	mov  ecx, 0
+for:
+	cmp ebx, DimMatrix
+	jl  cert
+	jmp fin
+
+cert:
+	mov eax, 7
+	mov DWORD[colScreen], eax
+	cmp ecx, DimMatrix
+	jl  cert2
+	mov eax,2
+	add DWORD[rowScreen], eax
+	add ebx, 1
+	jmp for
+
+cert2:
+	call gotoxyP1
+	mov eax, ebx
+	mov edx, 10
+	mul edx
+	add eax, ecx
+	mov  al, BYTE[marks + eax]
+	mov  BYTE[charac], al
+	call printchP1
+	mov eax, 4
+	add  DWORD[colScreen], eax
+	mov eax, 2
+	add  DWORD[rowScreen], eax
+	add ecx, 1
+	jmp  for
+
+fin:
+	call showMinesP1
 	mov rsp, rbp
 	pop rbp
 	ret
+
 
 
 ;;;;;		
@@ -332,12 +387,63 @@ updateBoardP2:
 moveCursorP2:
 	push rbp
 	mov  rbp, rsp
+	call getchP1
+	mov  al, BYTE[charac]
+	mov  edx, DWORD[rowcol+0] 
+	mov  ebx, DWORD[rowcol+4]
+	mov  ecx, DimMatrix
+	sub  ecx, 1
+	cmp  al, 'i'
+	je   i
+	cmp  al,  'j'
+	je   j
+	cmp  al,  'k'
+	je   k
+	cmp  al, 'l'
+	je   l
+	jmp moveFin
+i:
+	cmp  edx, 0
+	jg  up
+	jmp moveFin
+j:
+	cmp  ebx, 0
+	jg  left
+	jmp moveFin
+k:
+	cmp  edx, ecx
+	jl  down
+	jmp moveFin
+l:
+	cmp  ebx, ecx
+	jl   right
+	jmp  moveFin
 	
+up:
+	sub edx, 1
+	mov [rowcol+0], edx
+	jmp moveFin
 	
-		
+left:
+	sub ebx, 1
+	mov [rowcol+4], ebx
+	jmp moveFin
+	
+down:
+	add edx, 1
+	mov [rowcol+0], edx
+	jmp moveFin
+	
+right:
+	add ebx, 1
+	mov [rowcol+4], ebx
+	jmp moveFin
+	
+moveFin:
 	mov rsp, rbp
 	pop rbp
 	ret
+
 
 
 ;;;;;  
@@ -364,9 +470,12 @@ moveCursorP2:
 calcIndexP2:
 	push rbp
 	mov  rbp, rsp
-
-	
-			
+	mov eax, DWORD[rowcol + 0]
+	mov ebx, DWORD[rowcol + 4]
+	mov edx, 10
+	mul edx
+	add eax, ebx
+	mov DWORD[indexMat], eax
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -404,9 +513,24 @@ calcIndexP2:
 mineMarkerP2:
 	push rbp
 	mov  rbp, rsp
-
+	call calcIndexP1
+	cmp BYTE[marks+eax], ' '
+	jne desmarca
+	cmp DWORD[numMines], 0
+	jl  desmarca
+	mov BYTE[marks+eax], 'M'
+	sub ecx, 1
+	mov DWORD[numMines], ecx
+	jmp final
 	
-	
+desmarca:
+	cmp BYTE[marks+eax], 'M'
+	jne final
+	mov BYTE[marks+eax], ' '
+	add ecx, 1
+	mov DWORD[numMines], ecx
+		
+final:	
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -463,13 +587,6 @@ big:
 	cmp  DWORD[rdi +0], 0
 	jg  upleft
 	jmp leftcenter
-	
-	
-	
-	
-status:
-	mov rsi, 3
-	jmp end
 	
 
 upleft:
@@ -536,13 +653,13 @@ downright:
 
 elsend:
 	add ecx, '0'
-	mov BYTE[marks + eax], ecx
+	mov DWORD[marks + eax], ecx
 
 
 status: 
 	mov rsp, rbp
 	pop rbp
-	ret rsi
+	ret
 
 
 ;;;;;  
