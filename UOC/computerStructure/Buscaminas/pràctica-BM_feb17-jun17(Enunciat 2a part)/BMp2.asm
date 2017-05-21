@@ -279,15 +279,13 @@ showMinesP2:
 	div  ecx
 	add  al, '0'
 	mov  edi, 27
-	mov  ebx, 23
-	mov  esi, ebx
+	mov  esi, 23
 	call gotoxyP2
 	mov  dil, al
 	call printchP2
 	add  dl, '0'
 	mov  edi, 27
-	mov  ebx, 24
-	mov  esi, ebx
+	mov  esi, 24
 	call gotoxyP2
 	mov  dil, dl
 	call printchP2
@@ -471,12 +469,11 @@ moveFin:
 calcIndexP2:
 	push rbp
 	mov  rbp, rsp
-	mov eax, DWORD[rowcol + 0]
-	mov ebx, DWORD[rowcol + 4]
+	mov eax, DWORD[rdi + 0]
+	mov ebx, DWORD[rdi + 4]
 	mov edx, 10
 	mul edx
 	add eax, ebx
-	mov DWORD[indexMat], eax
 	mov rsp, rbp
 	pop rbp
 	ret
