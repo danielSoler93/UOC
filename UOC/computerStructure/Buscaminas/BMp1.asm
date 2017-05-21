@@ -250,7 +250,7 @@ showMinesP1:
 	mov  edx, 0
 	mov  ecx, 10
 	div  ecx
-	add  al, 48
+	add  al, '0'
 	mov  [charac], al
 	mov  ebx, 27
 	mov  [rowScreen], ebx
@@ -289,7 +289,7 @@ updateBoardP1:
 	push rbp
 	mov  rbp, rsp
 	mov  eax, 7
-	mov  [rowScreen], eax
+	mov  DWORD[rowScreen], eax
 	mov  ebx, 0
 	mov  ecx, 0
 for:
@@ -299,23 +299,27 @@ for:
 
 cert:
 	mov eax, 7
-	mov [colScreen], eax
+	mov DWORD[colScreen], eax
 	cmp ecx, DimMatrix
 	jl  cert2
 	mov eax,2
-	add [rowScreen], eax
+	add DWORD[rowScreen], eax
 	add ebx, 1
 	jmp for
 
 cert2:
 	call gotoxyP1
-	mov  al, BYTE[marks + 11]
-	mov  [charac], al
+	mov eax, ebx
+	mov edx, 10
+	mul edx
+	add eax, ecx
+	mov  al, BYTE[marks + eax]
+	mov  BYTE[charac], al
 	call printchP1
 	mov eax, 4
-	add  [colScreen], eax
+	add  DWORD[colScreen], eax
 	mov eax, 2
-	add  [rowScreen], eax
+	add  DWORD[rowScreen], eax
 	add ecx, 1
 	jmp  for
 
@@ -342,16 +346,12 @@ fin:
 moveCursorP1:
 	push rbp
 	mov  rbp, rsp
-	mov  eax, 3
-	mov  ebx, 0
-	mov  ecx, charac
-	mov  edx,1
-	int 80h
-	mov  eax, DWORD[rowcol+0] 
+	call getchP1
+	mov  al, BYTE[charac]
+	mov  edx, DWORD[rowcol+0] 
 	mov  ebx, DWORD[rowcol+4]
 	mov  ecx, DimMatrix
 	sub  ecx, 1
-	mov  al, BYTE[charac]
 	cmp  al, 'i'
 	je   i
 	cmp  al,  'j'
@@ -362,40 +362,40 @@ moveCursorP1:
 	je   l
 	jmp moveFin
 i:
-	cmp  eax, 0
-	jl  up
+	cmp  edx, 0
+	jg  up
 	jmp moveFin
 j:
 	cmp  ebx, 0
-	jl  left
+	jg  left
 	jmp moveFin
 k:
-	cmp  eax, ecx
-	jg  down
+	cmp  edx, ecx
+	jl  down
 	jmp moveFin
 l:
 	cmp  ebx, ecx
-	jg   right
+	jl   right
 	jmp  moveFin
 	
 up:
-	sub eax, 1
-	mov [rowcol], eax
+	sub edx, 1
+	mov [rowcol+0], edx
 	jmp moveFin
 	
 left:
 	sub ebx, 1
-	mov [rowcol], ebx
+	mov [rowcol+4], ebx
 	jmp moveFin
 	
 down:
-	add eax, 1
-	mov [rowcol], eax
+	add edx, 1
+	mov [rowcol+0], edx
 	jmp moveFin
 	
 right:
 	add ebx, 1
-	mov [rowcol], ebx
+	mov [rowcol+4], ebx
 	jmp moveFin
 	
 moveFin:
@@ -420,9 +420,12 @@ moveFin:
 calcIndexP1:
 	push rbp
 	mov  rbp, rsp
-
-	
-		
+	mov eax, DWORD[rowcol + 0]
+	mov ebx, DWORD[rowcol + 4]
+	mov edx, 10
+	mul edx
+	add eax, ebx
+	mov DWORD[indexMat], eax
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -455,9 +458,25 @@ calcIndexP1:
 mineMarkerP1:
 	push rbp
 	mov  rbp, rsp
-
-	          
 	
+	call calcIndexP1
+	cmp BYTE[marks+eax], ' '
+	jne desmarca
+	cmp DWORD[numMines], 0
+	jl  desmarca
+	mov BYTE[marks+eax], 'M'
+	sub ecx, 1
+	mov DWORD[numMines], ecx
+	jmp final
+	
+desmarca:
+	cmp BYTE[marks+eax], 'M'
+	jne final
+	mov BYTE[marks+eax], ' '
+	add ecx, 1
+	mov DWORD[numMines], ecx
+		
+final:	
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -475,7 +494,8 @@ mineMarkerP1:
 checkMinesP1:
 	push rbp
 	mov  rbp, rsp
-
+	
+	
 	cmp DWORD[numMines], 0  ;if (numMines == 0) {	
 	jne checkMinesP1_End
 
