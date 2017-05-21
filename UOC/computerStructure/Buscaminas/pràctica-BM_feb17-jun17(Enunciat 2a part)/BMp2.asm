@@ -273,23 +273,23 @@ posCurScreenP2:
 showMinesP2:
 	push rbp
 	mov  rbp, rsp
-	mov  eax, DWORD[numMines]
+	mov  eax, edi
 	mov  edx, 0
 	mov  ecx, 10
 	div  ecx
 	add  al, '0'
-	mov  [charac], al
-	mov  ebx, 27
-	mov  [rowScreen], ebx
+	mov  edi, 27
 	mov  ebx, 23
-	mov  [colScreen], ebx
+	mov  esi, ebx
 	call gotoxyP2
+	mov  dil, al
 	call printchP2
-	add  dl, 48
-	mov  [charac], al
+	add  dl, '0'
+	mov  edi, 27
 	mov  ebx, 24
-	mov  [colScreen], ebx
+	mov  esi, ebx
 	call gotoxyP2
+	mov  dil, dl
 	call printchP2
 	mov  rsp, rbp
 	pop  rbp
