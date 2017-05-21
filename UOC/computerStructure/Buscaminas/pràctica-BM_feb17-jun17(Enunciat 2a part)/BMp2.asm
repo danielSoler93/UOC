@@ -12,10 +12,11 @@ global developer
                          
 ;Subrutines d'assemblador que es criden des de C.
 global posCurScreenP2, showMinesP2  , updateBoardP2, moveCursorP2
-global mineMarkerP2  , searchMinesP2, checkEndP2   , playP2	 
-
+global mineMarkerP2  , searchMinesP2, checkEndP2   , playP2	
+ 
 ;Variables globals definides en C.
-extern marks, mines
+extern rowScreen, colScreen, rowcol, indexMat
+extern charac, mines, marks, numMines, state
 
 ;Funcions de C que es criden des de assemblador
 extern clearScreen_C, gotoxyP2_C, getchP2_C, printchP2_C
@@ -234,15 +235,15 @@ getchP2:
 posCurScreenP2:
 	push rbp
 	mov  rbp, rsp
-	mov  eax, DWORD[rowcol+0] 
-	mov  ebx, DWORD[rowcol+4]
+	mov  eax, DWORD[rdi+0]
+	mov  ebx, DWORD[rdi+4]
 	imul eax, 2
 	add  eax, 7
 	imul ebx, 4
 	add  ebx, 7
-	mov  [rowScreen], eax
-	mov  [colScreen], ebx
-	call gotoxyP1
+	mov  edi, eax
+	mov  esi, ebx
+	call gotoxyP2
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -282,14 +283,14 @@ showMinesP2:
 	mov  [rowScreen], ebx
 	mov  ebx, 23
 	mov  [colScreen], ebx
-	call gotoxyP1
-	call printchP1
+	call gotoxyP2
+	call printchP2
 	add  dl, 48
 	mov  [charac], al
 	mov  ebx, 24
 	mov  [colScreen], ebx
-	call gotoxyP1
-	call printchP1
+	call gotoxyP2
+	call printchP2
 	mov  rsp, rbp
 	pop  rbp
 	ret
@@ -340,14 +341,14 @@ cert:
 	jmp for
 
 cert2:
-	call gotoxyP1
+	call gotoxyP2
 	mov eax, ebx
 	mov edx, 10
 	mul edx
 	add eax, ecx
 	mov  al, BYTE[marks + eax]
 	mov  BYTE[charac], al
-	call printchP1
+	call printchP2
 	mov eax, 4
 	add  DWORD[colScreen], eax
 	mov eax, 2
@@ -356,7 +357,7 @@ cert2:
 	jmp  for
 
 fin:
-	call showMinesP1
+	call showMinesP2
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -387,7 +388,7 @@ fin:
 moveCursorP2:
 	push rbp
 	mov  rbp, rsp
-	call getchP1
+	call getchP2
 	mov  al, BYTE[charac]
 	mov  edx, DWORD[rowcol+0] 
 	mov  ebx, DWORD[rowcol+4]
@@ -513,7 +514,7 @@ calcIndexP2:
 mineMarkerP2:
 	push rbp
 	mov  rbp, rsp
-	call calcIndexP1
+	call calcIndexP2
 	cmp BYTE[marks+eax], ' '
 	jne desmarca
 	cmp DWORD[numMines], 0
