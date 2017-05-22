@@ -66,6 +66,7 @@ typedef struct {
 #endif
 #ifdef COMPLETE_VERSION
 /******************** PR2 - EX6B ********************/
+	tBook *table;
 #endif	
 	int size;
 } tBookTable;
@@ -87,13 +88,17 @@ typedef struct {
 /******************** PR2 - EX2 *********************/
 /* Books of a class */
 typedef struct {
-    char id;
-	int subBooks[MAX_BOOKS];
-	unsigned int totSubBooks;
+
 	/* Table of books of the subsection */
 #ifdef SIMPLE_VERSION	
+	char id;
+	int subBooks[MAX_BOOKS];
+	unsigned int totSubBooks;
 #endif	
 #ifdef COMPLETE_VERSION	
+	char id;
+	int *subBooks[MAX_BOOKS];
+	unsigned int totSubBooks;
 /******************** PR2 - EX6A ********************/
 #endif
 } tSubInfo;
