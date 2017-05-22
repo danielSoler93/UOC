@@ -1,6 +1,6 @@
 /* Uncomment the practice version you want to run */
-//#define SIMPLE_VERSION
-#define COMPLETE_VERSION
+#define SIMPLE_VERSION
+//#define COMPLETE_VERSION
 
 /* This code ensures that this file is included only once */
 #ifndef __DATA_H
@@ -88,13 +88,17 @@ typedef struct {
 /******************** PR2 - EX2 *********************/
 /* Books of a class */
 typedef struct {
-    char id;
-	int *subBooks[MAX_BOOKS];
-	unsigned int totSubBooks;
+
 	/* Table of books of the subsection */
 #ifdef SIMPLE_VERSION	
+	char id;
+	int subBooks[MAX_BOOKS];
+	unsigned int totSubBooks;
 #endif	
 #ifdef COMPLETE_VERSION	
+	char id;
+	int *subBooks[MAX_BOOKS];
+	unsigned int totSubBooks;
 /******************** PR2 - EX6A ********************/
 #endif
 } tSubInfo;
