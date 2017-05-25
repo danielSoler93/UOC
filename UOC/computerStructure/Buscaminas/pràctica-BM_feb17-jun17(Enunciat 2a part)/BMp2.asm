@@ -481,9 +481,9 @@ calcIndexP2:
     push rdi
 	mov eax, DWORD[rdi + 0]
 	mov ebx, DWORD[rdi + 4]
-	mov edx, 10
-	mul edx
-	add eax, ebx
+	mov edx, 10 
+	mul edx    	 ;rcol[0]*10
+	add eax, ebx ;rcol[0]*10 + rcol[1]
     pop rdi
     pop rsi
     pop rdx
