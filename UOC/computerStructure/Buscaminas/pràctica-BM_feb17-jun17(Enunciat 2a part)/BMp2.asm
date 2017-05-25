@@ -241,14 +241,14 @@ posCurScreenP2:
     push rdx
     push rsi
     push rdi
-	mov  eax, DWORD[rdi+0]
-	mov  ebx, DWORD[rdi+4]
-	imul eax, 2
-	add  eax, 7
-	imul ebx, 4
-	add  ebx, 7
-	mov  edi, eax
-	mov  esi, ebx
+	mov  eax, DWORD[rdi+0] ;rc[0]
+	mov  ebx, DWORD[rdi+4] ;rc[1]
+	imul eax, 2 ;rc[0]*2
+	add  eax, 7 ;rowScreen=(rc[0]*2)+7;
+	imul ebx, 4 ;rc[1]*4
+	add  ebx, 7 ;colScreen=(rc[1]*4)+7;
+	mov  edi, eax ;input gotoxyP2 rowScreen
+	mov  esi, ebx ;input gotoxyP2 colScreen
 	call gotoxyP2
 	pop rdi
     pop rsi
