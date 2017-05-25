@@ -531,23 +531,23 @@ mineMarkerP2:
     push rdx
     push rsi
     push rdi
-	call calcIndexP2
-	cmp BYTE[marks+eax], ' '
+	call calcIndexP2 ;return index in eax
+	cmp BYTE[marks+eax], ' ' ;marks[row[i]][row[j]] == ' ' 
 	jne desmarca
-	cmp BYTE[numMines], 0
+	cmp BYTE[numMines], 0  ;numMines > 0
 	jl  desmarca
-	mov BYTE[marks+eax], 'M'
-	sub ecx, 1
+	mov BYTE[marks+eax], 'M'  ;marks[rowScreen][ColScreen] = 'M'
+	sub ecx, 1				;numMines--
 	jmp final
 	
 desmarca:
-	cmp BYTE[marks+eax], 'M'
+	cmp BYTE[marks+eax], 'M'   ;marks[row[i]][row[j]] == 'M' 
 	jne final
-	mov BYTE[marks+eax], ' '
-	add ecx, 1
+	mov BYTE[marks+eax], ' '   ;marks[rowScreen][ColScreen] = ' '
+	add ecx, 1					;numMines++
 		
 final:
-	mov eax, ecx
+	mov eax, ecx      ;return numMines
     pop rdi
     pop rsi
     pop rdx
