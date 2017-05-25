@@ -20,7 +20,7 @@ extern charac, mines, marks, numMines, state
 
 ;Funcions de C que es criden des de assemblador
 extern clearScreen_C, gotoxyP2_C, getchP2_C, printchP2_C
-extern printBoardP2_C, printMessageP2_C
+extern printBoardP2_C, printMessageP2_C, updateBoardP2_C
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ATENCIÓ: Recordeu que les variables i els paràmetres de tipus 'char',
@@ -235,6 +235,12 @@ getchP2:
 posCurScreenP2:
 	push rbp
 	mov  rbp, rsp
+	push rax
+    push rbx
+    push rcx
+    push rdx
+    push rsi
+    push rdi
 	mov  eax, DWORD[rdi+0]
 	mov  ebx, DWORD[rdi+4]
 	imul eax, 2
@@ -244,6 +250,12 @@ posCurScreenP2:
 	mov  edi, eax
 	mov  esi, ebx
 	call gotoxyP2
+	pop rdi
+    pop rsi
+    pop rdx
+    pop rcx
+    pop rbx
+	pop rax
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -273,6 +285,12 @@ posCurScreenP2:
 showMinesP2:
 	push rbp
 	mov  rbp, rsp
+	push rax
+    push rbx
+    push rcx
+    push rdx
+    push rsi
+    push rdi
 	mov  eax, edi
 	mov  edx, 0
 	mov  ecx, 10
@@ -289,6 +307,12 @@ showMinesP2:
 	call gotoxyP2
 	mov  dil, dl
 	call printchP2
+	pop rdi
+    pop rsi
+    pop rdx
+    pop rcx
+    pop rbx
+	pop rax
 	mov  rsp, rbp
 	pop  rbp
 	ret
@@ -317,48 +341,26 @@ showMinesP2:
 ; Cap
 ;;;;;  
 updateBoardP2:
+
 	push rbp
 	mov  rbp, rsp
-	mov  eax, 7
-	mov  DWORD[rowScreen], eax
-	mov  ebx, 0
-	mov  ecx, 0
-for:
-	cmp ebx, DimMatrix
-	jl  cert
-	jmp fin
-
-cert:
-	mov eax, 7
-	mov DWORD[colScreen], eax
-	cmp ecx, DimMatrix
-	jl  cert2
-	mov eax,2
-	add DWORD[rowScreen], eax
-	add ebx, 1
-	jmp for
-
-cert2:
-	call gotoxyP2
-	mov eax, ebx
-	mov edx, 10
-	mul edx
-	add eax, ecx
-	mov  al, BYTE[marks + eax]
-	mov  BYTE[charac], al
-	call printchP2
-	mov eax, 4
-	add  DWORD[colScreen], eax
-	mov eax, 2
-	add  DWORD[rowScreen], eax
-	add ecx, 1
-	jmp  for
-
-fin:
-	call showMinesP2
+	push rax
+    push rbx
+    push rcx
+    push rdx
+    push rsi
+    push rdi
+    call updateBoardP2_C
+    pop rdi
+    pop rsi
+    pop rdx
+    pop rcx
+    pop rbx
+    pop rax
 	mov rsp, rbp
 	pop rbp
 	ret
+	
 
 
 
@@ -386,59 +388,63 @@ fin:
 moveCursorP2:
 	push rbp
 	mov  rbp, rsp
-	call getchP2
-	mov  al, sil
-	mov  edx, DWORD[rdi] 
+	push rax
+	push rbx
+    push rcx
+    push rdx
+    push rsi
+    push rdi
+	mov  edx, DWORD[rdi+0]
 	mov  ebx, DWORD[rdi+4]
 	mov  ecx, DimMatrix
 	sub  ecx, 1
-	cmp  al, 'i'
+	cmp  sil, 'i'
 	je   i
-	cmp  al,  'j'
+	cmp  sil,  'j'
 	je   j
-	cmp  al,  'k'
+	cmp  sil,  'k'
 	je   k
-	cmp  al, 'l'
+	cmp  sil, 'l'
 	je   l
 	jmp moveFin
+	
+	
 i:
 	cmp  edx, 0
-	jg  up
+	jle  moveFin
+	sub edx, 1
+	mov DWORD[rdi+0], edx
 	jmp moveFin
 j:
 	cmp  ebx, 0
-	jg  left
-	jmp moveFin
+	jle  moveFin
+	cmp  ebx, ecx
+	sub ebx, 1
+	mov DWORD[rdi+4], ebx
+	jmp  moveFin	
+	
 k:
 	cmp  edx, ecx
-	jl  down
+	jge  moveFin
+	add edx, 1
+	mov DWORD[rdi+0], edx
 	jmp moveFin
+	
 l:
 	cmp  ebx, ecx
-	jl   right
-	jmp  moveFin
-	
-up:
-	sub edx, 1
-	mov [rdi+0], edx
-	jmp moveFin
-	
-left:
-	sub ebx, 1
-	mov [rdi+4], ebx
-	jmp moveFin
-	
-down:
-	add edx, 1
-	mov [rdi+0], edx
-	jmp moveFin
-	
-right:
+	jge  moveFin
 	add ebx, 1
-	mov [rdi+4], ebx
+	mov DWORD[rdi+4], ebx
 	jmp moveFin
+
 	
 moveFin:
+    pop rdi
+    pop rsi
+    pop rdx
+    pop rcx
+    pop rbx
+    pop rax
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -469,11 +475,21 @@ moveFin:
 calcIndexP2:
 	push rbp
 	mov  rbp, rsp
+	push rbx
+    push rcx
+    push rdx
+    push rsi
+    push rdi
 	mov eax, DWORD[rdi + 0]
 	mov ebx, DWORD[rdi + 4]
 	mov edx, 10
 	mul edx
 	add eax, ebx
+    pop rdi
+    pop rsi
+    pop rdx
+    pop rcx
+    pop rbx
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -511,14 +527,18 @@ calcIndexP2:
 mineMarkerP2:
 	push rbp
 	mov  rbp, rsp
+	push rbx
+    push rcx
+    push rdx
+    push rsi
+    push rdi
 	call calcIndexP2
 	cmp BYTE[marks+eax], ' '
 	jne desmarca
-	cmp DWORD[numMines], 0
+	cmp BYTE[numMines], 0
 	jl  desmarca
 	mov BYTE[marks+eax], 'M'
 	sub ecx, 1
-	mov DWORD[numMines], ecx
 	jmp final
 	
 desmarca:
@@ -526,9 +546,14 @@ desmarca:
 	jne final
 	mov BYTE[marks+eax], ' '
 	add ecx, 1
-	mov DWORD[numMines], ecx
 		
-final:	
+final:
+	mov eax, ecx
+    pop rdi
+    pop rsi
+    pop rdx
+    pop rcx
+    pop rbx	
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -568,61 +593,68 @@ final:
 searchMinesP2:
 	push rbp
 	mov  rbp, rsp
-	mov ecx, 0 
-	mov eax, DWORD[rdi +0]
-	mov ebx, DWORD[rdi +4]
+	push rbx
+    push rcx
+    push rdx
+    push rsi
+    push rdi
+	mov cl, 0 ;digit
+	mov eax, DWORD[rdi +0] ;row
+	mov ebx, DWORD[rdi +4] ;col
 	mov edx, 10
-	mul edx
-	add eax, ebx
-	mov edx, DimMatrix
-	sub edx, 1
-	cmp DWORD[marks+eax], ' '
-	je  big
-
-big:
-	cmp DWORD[mines+eax], ' '
-	jne status
+	mul edx          ;row*10
+	add eax, ebx     ;row*10 + col = Index
+	mov edx, DimMatrix  
+	sub edx, 1       ;DimMatrix-1
+	cmp BYTE[marks+eax], ' '
+	jne  status
+	cmp BYTE[mines+eax], ' '
+	je else
+	mov esi, 3
+	jmp status
+	
+else:
 	cmp  DWORD[rdi +0], 0
 	jg  upleft
 	jmp leftcenter
 	
 
 upleft:
-	cmp ebx, 0
+	cmp DWORD[rdi +4], 0
 	jle upcenter
-	cmp DWORD[mines+eax-11], '*'
+	cmp BYTE[mines+eax-11], '*'
 	jne upcenter
-	add ecx, 1
+	add cl, 1
 	jmp upcenter
 	
 upcenter:
-	cmp DWORD[mines+eax-10], '*'
+	cmp BYTE[mines+eax-10], '*'
 	jne upright
-	add ecx, 1
+	add cl, 1
 	jmp upright
 	
 upright:
 	cmp ebx, edx
 	jge leftcenter
-	cmp DWORD[mines+eax-9], '*'
+	cmp BYTE[mines+eax-9], '*'
 	jne leftcenter
-	add ecx, 1
+	add cl, 1
 	jmp leftcenter
 	
 leftcenter:
 	cmp ebx, 0
 	jle rightcenter
-	cmp DWORD[mines+eax-1], '*'
+	cmp BYTE[mines+eax-1], '*'
 	jne rightcenter
-	add ecx, 1
+	add cl, 1
 	jmp rightcenter
 
 rightcenter:
 	cmp ebx, edx
 	jge downleft
-	cmp DWORD[mines+eax+1], '*'
+	cmp BYTE[mines+eax+1], '*'
 	jne downleft
-	add ecx, 1
+	add cl, 1
 	jmp downleft
 
 downleft:
@@ -630,31 +662,37 @@ downleft:
 	jge elsend
 	cmp ebx, 0
 	jle downcenter
-	cmp DWORD[mines+eax+9], '*'
+	cmp BYTE[mines+eax+9], '*'
 	jne downcenter
-	add ecx, 1
+	add cl, 1
 	jmp downcenter
 	
 downcenter:
-	cmp DWORD[mines+eax+10], '*'
+	cmp BYTE[mines+eax+10], '*'
 	jne downright
-	add ecx, 1
+	add cl, 1
 	jmp downright
 	
 downright:
 	cmp ebx, edx
 	jge elsend
-	cmp DWORD[mines+eax+11], '*'
+	cmp BYTE[mines+eax+11], '*'
 	jne elsend
-	add ecx, 1
+	add cl, 1
 	jmp elsend
 
 elsend:
-	add ecx, '0'
-	mov DWORD[marks + eax], ecx
+	add cl, '0'
+	mov BYTE[marks + eax], cl
 
 
-status: 
+status:
+	mov eax, esi
+    pop rdi
+    pop rsi
+    pop rdx
+    pop rcx
+    pop rbx
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -681,9 +719,63 @@ status:
 checkEndP2:
 	push rbp
 	mov  rbp, rsp
+	push rbx
+    push rcx
+    push rdx
+    push rsi
+    push rdi
+	mov ebx, 0 ;notOpenMarks
+	cmp edi, 0  ;nombre de mines per marcar=0?
+	jne checkEnd ;si no res
+	mov ecx, 0 ;si si inicialitza variable first for
+	jmp for1; and jump right to it
+
+for1:
+	cmp ecx, DimMatrix 
+	jge statusChange ;if its >DimMatrix jump for
+	add ecx, 1 ;add 1 to the loop variabl
+	mov edx, 0 ;initialize vsriable second for
+	jmp for2 ;jump to it
+	
+for2:
+	cmp edx, DimMatrix
+	jge for1 ;if i>DimMatrix get out of the for
+	push rdx
+	push rbx
+	mov ebx, edx
+	mov eax, ecx
+	mov edx, 10
+	mul edx
+	add eax, ebx
+	mov  al, BYTE[marks+eax]
+	pop rbx
+	pop rdx
+	add edx, 1 ; sum one to varibale of the second for 
+	cmp al, ' '  ;mines[i][j]!=' ' get to the for1
+	jne for2		
+	add ebx, 1 ;notopen++
+	jmp for2
+	
+	
+	
+	
+	
+statusChange:
+	cmp ebx, 0
+	jne checkEnd
+	mov esi, 2
+	jmp checkEnd
+	
+	
 
 	
-	 
+checkEnd:
+	mov eax, esi
+    pop rdi
+    pop rsi
+    pop rdx
+    pop rcx
+    pop rbx	
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -817,7 +909,7 @@ playP2:
 
    playP2_PrintMessage:
    mov  edi, ecx
-   call updateBoardP2    ;updateBoardP2_C(numMines);
+   call updateBoardP2   ;updateBoardP2_C(numMines);
 
    mov  edi, edx
    push rcx
