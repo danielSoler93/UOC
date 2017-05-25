@@ -723,18 +723,18 @@ checkEndP2:
     push rdx
     push rsi
     push rdi
-	mov ebx, 0 ;notOpenMarks
-	cmp edi, 0  ;nombre de mines per marcar=0?
-	jne checkEnd ;si no res
-	mov ecx, 0 ;si si inicialitza variable first for
-	jmp for1; and jump right to it
+	mov ebx, 0 ;notOpenMarks = 0
+	cmp edi, 0  ;nMines==0
+	jne checkEnd ;
+	mov ecx, 0 ;i=o
+	jmp for1; for1
 
 for1:
 	cmp ecx, DimMatrix 
-	jge statusChange ;if its >DimMatrix jump for
-	add ecx, 1 ;add 1 to the loop variabl
-	mov edx, 0 ;initialize vsriable second for
-	jmp for2 ;jump to it
+	jge statusChange ;if i >DimMatrix jump for
+	add ecx, 1 ;i++
+	mov edx, 0 ;j=0
+	jmp for2 ;jump to second for
 	
 for2:
 	cmp edx, DimMatrix
@@ -745,14 +745,14 @@ for2:
 	mov eax, ecx
 	mov edx, 10
 	mul edx
-	add eax, ebx
-	mov  al, BYTE[marks+eax]
+	add eax, ebx  ;rcol[0]*10+rcol[1]
+	mov  al, BYTE[marks+eax]  ;marks[i][j]
 	pop rbx
 	pop rdx
-	add edx, 1 ; sum one to varibale of the second for 
+	add edx, 1 ; j++
 	cmp al, ' '  ;mines[i][j]!=' ' get to the for1
 	jne for2		
-	add ebx, 1 ;notopen++
+	add ebx, 1 ;notOpen++
 	jmp for2
 	
 	
@@ -760,16 +760,16 @@ for2:
 	
 	
 statusChange:
-	cmp ebx, 0
+	cmp ebx, 0 ;if(notOpen==0)
 	jne checkEnd
-	mov esi, 2
+	mov esi, 2 ; status=2
 	jmp checkEnd
 	
 	
 
 	
 checkEnd:
-	mov eax, esi
+	mov eax, esi ;return status
     pop rdi
     pop rsi
     pop rdx
