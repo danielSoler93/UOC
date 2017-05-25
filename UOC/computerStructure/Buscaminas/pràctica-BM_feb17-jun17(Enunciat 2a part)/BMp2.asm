@@ -291,22 +291,22 @@ showMinesP2:
     push rdx
     push rsi
     push rdi
-	mov  eax, edi
-	mov  edx, 0
-	mov  ecx, 10
-	div  ecx
-	add  al, '0'
+	mov  eax, edi ;numMines
+	mov  edx, 0   ;digit = nMines%10
+	mov  ecx, 10 
+	div  ecx	  ;digit = nMines/10;//Decenes
+	add  al, '0'  ;digit = digit + '0'
 	mov  edi, 27
 	mov  esi, 23
-	call gotoxyP2
+	call gotoxyP2 ;gotoxyP2_C(27, 23)
 	mov  dil, al
-	call printchP2
-	add  dl, '0'
-	mov  edi, 27
+	call printchP2 ;printchP2_C(digit)
+	add  dl, '0'   ;digit = digit + '0'
+	mov  edi, 27 
 	mov  esi, 24
-	call gotoxyP2
+	call gotoxyP2 ;gotoxyP2_C(27, 24)
 	mov  dil, dl
-	call printchP2
+	call printchP2 ;printchP2_C(digit)
 	pop rdi
     pop rsi
     pop rdx
