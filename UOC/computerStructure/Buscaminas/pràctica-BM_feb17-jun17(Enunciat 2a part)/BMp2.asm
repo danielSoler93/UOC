@@ -398,42 +398,41 @@ moveCursorP2:
 	mov  ebx, DWORD[rdi+4]
 	mov  ecx, DimMatrix
 	sub  ecx, 1
-	cmp  sil, 'i'
+	cmp  sil, 'i' ;case 'i'
 	je   i
-	cmp  sil,  'j'
+	cmp  sil,  'j' ;case 'j'
 	je   j
-	cmp  sil,  'k'
+	cmp  sil,  'k' ;case 'k'
 	je   k
-	cmp  sil, 'l'
+	cmp  sil, 'l'  ;case 'l'
 	je   l
 	jmp moveFin
 	
 	
 i:
-	cmp  edx, 0
+	cmp  edx, 0 ;if (rc[0]>0)
 	jle  moveFin
-	sub edx, 1
+	sub edx, 1   ;rc[0]--
 	mov DWORD[rdi+0], edx
 	jmp moveFin
 j:
-	cmp  ebx, 0
+	cmp  ebx, 0 ;if (rc[1]>0)
 	jle  moveFin
-	cmp  ebx, ecx
-	sub ebx, 1
+	sub ebx, 1   ;rc[1]--
 	mov DWORD[rdi+4], ebx
 	jmp  moveFin	
 	
 k:
-	cmp  edx, ecx
+	cmp  edx, ecx ;if (rc[0]<DimMatrix-1)
 	jge  moveFin
 	add edx, 1
-	mov DWORD[rdi+0], edx
+	mov DWORD[rdi+0], edx ;rc[0]++;
 	jmp moveFin
 	
 l:
-	cmp  ebx, ecx
+	cmp  ebx, ecx  ;if (rc[1]<DimMatrix-1)
 	jge  moveFin
-	add ebx, 1
+	add ebx, 1     ;rc[1]++;
 	mov DWORD[rdi+4], ebx
 	jmp moveFin
 
