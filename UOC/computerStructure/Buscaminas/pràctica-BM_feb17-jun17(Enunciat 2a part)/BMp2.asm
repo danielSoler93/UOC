@@ -350,18 +350,53 @@ updateBoardP2:
     push rdx
     push rsi
     push rdi
-    call updateBoardP2_C
-    pop rdi
+	mov  ebx, 0 ;varibel for
+	mov  ecx, 0 ;variable second for
+	mov  eax, 7   ;rowScreen = 7
+for:
+	cmp ebx, DimMatrix ;for (i=0;i<DimMatrix;i++)
+	jge  fin
+	mov edx, 7  ;colScreen = 7	
+	jmp cert
+
+cert:
+	cmp ecx, DimMatrix ;for (j=0;j<DimMatrix;j++)
+	jl  cert2
+	add  eax, 2   ;rowScreen = rowScreen + 2;
+	mov ecx, 0
+	add ebx, 1 ;add one to for1 variable
+	jmp for
+
+cert2:
+	mov edi, eax
+	mov esi, edx
+	call gotoxyP2  ; gotoxyP2_C(rowScreen,colScreen);
+	push rax
+	push rdx
+	mov eax, ebx
+	mov edx, 10
+	mul edx
+	add eax, ecx
+	mov  al, BYTE[marks + eax]
+	mov  dil, al
+	call printchP2  ;printchP2_C(marks[i][j]);
+	pop rdx
+	pop rax
+	add  edx, 4   ;colScreen = colScreen + 4;
+	add ecx, 1    ;j++
+	jmp  cert
+
+fin:
+	pop rdi
     pop rsi
     pop rdx
     pop rcx
     pop rbx
-    pop rax
+	pop rax
+	call showMinesP2
 	mov rsp, rbp
 	pop rbp
 	ret
-	
-
 
 
 ;;;;;		
@@ -534,7 +569,7 @@ mineMarkerP2:
 	call calcIndexP2 ;return index in eax
 	cmp BYTE[marks+eax], ' ' ;marks[row[i]][row[j]] == ' ' 
 	jne desmarca
-	cmp BYTE[numMines], 0  ;numMines > 0
+	cmp esi, 0  ;numMines > 0
 	jl  desmarca
 	mov BYTE[marks+eax], 'M'  ;marks[rowScreen][ColScreen] = 'M'
 	sub ecx, 1				;numMines--
@@ -605,88 +640,88 @@ searchMinesP2:
 	add eax, ebx     ;row*10 + col = Index
 	mov edx, DimMatrix  
 	sub edx, 1       ;DimMatrix-1
-	cmp BYTE[marks+eax], ' '
+	cmp BYTE[marks+eax], ' '  ;if (marks[row][col]==' ') 
 	jne  status
-	cmp BYTE[mines+eax], ' '
+	cmp BYTE[mines+eax], ' '  ;if (mines[row][col]!=' ')
 	je else
-	mov esi, 3
+	mov esi, 3  ;status = 3
 	jmp status
 	
 else:
-	cmp  DWORD[rdi +0], 0
+	cmp  DWORD[rdi +0], 0 ;if (row > 0)
 	jg  upleft
 	jmp leftcenter
 	
 
 upleft:
-	cmp DWORD[rdi +4], 0
+	cmp DWORD[rdi +4], 0  ;if (col > 0)
 	jle upcenter
-	cmp BYTE[mines+eax-11], '*'
+	cmp BYTE[mines+eax-11], '*' ;if (mines[row-1][col-1]=='*') 
 	jne upcenter
-	add cl, 1
+	add cl, 1  ;digit++
 	jmp upcenter
 	
 upcenter:
-	cmp BYTE[mines+eax-10], '*'
+	cmp BYTE[mines+eax-10], '*'  ;if (mines[row-1][col]=='*') 
 	jne upright
-	add cl, 1
+	add cl, 1  ;digit++
 	jmp upright
 	
 upright:
-	cmp ebx, edx
+	cmp ebx, edx   ;if (col < DimMatrix-1)
 	jge leftcenter
-	cmp BYTE[mines+eax-9], '*'
+	cmp BYTE[mines+eax-9], '*'   ;if (mines[row-1][col+1]=='*')
 	jne leftcenter
-	add cl, 1
+	add cl, 1    ;digit++
 	jmp leftcenter
 	
 leftcenter:
-	cmp ebx, 0
-	jle rightcenter
-	cmp BYTE[mines+eax-1], '*'
+	cmp ebx, 0   ;if (col > 0) 
+	jle rightcenter  
+	cmp BYTE[mines+eax-1], '*'  ;if (mines[row][col-1]=='*') 
 	jne rightcenter
-	add cl, 1
+	add cl, 1		;digit++
 	jmp rightcenter
 
 rightcenter:
-	cmp ebx, edx
+	cmp ebx, edx   ;if (col < DimMatrix-1)
 	jge downleft
-	cmp BYTE[mines+eax+1], '*'
+	cmp BYTE[mines+eax+1], '*'   ;if (mines[row][col+1]=='*')
 	jne downleft
-	add cl, 1
+	add cl, 1   ;digit++
 	jmp downleft
 
 downleft:
-	cmp DWORD[rdi +0], edx
+	cmp DWORD[rdi +0], edx  ;if (row < DimMatrix-1)
 	jge elsend
-	cmp ebx, 0
+	cmp ebx, 0            ;if(col>0)
 	jle downcenter
-	cmp BYTE[mines+eax+9], '*'
+	cmp BYTE[mines+eax+9], '*'  ;if (mines[row+1][col-1]=='*')
 	jne downcenter
-	add cl, 1
+	add cl, 1   ;digit++
 	jmp downcenter
 	
 downcenter:
-	cmp BYTE[mines+eax+10], '*'
+	cmp BYTE[mines+eax+10], '*'   ;If (mines[row+1][col]=='*')
 	jne downright
-	add cl, 1
+	add cl, 1     ;digit++
 	jmp downright
 	
 downright:
-	cmp ebx, edx
+	cmp ebx, edx    ;if (col < DimMatrix-1)
 	jge elsend
 	cmp BYTE[mines+eax+11], '*'
 	jne elsend
-	add cl, 1
+	add cl, 1   ;digit++
 	jmp elsend
 
 elsend:
-	add cl, '0'
-	mov BYTE[marks + eax], cl
+	add cl, '0'  ;digit = digit + '0'
+	mov BYTE[marks + eax], cl  ;marks[row][col] = digit+'0';
 
 
 status:
-	mov eax, esi
+	mov eax, esi  ;return state
     pop rdi
     pop rsi
     pop rdx
