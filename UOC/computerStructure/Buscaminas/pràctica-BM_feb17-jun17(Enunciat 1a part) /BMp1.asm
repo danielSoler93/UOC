@@ -8,8 +8,6 @@ developer db "Daniel Soler",0
 ;Constants que també estan definides en C.
 DimMatrix    equ 10
 SizeMatrix   equ 100
-;reservant espai
-buffer resb 10 
 
 section .text            
 ;Variables definides en Assemblador.
