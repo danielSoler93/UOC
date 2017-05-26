@@ -18,9 +18,19 @@
 
 extern int developer;	//Variable declarada en assemblador que indica el nom del programador
 
-/**
+ /**
  * Definició de variables globals
  */
+ 
+int  rowScreen;	    //Fila per a posicionar el cursor a la pantalla.
+int  colScreen;	    //Columna per a posicionar el cursor a la pantalla
+int  rowcol[2];		//vector de dues posicions de tipus int on tenim la 
+					//fila (rowcol[0]) i la columna (rowcol[1]) per a 
+                    //accedir a les matrius mines i marks i per a 
+                    //indicar fila i columna del cursor dins del tauler.
+int  indexMat; 		//Índex per a accedir a les matrius mines i marks des d'assemblador.
+char charac;        //Caràcter llegit de teclat i per a escriure a pantalla
+
 // Matriu 10x10 on posem les mines (Hi han 20 mines marcades)
 char mines[DimMatrix][DimMatrix] = { {' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
                                      {' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
@@ -33,7 +43,7 @@ char mines[DimMatrix][DimMatrix] = { {' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
                                      {' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
                                      {' ',' ',' ',' ',' ',' ',' ',' ',' ','*'} };
 
-// Matriu 10x10 on s'indiquen les mines marcades (Hi han 2 mines marcades)
+// Matriu 10x10 on s'indiquen les mines marcades 'M'(Hi han 2 mines marcades)
 // i el nombre de mines de les posicions obertes.(Hi han 4 posicions obertes)              
 char marks[DimMatrix][DimMatrix] = { {'0',' ',' ',' ',' ',' ',' ',' ',' ',' '},
                                      {'1',' ',' ',' ',' ',' ',' ',' ',' ',' '},
@@ -46,7 +56,12 @@ char marks[DimMatrix][DimMatrix] = { {'0',' ',' ',' ',' ',' ',' ',' ',' ',' '},
                                      {' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
                                      {' ',' ',' ',' ',' ',' ',' ',' ',' ','M'} };
 
-           
+int numMines = 18; 	// Nombre de mines que queden per marcar.
+                    
+int state    = 1;	// 0: Sortir, hem premut la tecla 'ESC' per a sortir.
+					// 1: Continuem jugant.
+					// 2: Guanyat, s'ha marcat totes les mines.
+					       
 /**
  * Definició de les subrutines d'assemblador que es criden des de C
  */

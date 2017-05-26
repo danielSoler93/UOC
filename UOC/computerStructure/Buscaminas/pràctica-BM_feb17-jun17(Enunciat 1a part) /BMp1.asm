@@ -259,7 +259,7 @@ showMinesP1:
 	call gotoxyP1
 	call printchP1
 	add  dl, 48
-	mov  [charac], al
+	mov  [charac], dl
 	mov  ebx, 24
 	mov  [colScreen], ebx
 	call gotoxyP1
