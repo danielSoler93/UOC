@@ -211,14 +211,14 @@ getchP1:
 posCurScreenP1:
 	push rbp
 	mov  rbp, rsp
-	mov  eax, DWORD[rowcol+0] 
-	mov  ebx, DWORD[rowcol+4]
-	imul eax, 2
-	add  eax, 7
-	imul ebx, 4
-	add  ebx, 7
-	mov  [rowScreen], eax
-	mov  [colScreen], ebx
+	mov  eax, DWORD[rowcol+0]  ;rc[0]
+	mov  ebx, DWORD[rowcol+4]  ;rc[1]
+	imul eax, 2     ;rc[0]*2
+	add  eax, 7     ;(rc[0]*2)+7;
+	imul ebx, 4     ;rc[1]*4
+	add  ebx, 7     ;(rc[1]*4)+7;
+	mov  [rowScreen], eax   ;rowScreen=(rc[0]*2)+7;
+	mov  [colScreen], ebx   ;colScreen=(rc[1]*4)+7;
 	call gotoxyP1
 	mov rsp, rbp
 	pop rbp
@@ -246,24 +246,24 @@ posCurScreenP1:
 showMinesP1:
 	push rbp
 	mov  rbp, rsp
-	mov  eax, DWORD[numMines]
-	mov  edx, 0
+	mov  eax, DWORD[numMines]  ;numMines
+	mov  edx, 0					;digit = nMines%10
 	mov  ecx, 10
-	div  ecx
-	add  al, '0'
+	div  ecx					;digit = nMines/10;//Decenes		
+	add  al, '0'				;digit = digit + '0'
 	mov  [charac], al
-	mov  ebx, 27
+	mov  ebx, 27				;rowScreen = 27
 	mov  [rowScreen], ebx
-	mov  ebx, 23
+	mov  ebx, 23				;colScreen = 23
 	mov  [colScreen], ebx
-	call gotoxyP1
-	call printchP1
+	call gotoxyP1				;gotoxyP2_C(27, 23)
+	call printchP1				;printchP2_C
 	add  dl, 48
 	mov  [charac], dl
 	mov  ebx, 24
-	mov  [colScreen], ebx
-	call gotoxyP1
-	call printchP1
+	mov  [colScreen], ebx		;colScreen = 24
+	call gotoxyP1				;gotoxyP2_C(27, 24)
+	call printchP1				;printchP2_C
 	mov  rsp, rbp
 	pop  rbp
 	ret
@@ -292,36 +292,42 @@ updateBoardP1:
 	mov  DWORD[rowScreen], eax
 	mov  ebx, 0
 	mov  ecx, 0
+	mov  ebx, 0 ;varibel for
+	mov  ecx, 0 ;variable second for
+	mov  eax, 7   ;rowScreen = 7
+	
 for:
-	cmp ebx, DimMatrix
-	jl  cert
-	jmp fin
+	cmp ebx, DimMatrix ;for (i=0;i<DimMatrix;i++)
+	jge  fin
+	mov edx, 7  ;colScreen = 7	
+	jmp cert
 
 cert:
-	mov eax, 7
-	mov DWORD[colScreen], eax
-	cmp ecx, DimMatrix
+	cmp ecx, DimMatrix ;for (j=0;j<DimMatrix;j++)
 	jl  cert2
-	mov eax,2
-	add DWORD[rowScreen], eax
-	add ebx, 1
+	add  eax, 2   ;rowScreen = rowScreen + 2;
+	mov ecx, 0
+	add ebx, 1 ;add one to for1 variable
 	jmp for
 
 cert2:
-	call gotoxyP1
+	mov DWORD[rowScreen], eax
+	mov DWORD[colScreen], edx
+	call gotoxyP1  ; gotoxyP1_C(rowScreen,colScreen);
+	push rax
+	push rdx
 	mov eax, ebx
 	mov edx, 10
 	mul edx
 	add eax, ecx
 	mov  al, BYTE[marks + eax]
 	mov  BYTE[charac], al
-	call printchP1
-	mov eax, 4
-	add  DWORD[colScreen], eax
-	mov eax, 2
-	add  DWORD[rowScreen], eax
-	add ecx, 1
-	jmp  for
+	call printchP1  ;printchP1_C(marks[i][j]);
+	pop rdx
+	pop rax
+	add  edx, 4   ;colScreen = colScreen + 4;
+	add ecx, 1    ;j++
+	jmp  cert
 
 fin:
 	call showMinesP1
@@ -346,7 +352,6 @@ fin:
 moveCursorP1:
 	push rbp
 	mov  rbp, rsp
-	call getchP1
 	mov  al, BYTE[charac]
 	mov  edx, DWORD[rowcol+0] 
 	mov  ebx, DWORD[rowcol+4]
@@ -362,42 +367,30 @@ moveCursorP1:
 	je   l
 	jmp moveFin
 i:
-	cmp  edx, 0
-	jg  up
+	cmp  edx, 0 ;if (rc[0]>0)
+	jle  moveFin
+	sub edx, 1   ;rc[0]--
+	mov DWORD[rowcol+0], edx
 	jmp moveFin
 j:
-	cmp  ebx, 0
-	jg  left
-	jmp moveFin
+	cmp  ebx, 0 ;if (rc[1]>0)
+	jle  moveFin
+	sub ebx, 1   ;rc[1]--
+	mov DWORD[rowcol+4], ebx
+	jmp  moveFin	
 k:
-	cmp  edx, ecx
-	jl  down
+	cmp  edx, ecx ;if (rc[0]<DimMatrix-1)
+	jge  moveFin
+	add edx, 1
+	mov DWORD[rowcol+0], edx ;rc[0]++;
 	jmp moveFin
 l:
-	cmp  ebx, ecx
-	jl   right
-	jmp  moveFin
-	
-up:
-	sub edx, 1
-	mov [rowcol+0], edx
+	cmp  ebx, ecx  ;if (rc[1]<DimMatrix-1)
+	jge  moveFin
+	add ebx, 1     ;rc[1]++;
+	mov DWORD[rowcol+4], ebx
 	jmp moveFin
-	
-left:
-	sub ebx, 1
-	mov [rowcol+4], ebx
-	jmp moveFin
-	
-down:
-	add edx, 1
-	mov [rowcol+0], edx
-	jmp moveFin
-	
-right:
-	add ebx, 1
-	mov [rowcol+4], ebx
-	jmp moveFin
-	
+
 moveFin:
 	mov rsp, rbp
 	pop rbp
@@ -422,9 +415,9 @@ calcIndexP1:
 	mov  rbp, rsp
 	mov eax, DWORD[rowcol + 0]
 	mov ebx, DWORD[rowcol + 4]
-	mov edx, 10
+	mov edx, 10					;rcol[0]*10
 	mul edx
-	add eax, ebx
+	add eax, ebx    			;rcol[0]*10 + rcol[1]
 	mov DWORD[indexMat], eax
 	mov rsp, rbp
 	pop rbp
@@ -459,21 +452,22 @@ mineMarkerP1:
 	push rbp
 	mov  rbp, rsp
 	
-	call calcIndexP1
-	cmp BYTE[marks+eax], ' '
+	call calcIndexP1  ;return index in eax
+	cmp BYTE[marks+eax], ' '  ;marks[row[i]][row[j]] == ' ' 
 	jne desmarca
-	cmp DWORD[numMines], 0
+	cmp DWORD[numMines], 0  ;if( ;numMines > 0)
 	jl  desmarca
-	mov BYTE[marks+eax], 'M'
-	sub ecx, 1
+	mov BYTE[marks+eax], 'M'   ;marks[rowScreen][ColScreen] = 'M'
+	sub ecx, 1      	;numMines--
+	jmp final
 	mov DWORD[numMines], ecx
 	jmp final
 	
 desmarca:
-	cmp BYTE[marks+eax], 'M'
+	cmp BYTE[marks+eax], 'M'    ;marks[row[i]][row[j]] == 'M' 
 	jne final
-	mov BYTE[marks+eax], ' '
-	add ecx, 1
+	mov BYTE[marks+eax], ' '     ;marks[rowScreen][ColScreen] = ' '
+	add ecx, 1 					;numMines++
 	mov DWORD[numMines], ecx
 		
 final:	
@@ -494,14 +488,11 @@ final:
 checkMinesP1:
 	push rbp
 	mov  rbp, rsp
-	
-	
 	cmp DWORD[numMines], 0  ;if (numMines == 0) {	
 	jne checkMinesP1_End
-
 	mov DWORD[state], 2     ;state = 2;
 	
-	checkMinesP1_End:
+checkMinesP1_End:
 	mov rsp, rbp
 	pop rbp
 	ret
