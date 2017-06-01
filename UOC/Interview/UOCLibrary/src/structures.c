@@ -30,3 +30,57 @@ tBoolean uniqueString(char * word){
 	}
 	return TRUE;
 }
+
+tBoolean permutation(char * word1, char * word2){
+	
+	/*
+	 * 
+	 * Check whether or not the first word is
+	 * a permutation of the second one
+	 * 
+	 * input)
+	 *  	word 1: first str
+	 * 
+	 * 		word 2: second str
+	 * 
+	 * Output)
+	 * 		retVal: True if they are false if not.
+	 * 
+	 * Concepts to ask for: Spaces and capitals count???
+	 * 
+	 * */
+	
+	if(strlen(word1) != strlen(word2)) return FALSE;
+	
+	sort(word1);
+	sort(word2);
+	
+	if(strcmp(word1, word2) == 0) return TRUE;
+	
+	else return FALSE;
+}
+
+void sort(char * word){
+	int size = strlen(word);
+	int i;
+	int j;
+	char smallest;
+	
+	
+	for(i=0;i<size;i++){
+		smallest = word[i];
+		int index = i;
+		
+		for(j=i;j<size;j++){
+			if(strcmp(&word[j], &smallest)<0){
+				smallest = word[j];
+				index = j;
+			}
+		}
+		
+		if(index != i){
+			word[index] = word[i];
+			word[i] = smallest;
+		}
+	}
+}

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "sort.h"
+#include "structures.h"
 #include <stdio.h>
 #include <conio.h>
 #include <time.h>
@@ -27,11 +28,15 @@ int main(int argc, char **argv)
 	
 	//display(array.list, array.size);
 	
-	char word[] = "stringhole";
-	char word2[] = "stringsoul";
+	char word[] = "dogi";
+	char word2[] = "godi";
 	
 	uniqueString(word);
 	uniqueString(word2);
 	
+	permutation(word, word2);
+	
+	
+
 	return 0;
 }
