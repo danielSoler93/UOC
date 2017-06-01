@@ -20,10 +20,12 @@
     <File Name="src/main.c"/>
     <File Name="src/test.c"/>
     <File Name="src/sort.c"/>
+    <File Name="src/structures.c"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="include/test.h"/>
     <File Name="include/sort.h"/>
+    <File Name="include/structures.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Daniel
-Date                   :=06/05/2017
+Date                   :=01/06/2017
 CodeLitePath           :=C:/CodeLite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -62,7 +62,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IntermediateDirectory)/src_sort.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IntermediateDirectory)/src_sort.c$(ObjectSuffix) $(IntermediateDirectory)/src_structures.c$(ObjectSuffix) 
 
 
 
@@ -116,6 +116,14 @@ $(IntermediateDirectory)/src_sort.c$(DependSuffix): src/sort.c
 
 $(IntermediateDirectory)/src_sort.c$(PreprocessSuffix): src/sort.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_sort.c$(PreprocessSuffix) src/sort.c
+
+$(IntermediateDirectory)/src_structures.c$(ObjectSuffix): src/structures.c $(IntermediateDirectory)/src_structures.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Interview/UOCLibrary/src/structures.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_structures.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_structures.c$(DependSuffix): src/structures.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_structures.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_structures.c$(DependSuffix) -MM src/structures.c
+
+$(IntermediateDirectory)/src_structures.c$(PreprocessSuffix): src/structures.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_structures.c$(PreprocessSuffix) src/structures.c
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

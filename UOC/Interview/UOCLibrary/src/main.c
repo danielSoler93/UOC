@@ -25,7 +25,13 @@ int main(int argc, char **argv)
 	mergeSort(array.list, array.size);
 	
 	
-	display(array.list, array.size);
+	//display(array.list, array.size);
+	
+	char word[] = "stringhole";
+	char word2[] = "stringsoul";
+	
+	uniqueString(word);
+	uniqueString(word2);
 	
 	return 0;
 }

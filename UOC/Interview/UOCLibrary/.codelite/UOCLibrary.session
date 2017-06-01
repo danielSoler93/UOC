@@ -76,7 +76,7 @@
     <TabInfo>
       <wxString Value="C:\Users\Daniel\Documents\uoc\UOC\UOC\Interview\UOCLibrary\include\test.h" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="5" Name="CurrentLine"/>
+      <int Value="6" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
       <IntVector Name="CollapsedFolds"/>
     </TabInfo>
