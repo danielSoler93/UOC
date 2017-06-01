@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 	
 	//display(array.list, array.size);
 	
-	char word[] = "dogi";
+	char word[] = "do gi ";
 	char word2[] = "godi";
 	
 	uniqueString(word);
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 	
 	permutation(word, word2);
 	
-	
+	spaces(word);
 
 	return 0;
 }

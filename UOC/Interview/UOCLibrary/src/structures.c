@@ -84,3 +84,24 @@ void sort(char * word){
 		}
 	}
 }
+
+void spaces(char * word){
+	
+	int size = strlen(word);
+	int i;
+	char buffer[100];
+	int indexBuffer = 0;
+	
+	for(i=0; i<size; i++){
+		if(word[i]==' '){
+			buffer[indexBuffer++] = '%';
+			buffer[indexBuffer++] = '2';
+			buffer[indexBuffer++] = '0';
+		}
+		else buffer[indexBuffer++] = word[i];
+	}
+	
+	printf("%s", buffer);
+	
+	
+}
