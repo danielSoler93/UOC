@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "sort.h"
 #include "structures.h"
 
@@ -105,3 +106,82 @@ void spaces(char * word){
 	
 	
 }
+
+tBoolean palindrome(tHashtable hashtable, char * string){
+	
+	int i;
+	tBoolean oddFound = FALSE;
+	
+	
+	initHashTable(&hashtable);
+	
+	
+	for(i=0; i<strlen(string); i++) addHashTable(&hashtable, string[i]);
+	
+	
+	for(i=0; i<strlen(string); i++){
+		if(oddFound) {
+			printf("\nnot palindrom permutation\n");
+			return FALSE;
+		}
+		else {
+			if (hashtable.table[(int)(string[i] - 'a')].value %2 != 0) {
+				oddFound = TRUE;
+			}
+		}
+	}
+	
+	
+	printf("\npalindrom permutation\n");
+	return TRUE;
+	
+}
+
+tBoolean oneWay(char * string1, char * string2){
+	/*
+	 * Return true if bothe strings can be identical with one change
+	 * This change can be either a insertion/removal or a replacement.
+	 * 
+	 * Input)
+	 *   string1 largest
+	 * 	 string2 smallest
+	 * 
+	 */
+	 
+	int sizeString1 = strlen(string1);
+	int sizeString2 = strlen(string2);
+	tBoolean differenceFound = FALSE;
+	
+	if(abs(sizeString1-sizeString2)>=2) {
+		printf("Not equal with one way");
+		return FALSE;
+	}
+	
+	else{
+		
+		int i;
+		int j=0;
+		
+		for(i=0; i<sizeString1; i++){
+				
+				if(differenceFound>=2) {
+					printf("Not equal with one way");
+					return FALSE;
+				}
+				
+				else {
+					
+					if(string1[i]!=string2[j]){
+						differenceFound++;
+						if(sizeString1 != sizeString2)   j--;
+					}
+			}
+		j++;
+		}
+		printf("equal with one change");
+		return TRUE;
+	}
+}
+
+	
+	

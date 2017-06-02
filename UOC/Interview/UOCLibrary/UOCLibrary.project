@@ -21,6 +21,7 @@
     <File Name="src/test.c"/>
     <File Name="src/sort.c"/>
     <File Name="src/structures.c"/>
+    <File Name="src/hashtable.c"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="include/test.h"/>

@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Daniel
-Date                   :=01/06/2017
+Date                   :=02/06/2017
 CodeLitePath           :=C:/CodeLite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -62,7 +62,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IntermediateDirectory)/src_sort.c$(ObjectSuffix) $(IntermediateDirectory)/src_structures.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IntermediateDirectory)/src_test.c$(ObjectSuffix) $(IntermediateDirectory)/src_sort.c$(ObjectSuffix) $(IntermediateDirectory)/src_structures.c$(ObjectSuffix) $(IntermediateDirectory)/src_hashtable.c$(ObjectSuffix) 
 
 
 
@@ -124,6 +124,14 @@ $(IntermediateDirectory)/src_structures.c$(DependSuffix): src/structures.c
 
 $(IntermediateDirectory)/src_structures.c$(PreprocessSuffix): src/structures.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_structures.c$(PreprocessSuffix) src/structures.c
+
+$(IntermediateDirectory)/src_hashtable.c$(ObjectSuffix): src/hashtable.c $(IntermediateDirectory)/src_hashtable.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/Daniel/Documents/uoc/UOC/UOC/Interview/UOCLibrary/src/hashtable.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_hashtable.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_hashtable.c$(DependSuffix): src/hashtable.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_hashtable.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_hashtable.c$(DependSuffix) -MM src/hashtable.c
+
+$(IntermediateDirectory)/src_hashtable.c$(PreprocessSuffix): src/hashtable.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_hashtable.c$(PreprocessSuffix) src/hashtable.c
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

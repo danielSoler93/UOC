@@ -28,15 +28,17 @@ int main(int argc, char **argv)
 	
 	//display(array.list, array.size);
 	
-	char word[] = "do gi ";
-	char word2[] = "godi";
+	char word[] = "dogi";
+	char word2[] = "dogi";
 	
-	uniqueString(word);
-	uniqueString(word2);
+	//spaces(word);
 	
-	permutation(word, word2);
+	//tHashtable hashtable;
 	
-	spaces(word);
-
+	//palindrome(hashtable, word2);
+	
+	oneWay(word, word2);
+	
 	return 0;
 }
+
