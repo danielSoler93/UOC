@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1497398918 source:c:\users\daniel\documents\uoc\uoc\uoc\interview\linkedlist\main.c
+	<stdio.h>
+	<stdlib.h>
+	"linkedList.h"
+	"test.h"
+
+1497397474 c:\users\daniel\documents\uoc\uoc\uoc\interview\linkedlist\include\linkedlist.h
+	<stdbool.h>
+
+1497401752 source:c:\users\daniel\documents\uoc\uoc\uoc\interview\linkedlist\src\linkedlist.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stdbool.h>
+	"linkedList.h"
+
+1497401246 source:c:\users\daniel\documents\uoc\uoc\uoc\interview\linkedlist\src\test.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<stdbool.h>
+	"linkedList.h"
+
+1497399267 c:\users\daniel\documents\uoc\uoc\uoc\interview\linkedlist\include\test.h
+
