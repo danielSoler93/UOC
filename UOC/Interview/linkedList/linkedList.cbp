@@ -21,6 +21,7 @@
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="-t" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="include" />
@@ -33,13 +34,19 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="include/linkedList.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="include/hashtable.h" />
+		<Unit filename="include/linkedList.h" />
+		<Unit filename="include/test.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/hashtable.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/linkedList.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/test.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

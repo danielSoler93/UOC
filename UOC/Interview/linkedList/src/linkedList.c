@@ -12,6 +12,17 @@ void initializeList(tLinkedList * linkedList){
 }
 
 
+bool isEmpty(tLinkedList linkedList){
+    printf("%d\n", linkedList.head->data);
+    if(linkedList.sizeList==0) {
+        printf("Empty List\n");
+        return true;
+    }
+    return false;
+
+}
+
+
 void insert(int d, tLinkedList * linkedList){
 	struct Node *end = (struct Node*) malloc(sizeof(struct Node));
 	end->next = NULL;
@@ -26,16 +37,13 @@ void insert(int d, tLinkedList * linkedList){
 	} else{
 		linkedList->head = end;
 	}
-
 }
 
 bool search(int d, tLinkedList  linkedList){
 
     current = linkedList.head;
-    if(current->data==NULL) {
-            printf("Empty List\n");
-            return false;
-    }
+
+    if(isEmpty(linkedList))    return false;
 
 
     while(current->next!=NULL && current->data!=d){
@@ -51,28 +59,27 @@ bool search(int d, tLinkedList  linkedList){
     }
 }
 
-void delete(int d, tLinkedList * linkedList){
+void delete(int position, tLinkedList * linkedList){
 
     current = linkedList->head;
     struct Node *previous;
 
-    if(current->data==NULL) {
-            printf("Empty List\n");
-            return false;
-    }
+    if(isEmpty(*linkedList)) return false;
 
-    else if(current->next == NULL && current->data == d) {
+    else if(position == 1 && current->next == NULL) {
             linkedList->head->next = NULL;
             linkedList->head->data = NULL;
     }
 
     else{
-        while(current->next!=NULL && current->data!=d){
+        int index = 1;
+        while(current->data!=NULL && index!=position){
             previous = current;
             current = current->next;
+            index ++;
         }
-        if(current->data==d) {
-                if(current == linkedList->head){
+        if(index==position) {
+                if(position == 1){
                     linkedList->head = current->next;
                     current->next = NULL;
                 }else{
@@ -82,16 +89,21 @@ void delete(int d, tLinkedList * linkedList){
         }
 
         else{
-            printf("No Node with data %d\n", d);
+            printf("No Node in position %d\n", position);
         }
 
     }
+    linkedList->sizeList--;
 
 
 }
 
 void displayList(tLinkedList linkedList){
 	current = linkedList.head;
+
+    if(isEmpty(linkedList))  return false;
+
+
 	int i;
 	while(current->next != NULL){
 		printf("%d", current->data);
@@ -99,3 +111,26 @@ void displayList(tLinkedList linkedList){
 	}
 	printf("%d", current->data);
 }
+
+void deleteRepeted(tLinkedList * linkedList){
+
+    if(isEmpty(*linkedList)) return false;
+
+    int i;
+    int index;
+    bool found;
+    struct Node previous;
+
+    /*Implement hash*/
+    current = linkedList->head;
+    previous = NULL;
+    while(current!=NULL){
+        if(hashtable.table[hash(current->data)]!=NULL)
+            previous->next = current->next;
+            }else {
+            hash.add(current->data);
+            previous = current;
+        }
+    current->current->next;
+}
+

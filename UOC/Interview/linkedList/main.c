@@ -23,7 +23,7 @@ int main(int argc, char **argv)
         insert(4, &linkedList);
         insert(5, &linkedList);
         insert(6, &linkedList);
-        delete(4,&linkedList);
+        //delete(4,&linkedList);
         displayList(linkedList);
     }
 
